@@ -1,0 +1,22 @@
+3 49 external_arithmetic_or_space_certificate_required
+3 81 excluded_by_lattice_certificate
+3 169 unresolved_search
+3 257 excluded_by_lattice_certificate
+3 321 excluded_by_lattice_certificate
+3 361 unresolved_search
+3 697 excluded_by_lattice_certificate
+3 1257 excluded_by_lattice_certificate
+3 1489 excluded_by_lattice_certificate
+3 3969 excluded_by_lattice_certificate
+4 725 unresolved_search
+4 1125 external_arithmetic_or_space_certificate_required
+4 2525 excluded_by_lattice_certificate
+4 4205 excluded_by_lattice_certificate
+4 4525 excluded_by_lattice_certificate
+4 5125 external_arithmetic_or_space_certificate_required
+4 8069 excluded_by_lattice_certificate
+4 16317 excluded_by_lattice_certificate
+5 14641 excluded_by_lattice_certificate
+5 38569 excluded_by_lattice_certificate
+6 371293 excluded_by_lattice_certificate
+Nonexception lattice certification complete: False
