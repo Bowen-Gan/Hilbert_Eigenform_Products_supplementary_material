@@ -1,7 +1,0 @@
-quartic fields enumerated: 17
-1600 x^4 - 6*x^2 + 4 h = 1
-2000 x^4 - 5*x^2 + 5 h = 1
-2624 x^4 - 2*x^3 - 3*x^2 + 2*x + 1 h = 1
-3600 x^4 + 2*x^3 - 7*x^2 - 8*x + 1 h = 1
-4400 x^4 - 7*x^2 + 11 h = 1
-E2 square-ramified quartic certificate: all checks passed
