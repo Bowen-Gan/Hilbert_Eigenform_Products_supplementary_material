@@ -1,0 +1,7 @@
+D=49: source weights >= 7 excluded
+D=169: source weights >= 4 excluded
+D=361: source weights >= 3 excluded
+D=725: source weights >= 4 excluded
+D=1125: source weights >= 4 excluded
+D=5125: source weights >= 2 excluded
+D=6125: nonintegral reciprocal constant term

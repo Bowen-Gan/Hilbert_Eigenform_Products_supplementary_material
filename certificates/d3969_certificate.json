@@ -1,0 +1,842 @@
+{
+  "polynomial": [
+    -35,
+    -21,
+    0,
+    1
+  ],
+  "discriminant": 3969,
+  "class_group": [
+    3
+  ],
+  "narrow_class_group": [
+    3
+  ],
+  "certificate": {
+    "prime_basis": [
+      [
+        "3",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "-12",
+        "-2",
+        "1"
+      ]
+    ],
+    "norm": 3,
+    "exponents": [
+      {
+        "status": "indecomposable",
+        "mu": [
+          "3",
+          "0",
+          "0"
+        ],
+        "ideal_basis": [
+          [
+            "3",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "1",
+            "0"
+          ],
+          [
+            "-12",
+            "-2",
+            "1"
+          ]
+        ],
+        "component_basis": [
+          [
+            "3",
+            "0",
+            "0"
+          ],
+          [
+            "-14",
+            "-1",
+            "1"
+          ],
+          [
+            "14",
+            "4",
+            "-1"
+          ]
+        ],
+        "basis_change": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1",
+            "-1"
+          ]
+        ],
+        "trace_gram": [
+          [
+            "27",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "126",
+            "63"
+          ],
+          [
+            "0",
+            "63",
+            "126"
+          ]
+        ],
+        "coordinate_bounds": [
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        "box_size": 18,
+        "points_checked": 18,
+        "decomposition": null,
+        "points": [
+          {
+            "coordinates": [
+              0,
+              -1,
+              -1
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              -1,
+              0
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              -1,
+              1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              0,
+              -1
+            ],
+            "signs_x": [
+              1,
+              -1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              0,
+              0
+            ],
+            "signs_x": [
+              0,
+              0,
+              0
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              0,
+              1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              1,
+              -1
+            ],
+            "signs_x": [
+              1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "signs_x": [
+              -1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              1,
+              1
+            ],
+            "signs_x": [
+              -1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              -1,
+              -1
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              -1,
+              0
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              -1,
+              1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              0,
+              -1
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              0,
+              0
+            ],
+            "signs_x": [
+              1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              0,
+              1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              1,
+              -1
+            ],
+            "signs_x": [
+              1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              1,
+              0
+            ],
+            "signs_x": [
+              1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              1,
+              1
+            ],
+            "signs_x": [
+              -1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          }
+        ],
+        "exponent": 1
+      },
+      {
+        "status": "indecomposable",
+        "mu": [
+          "3",
+          "0",
+          "0"
+        ],
+        "ideal_basis": [
+          [
+            "3",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "3",
+            "0"
+          ],
+          [
+            "-14",
+            "-1",
+            "1"
+          ]
+        ],
+        "component_basis": [
+          [
+            "3",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "1",
+            "0"
+          ],
+          [
+            "-13",
+            "-3",
+            "1"
+          ]
+        ],
+        "basis_change": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "-1"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ]
+        ],
+        "trace_gram": [
+          [
+            "27",
+            "9",
+            "9"
+          ],
+          [
+            "9",
+            "45",
+            "-18"
+          ],
+          [
+            "9",
+            "-18",
+            "45"
+          ]
+        ],
+        "coordinate_bounds": [
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        "box_size": 18,
+        "points_checked": 18,
+        "decomposition": null,
+        "points": [
+          {
+            "coordinates": [
+              0,
+              -1,
+              -1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              -1,
+              0
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              -1,
+              1
+            ],
+            "signs_x": [
+              1,
+              -1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              0,
+              -1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              0,
+              0
+            ],
+            "signs_x": [
+              0,
+              0,
+              0
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              0,
+              1
+            ],
+            "signs_x": [
+              1,
+              -1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              1,
+              -1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "signs_x": [
+              -1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              0,
+              1,
+              1
+            ],
+            "signs_x": [
+              1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              -1,
+              -1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              -1,
+              0
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              -1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              -1,
+              1
+            ],
+            "signs_x": [
+              1,
+              1,
+              -1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              0,
+              -1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              0,
+              0
+            ],
+            "signs_x": [
+              1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              0,
+              1
+            ],
+            "signs_x": [
+              1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              1,
+              -1
+            ],
+            "signs_x": [
+              -1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              1,
+              0
+            ],
+            "signs_x": [
+              1,
+              1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              1,
+              1,
+              -1
+            ]
+          },
+          {
+            "coordinates": [
+              1,
+              1,
+              1
+            ],
+            "signs_x": [
+              1,
+              -1,
+              1
+            ],
+            "signs_mu_minus_x": [
+              -1,
+              1,
+              -1
+            ]
+          }
+        ],
+        "exponent": 2
+      }
+    ]
+  },
+  "sage_version": "10.8.12"
+}
