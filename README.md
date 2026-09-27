@@ -90,10 +90,13 @@ The [`notes/`](notes/) directory records the mathematical interpretation and ext
 
 ## Archiving a local run
 
-For a local execution record, retain the command transcript, the newly generated `rerun/` directory, and the environment and source information. The following example uses Bash on Linux or WSL, from an activated Sage environment and a Git checkout of this repository:
+For a local execution record, retain the command transcript, the newly generated `rerun/` directory, and the environment and source information. The following example uses Bash on Linux or WSL, from an activated Sage environment and a Git checkout of this repository. It creates a separate archive directory for each invocation:
 
 ```bash
+(
+set -e -o pipefail
 mkdir -p verification
+run_dir=$(mktemp -d "verification/run-$(date -u +%Y%m%dT%H%M%SZ)-XXXXXX")
 
 {
     date --iso-8601=seconds
@@ -101,22 +104,33 @@ mkdir -p verification
     python -c "import sys; from sage.version import version; print('Sage:', version); print('Python:', sys.version)"
     git rev-parse HEAD
     git status --short
-    git diff -- run_all.py '*.sage' rq_certificate.py
+    git diff HEAD -- run_all.py '*.sage' rq_certificate.py
     sha256sum run_all.py *.sage rq_certificate.py
-} > verification/environment.txt 2>&1
+} > "$run_dir/environment.txt" 2>&1
 
-set -o pipefail
-python -u run_all.py 2>&1 | tee verification/local-run.txt
-run_status=${PIPESTATUS[0]}
+if python -u run_all.py 2>&1 | tee "$run_dir/local-run.txt"; then
+    run_status=${PIPESTATUS[0]}
+else
+    run_status=${PIPESTATUS[0]}
+fi
 printf '\nDriver exit code: %s\n' "$run_status" \
-    | tee -a verification/local-run.txt
+    | tee -a "$run_dir/local-run.txt"
+date --iso-8601=seconds > "$run_dir/finished-at.txt"
+cp -a rerun "$run_dir/rerun"
+printf 'Execution record saved in %s\n' "$run_dir"
+exit "$run_status"
+)
 ```
 
-The driver must terminate with exit code zero and print the full-suite success marker. Its newly generated `all_arithmetic_status.json` must report `completed: true`. If only the endpoint command was executed, describe the archived record as an endpoint run.
+The driver must terminate with exit code zero and print the full-suite success marker. Its newly generated `all_arithmetic_status.json` must report `completed: true`. After saving the record, the subshell above returns the driver's exit code; a failure while creating or copying the archive also causes a nonzero exit. The copied `rerun/` directory is preserved independently of subsequent invocations. If the run fails, the archived directory may contain incomplete results or files left by an earlier invocation; it must not be described as a successful verification.
+
+The source diff is taken against `HEAD`, so it includes both staged and unstaged changes to the tracked program files. For a published verification record, use committed source files and identify the exact commit that was executed. These records supplement the source code and mathematical arguments; they do not replace them.
+
+To archive an endpoint-only run, replace `python -u run_all.py` in the command above with `python -u run_all.py --endpoints-only`. Require the endpoint success marker and a newly generated `endpoints_status.json` with `completed: true`, and describe the record explicitly as an endpoint run. Other files copied from `rerun/` do not establish that the full suite was executed in that invocation.
 
 The files under `verification/` in this example are to be generated on the machine performing the run; they are not included among the existing records.
 
-## Integrity and citation
+## File integrity
 
 [`SHA256SUMS.txt`](SHA256SUMS.txt) lists checksums for the distributed source, documentation, and recorded output files, including `rerun/`. It excludes itself and generated Python cache files. Before rerunning or editing the files, the manifest can be checked from the repository root with:
 
@@ -126,5 +140,34 @@ sha256sum -c SHA256SUMS.txt
 
 Checksums identify file contents; they do not by themselves establish that a computation was executed. The run records and mathematical arguments serve different purposes.
 
-When citing this supplement, include the repository URL and the full commit identifier or an archived release corresponding to the manuscript version under review. This fixes the scripts, documentation, and recorded outputs used for that version.
+When distributing a revised package, update the checksum manifest to match the files being distributed, including any revised documentation or recorded outputs. Changes to this README also require its checksum to be updated.
 
+## Citation
+
+Cite the version of this supplement that accompanies the manuscript under review. A citation should identify the supplement, the repository, and either the full commit identifier or the DOI of a specific archived release. A link to the repository's default branch alone does not identify a fixed version.
+
+The repository is available at:
+
+<https://github.com/Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material>
+
+For a manuscript using `thebibliography`, the following template gives a title-based citation. Replace `FULL_COMMIT_SHA` with the complete identifier of the version used, and `SHORT_COMMIT_SHA` with its abbreviated identifier. Obtain the full identifier from that checkout using `git rev-parse HEAD`. Add the authors of the supplement before the title once its authorship has been specified.
+
+```latex
+\bibitem{EigenformCertificates}
+\emph{Supplementary Material: Eigenform Product Identities for
+Full-Level Hilbert Modular Forms},
+SageMath source code, arithmetic certificates, and recorded outputs,
+GitHub repository, 2026,
+commit \texttt{SHORT_COMMIT_SHA},
+\url{https://github.com/Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material/tree/FULL_COMMIT_SHA}.
+```
+
+The supplement may be cited in the manuscript as follows:
+
+```latex
+The SageMath source code, arithmetic certificates, recorded outputs,
+and instructions for reproducing the computations are available
+in the supplementary material~\cite{EigenformCertificates}.
+```
+
+If a release is archived in Zenodo, cite its specific-version DOI to identify the files used for the manuscript. Include the actual release version and authorship recorded in the archive. A concept DOI refers to the collection of versions and does not identify the particular version used. A `CITATION.cff` file may be added at the repository root to provide consistent citation metadata through GitHub's citation interface.
