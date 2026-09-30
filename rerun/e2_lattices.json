@@ -1,7 +1,7 @@
 {
   "schema": "case11-lattice-search-v1",
   "sage_version": "10.9",
-  "input_manifest": "/mnt/d/free_certificates/rerun/e2_candidates.json",
+  "input_manifest": "/mnt/d/certificates/rerun/e2_candidates.json",
   "prime_bound": 43,
   "all_required_degrees": true,
   "search_complete": true,
