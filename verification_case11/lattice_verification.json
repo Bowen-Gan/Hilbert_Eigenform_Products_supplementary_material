@@ -7,7 +7,7 @@
   "python_version": "3.12.14",
   "arithmetic": "integer/rational arithmetic; Sturm-isolated roots; outward rational intervals",
   "source_hashes": {
-    "e2_lattices.json": "3dcfe26014635704fb21dcf26b89bc480c12496808aa7ef87eb63bae85ea2b1f",
+    "e2_lattices.json": "b5a542e8307a192047fbc9339a0b5cdfa17d70640e9bfe7b9b96a256323a0179",
     "d3969_certificate.json": "d87441f659cd7e218df7855f8c0e8fd979654f94c8686ce6011abb20cc575db5"
   },
   "verifier_sha256": "e778c000baac1acec9ba97f1364da073273366b481a463a694cfe968049d907e",

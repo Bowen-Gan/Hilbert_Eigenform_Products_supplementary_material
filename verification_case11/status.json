@@ -1,7 +1,7 @@
 {
   "schema": "case11-additional-arithmetic-run-v1",
   "scope": "additional arithmetic checks; analytic theorems and complete field enumeration are external",
-  "started_utc": "2026-09-30T10:36:32.766144+00:00",
+  "started_utc": "2026-09-30T12:00:59.481665+00:00",
   "python_version": "3.12.14 (main, Sep  2 2026, 23:27:36) [GCC 15.3.0]",
   "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
   "completed": true,
@@ -20,7 +20,7 @@
       "accepted": true,
       "log": "verify_lattice_witnesses.log",
       "result": "lattice_verification.json",
-      "result_sha256": "8fbfd511d61c62ce999d05cec9bcf6c9ff42288e429fb94a45064b5264641410"
+      "result_sha256": "bfcf030ab5efd79e6a22e9799733fe5f74d7d5403c4e9e68c33bbf54a8f44a74"
     },
     {
       "script": "verify_dyadic_bounds.py",
@@ -111,17 +111,17 @@
     "e2_dyadic_output.json": "/mnt/d/certificates/rerun/e2_dyadic_output.json"
   },
   "input_hashes": {
-    "e2_lattices.json": "3dcfe26014635704fb21dcf26b89bc480c12496808aa7ef87eb63bae85ea2b1f",
+    "e2_lattices.json": "b5a542e8307a192047fbc9339a0b5cdfa17d70640e9bfe7b9b96a256323a0179",
     "d3969_certificate.json": "d87441f659cd7e218df7855f8c0e8fd979654f94c8686ce6011abb20cc575db5",
     "e2_dyadic_output.json": "3195bd12b3edd523a0b9971a506908873f78f6e09a81f3aec4855caaafcc3421"
   },
-  "updated_utc": "2026-09-30T10:36:37.316556+00:00",
+  "updated_utc": "2026-09-30T12:01:03.441593+00:00",
   "cross_checks": {
     "special_values_match_four_dyadic_inputs": true,
     "quadratic_reduction_has_exactly_six_survivors": true,
     "D21_reciprocal_constant_is_12": true,
     "Rankin_local_identity_is_exact": true
   },
-  "finished_utc": "2026-09-30T10:36:37.345560+00:00",
+  "finished_utc": "2026-09-30T12:01:03.467973+00:00",
   "success_marker": "CASE11_ADDITIONAL_ARITHMETIC_PASSED"
 }
