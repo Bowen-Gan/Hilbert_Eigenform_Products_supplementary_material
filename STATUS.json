@@ -1,57 +1,36 @@
 {
-  "schema": "saved-arithmetic-record-summary-v1",
-  "reviewed_utc": "2026-09-30T10:51:55.441590+00:00",
+  "schema": "complete-arithmetic-record-summary-v1",
   "completed": true,
-  "meaning_of_completed": "Both saved arithmetic suites report completion and all recorded tasks are accepted; their present artifacts passed the attached record review.",
+  "execution_relationship": "single_invocation",
+  "run_id": "51796563-e0e0-4e32-96ea-43e6ae028406",
+  "started_utc": "2026-09-30T11:59:20.063468+00:00",
+  "finished_utc": "2026-09-30T12:01:03.538296+00:00",
   "total_recorded_task_count": 18,
   "all_recorded_tasks_accepted": true,
-  "execution_relationship": "separate_invocations",
-  "suite_record_origins": "Legacy twelve-task successful archive and later six-task verification.",
-  "single_invocation_of_current_full_driver_attested": false,
-  "software": "SageMath/Python only",
+  "success_marker": "FULL_CERTIFICATES_PASSED",
+  "sage_version": "10.9",
+  "python_version": "3.12.14 (main, Sep  2 2026, 23:27:36) [GCC 15.3.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
   "magma_required": false,
+  "complete_record": {
+    "path": "verification/full_run_status.json",
+    "sha256": "0b661ac1d712591213f808bb1267adc8b69733baa3e8f9232981c53d8a914f9f"
+  },
   "suites": [
     {
-      "path": "rerun/all_arithmetic_status.json",
-      "sha256": "56086f49684769c29e47faab9ae9de6096d273eb0eba784aacf8db69d187f8ed",
-      "completed": true,
+      "name": "original_arithmetic",
       "task_count": 12,
-      "all_tasks_accepted": true,
-      "run_id": null,
-      "started_utc": null,
-      "finished_utc": null,
-      "execution_time_source_hashes_recorded": false,
-      "rerun_directory_byte_identical_to_previous_successful_archive": true,
-      "metadata_note": "This is a legacy successful archive without run timestamps or execution-time source hashes. Its records do not attest to a fresh invocation of the current run_all.py.",
-      "accepted_exit_two_task": "e2_indecomposable_search.sage",
-      "accepted_unresolved_discriminants": [
-        169,
-        361,
-        725
-      ]
+      "completed": true,
+      "status": "rerun/all_arithmetic_status.json",
+      "status_sha256": "5549ede9d36ba595af9f1b6ca59be97acbd116dfac945d711c96b7bdc1b2f97b"
     },
     {
-      "path": "verification_case11/status.json",
-      "sha256": "6058c7bd8120700bff0ab2009c23368008c039157c4ef195af8b2a58bfab3a97",
-      "completed": true,
+      "name": "additional_case11",
       "task_count": 6,
-      "all_tasks_accepted": true,
-      "started_utc": "2026-09-30T10:36:32.766144+00:00",
-      "finished_utc": "2026-09-30T10:36:37.345560+00:00",
-      "python_version": "3.12.14 (main, Sep  2 2026, 23:27:36) [GCC 15.3.0]",
-      "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
-      "recorded_source_hashes_match": true,
-      "recorded_input_hashes_match": true,
-      "recorded_result_hashes_match": true
+      "completed": true,
+      "status": "verification_case11/status.json",
+      "status_sha256": "1384934a4038577806fb70187876ee3193f0cf677b8e0276247df795dd49c069"
     }
   ],
-  "review_report": {
-    "path": "verification/record_review.json",
-    "sha256": "43209e960ff833d359b2545573279f741c068ffb73bc8105e26d5a284ea3ade0"
-  },
-  "previous_summary_preserved": {
-    "path": "verification/legacy_STATUS_20260927.json",
-    "sha256": "d0412c6cd78e7281dd6725a87b8301d919c097ad96c6c3138bb5346f558bacb4"
-  },
-  "theoretical_inputs": "Saved arithmetic checks do not formally verify the manuscript or cited mathematical theorems."
+  "theoretical_inputs": "The manuscript and cited mathematical theorems remain external."
 }

@@ -24,9 +24,9 @@ Python assertions must remain enabled. Do not use optimized Python execution (`-
 
 ## Supplied execution records
 
-The supplied records show that the original twelve-task suite and the additional six-task suite each completed successfully in separate runs. They do not record one complete invocation of the current eighteen-task driver. The next successful complete run will generate `verification/full_run_status.json`; that file is not part of the supplied archive.
+The repository includes a successful complete run of all eighteen tasks in one invocation of `python run_all.py`, performed on 30 September 2026 using SageMath 10.9 and Python 3.12.14 under WSL2. The run began at 11:59:20 UTC and finished at 12:01:03 UTC. All eighteen tasks were accepted, and the driver reported `FULL_CERTIFICATES_PASSED`.
 
-The suite records are [`rerun/all_arithmetic_status.json`](rerun/all_arithmetic_status.json) and [`verification_case11/status.json`](verification_case11/status.json). [`STATUS.json`](STATUS.json) summarizes these archived results. These summaries describe the archive and are not regenerated as complete-run records by the driver.
+The complete record is [`verification/full_run_status.json`](verification/full_run_status.json). It links the original twelve-task record, [`rerun/all_arithmetic_status.json`](rerun/all_arithmetic_status.json), and the additional six-task record, [`verification_case11/status.json`](verification_case11/status.json), from that invocation. [`STATUS.json`](STATUS.json) summarizes this latest successful complete run. The corresponding logs and results are included in the two output directories.
 
 The lattice search has one accepted exit code of `2`: its prescribed search leaves precisely the discriminants `169, 361, 725` unresolved. The driver checks this condition, and the subsequent endpoint programs establish the required weight-two cusp-space vanishing. Thus the lattice search's incomplete-exclusion flag must be read together with the endpoint results. All other tasks have exit code zero in the supplied records.
 
