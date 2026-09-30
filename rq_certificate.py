@@ -22,6 +22,10 @@ from itertools import combinations
 from math import gcd, isqrt
 from pathlib import Path
 import json
+import sys
+
+if not __debug__:
+    raise SystemExit('Assertions must be enabled: do not use -O/-OO.')
 
 
 def squarefree(n):

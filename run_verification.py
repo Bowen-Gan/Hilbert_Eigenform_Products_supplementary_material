@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+"""Run the additional Case 11 exact-arithmetic verifiers and archive this run.
+
+No Sage installation is needed. This is an additional verification suite,
+not a substitute for the original Sage field-enumeration and endpoint programs.
+"""
+import argparse
+from datetime import datetime, timezone
+import hashlib
+import json
+import platform
+from pathlib import Path
+import subprocess
+import sys
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    if not __debug__:
+        raise SystemExit('Do not use optimized Python; assertions are required.')
+    root = Path(__file__).resolve().parent.parent
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--data-dir', type=Path, default=root/'inputs')
+    ap.add_argument('--output-dir', type=Path, default=root/'verification')
+    args = ap.parse_args()
+    inputs, out = args.data_dir.resolve(), args.output_dir.resolve()
+    out.mkdir(parents=True, exist_ok=True)
+    scripts = Path(__file__).resolve().parent
+    tasks = [
+        ('verify_lattice_witnesses.py', ['--data-dir', str(inputs)], 'lattice_verification.json'),
+        ('verify_dyadic_bounds.py', ['--data-dir', str(inputs)], 'dyadic_verification.json'),
+        ('verify_special_values.py', [], 'special_values_verification.json'),
+        ('verify_d21_local.py', [], 'd21_d40_local_result.json'),
+        ('rq_certificate.py', [], 'quadratic_reduction_verification.json'),
+        ('verify_rankin_local_factor.py', [], 'rankin_local_factor.json'),
+    ]
+    record = {
+        'schema': 'case11-additional-arithmetic-run-v1',
+        'scope': 'additional arithmetic checks; analytic theorems and complete field enumeration are external',
+        'started_utc': datetime.now(timezone.utc).isoformat(),
+        'python_version': sys.version, 'platform': platform.platform(),
+        'completed': False, 'tasks': [],
+        'source_hashes': {p.name: digest(p) for p in sorted(scripts.glob('*.py'))},
+        'input_hashes': {p.name: digest(p) for p in sorted(inputs.glob('*.json'))},
+    }
+    status = out/'status.json'
+    status.write_text(json.dumps(record, indent=2)+'\n')
+    for name, extra, result_name in tasks:
+        print('RUN '+name, flush=True)
+        command = [sys.executable, str(scripts/name), *extra, '--output', str(out/result_name)]
+        run = subprocess.run(command, capture_output=True, text=True)
+        log = out/(Path(name).stem+'.log')
+        log.write_text(run.stdout+run.stderr)
+        row = {'script': name, 'command': command, 'exit_code': run.returncode,
+               'accepted': run.returncode == 0, 'log': log.name, 'result': result_name}
+        record['tasks'].append(row)
+        record['updated_utc'] = datetime.now(timezone.utc).isoformat()
+        status.write_text(json.dumps(record, indent=2)+'\n')
+        if run.returncode:
+            print('FAILED '+name+'; inspect '+str(log), file=sys.stderr)
+            return 1
+        result = out/result_name
+        if not result.is_file():
+            row['accepted'] = False
+            row['error'] = 'expected result missing'
+            status.write_text(json.dumps(record, indent=2)+'\n')
+            return 1
+        json.loads(result.read_text())
+        row['result_sha256'] = digest(result)
+    # Connect the independently computed constants to the bound inputs.
+    special = json.loads((out/'special_values_verification.json').read_text())
+    dyadic = json.loads((out/'dyadic_verification.json').read_text())
+    constants = {r['discriminant']: r['alpha'] for r in special['fields']}
+    from fractions import Fraction
+    for r in dyadic['fields']:
+        if r['discriminant'] in constants:
+            assert Fraction(r['A']) == abs(Fraction(constants[r['discriminant']]))
+    quadratic = json.loads((out/'quadratic_reduction_verification.json').read_text())
+    assert quadratic['reduction']['survivors'] == [12,21,24,28,69,77]
+    assert next(r for r in quadratic['reduction']['rows'] if r['D'] == 21)['alpha'] == ['12']
+    rankin = json.loads((out/'rankin_local_factor.json').read_text())
+    assert rankin['status'] == 'PASS' and rankin['difference'] == []
+    record['cross_checks'] = {
+        'special_values_match_four_dyadic_inputs': True,
+        'quadratic_reduction_has_exactly_six_survivors': True,
+        'D21_reciprocal_constant_is_12': True,
+        'Rankin_local_identity_is_exact': True,
+    }
+    record['completed'] = True
+    record['finished_utc'] = datetime.now(timezone.utc).isoformat()
+    record['success_marker'] = 'CASE11_ADDITIONAL_ARITHMETIC_PASSED'
+    status.write_text(json.dumps(record, indent=2)+'\n')
+    print(record['success_marker'])
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
