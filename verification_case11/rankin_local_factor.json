@@ -1,0 +1,202 @@
+{
+  "binet_formula": "h_j(A,B)=(A^(j+1)-B^(j+1))/(A-B)",
+  "claimed_cross_numerator": [
+    {
+      "coefficient": 1,
+      "exponents": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        1,
+        2,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        1,
+        2,
+        2,
+        1,
+        2
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        2,
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        2,
+        1,
+        2,
+        1,
+        2
+      ]
+    }
+  ],
+  "coefficient_ring": "Z[A,B,C,D,X]",
+  "cross_numerator": [
+    {
+      "coefficient": 1,
+      "exponents": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        1,
+        2,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        1,
+        2,
+        2,
+        1,
+        2
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        2,
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "coefficient": -1,
+      "exponents": [
+        2,
+        1,
+        2,
+        1,
+        2
+      ]
+    }
+  ],
+  "difference": [],
+  "generic_identity": "sum_j>=0 h_j(A,B) h_j(C,D) X^j = (1-ABCD X^2)/((1-ACX)(1-ADX)(1-BCX)(1-BDX))",
+  "method": "Exact polynomial cross multiplication of all four geometric-series denominators and (A-B)(C-D).",
+  "not_verified": [
+    "The identification of Satake products with central characters and weights.",
+    "The global Eisenstein normalization and ordinary class-group projection.",
+    "Analytic continuation and specialization of the Rankin integral.",
+    "Boundary nonvanishing of the Rankin-Selberg L-function."
+  ],
+  "python_optimization": 0,
+  "python_version": "3.12.14",
+  "repeated_roots": "The cross-multiplied polynomial identity is valid identically; repeated-root generating functions follow by polynomial specialization.",
+  "status": "PASS",
+  "substitution": {
+    "ABCD": "chi(p)^(-1) q^(2 ell)",
+    "X": "q^(-(ell+1+w))",
+    "global_correction_argument": "2+2w",
+    "global_correction_character": "chi^(-1)",
+    "local_numerator": "1-chi(p)^(-1) q^(-2-2w)",
+    "q_exponent_coefficients": {
+      "constant": -2,
+      "ell": 0,
+      "w": -2
+    },
+    "q_exponent_computation": "2 ell - 2(ell+1+w) = -2-2w"
+  },
+  "variables": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "X"
+  ],
+  "verification_scope": "Exact local polynomial algebra only; no analytic theorem is certified."
+}

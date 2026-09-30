@@ -1,0 +1,2122 @@
+{
+  "local": {
+    "inert": [
+      {
+        "D": 21,
+        "alpha": "12",
+        "coefficient_relation": "3*h2+h3 = -1 - (5/4)*4^(ell-1)",
+        "decompositions_at_4": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "f3": 13,
+        "generator_norm": -3,
+        "ideal_data": {
+          "1": {
+            "divisors": 1,
+            "factor_norms_exponents": [],
+            "sigma1": 1
+          },
+          "2": {
+            "divisors": 2,
+            "factor_norms_exponents": [
+              [
+                4,
+                1
+              ]
+            ],
+            "sigma1": 5
+          },
+          "3": {
+            "divisors": 3,
+            "factor_norms_exponents": [
+              [
+                3,
+                2
+              ]
+            ],
+            "sigma1": 13
+          }
+        },
+        "lower_bound": 15,
+        "normalized_upper_bound": "1803/128",
+        "prime_above_3_generator": [
+          1,
+          1
+        ],
+        "resolution": "Pure coefficient proof in notes/d21_local_free.tex",
+        "terminal_t": 5,
+        "weights_left_by_old_dyadic_bound": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "D": 69,
+        "alpha": "2",
+        "coefficient_relation": "3*h2+h3 = -11 - (15/2)*4^(ell-1)",
+        "decompositions_at_4": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "f3": 13,
+        "ideal_data": {
+          "1": {
+            "divisors": 1,
+            "factor_norms_exponents": [],
+            "sigma1": 1
+          },
+          "2": {
+            "divisors": 2,
+            "factor_norms_exponents": [
+              [
+                4,
+                1
+              ]
+            ],
+            "sigma1": 5
+          },
+          "3": {
+            "divisors": 3,
+            "factor_norms_exponents": [
+              [
+                3,
+                2
+              ]
+            ],
+            "sigma1": 13
+          }
+        },
+        "lower_bound": 15,
+        "normalized_upper_bound": "49/4",
+        "ramanujan_bound": 21,
+        "terminal_t": 2,
+        "weight_two_constant": "-41"
+      },
+      {
+        "D": 77,
+        "alpha": "2",
+        "coefficient_relation": "3*h2+h3 = -8 - (15/2)*4^(ell-1)",
+        "decompositions_at_4": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "f3": 10,
+        "ideal_data": {
+          "1": {
+            "divisors": 1,
+            "factor_norms_exponents": [],
+            "sigma1": 1
+          },
+          "2": {
+            "divisors": 2,
+            "factor_norms_exponents": [
+              [
+                4,
+                1
+              ]
+            ],
+            "sigma1": 5
+          },
+          "3": {
+            "divisors": 2,
+            "factor_norms_exponents": [
+              [
+                9,
+                1
+              ]
+            ],
+            "sigma1": 10
+          }
+        },
+        "lower_bound": 15,
+        "normalized_upper_bound": "43/4",
+        "ramanujan_bound": 18,
+        "terminal_t": 2,
+        "weight_two_constant": "-38"
+      }
+    ],
+    "ramified": [
+      {
+        "D": 12,
+        "alpha": "24",
+        "candidates": []
+      },
+      {
+        "D": 24,
+        "alpha": "8",
+        "candidates": []
+      },
+      {
+        "D": 28,
+        "alpha": "6",
+        "candidates": []
+      }
+    ]
+  },
+  "reduction": {
+    "arithmetic": "integer and rational; no external dependencies",
+    "discriminants": [
+      5,
+      8,
+      12,
+      13,
+      21,
+      24,
+      28,
+      29,
+      37,
+      40,
+      44,
+      53,
+      56,
+      60,
+      61,
+      69,
+      77,
+      85,
+      93,
+      101,
+      109,
+      133,
+      141,
+      149,
+      157,
+      165
+    ],
+    "rows": [
+      {
+        "D": 5,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -1,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "5/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 8,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -2,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "2",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "D": 12,
+        "alpha": [
+          "24"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -3,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "retained for local computation",
+        "minkowski_bound_squared": "3",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 13,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -3,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "13/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "D": 21,
+        "alpha": [
+          "12"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -5,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "retained for local computation",
+        "minkowski_bound_squared": "21/4",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 24,
+        "alpha": [
+          "8"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -6,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "retained for local computation",
+        "minkowski_bound_squared": "6",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            2,
+            0
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              2,
+              0
+            ],
+            "generator": [
+              2,
+              1
+            ],
+            "ideal_generators": [
+              [
+                2,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -2
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 28,
+        "alpha": [
+          "6"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -7,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "retained for local computation",
+        "minkowski_bound_squared": "7",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            2,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              2,
+              1
+            ],
+            "generator": [
+              -3,
+              1
+            ],
+            "ideal_generators": [
+              [
+                2,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 2
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 7,
+          "squares_mod_p": [
+            0,
+            1,
+            2,
+            4
+          ]
+        }
+      },
+      {
+        "D": 29,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -7,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "29/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            2,
+            1
+          ]
+        }
+      },
+      {
+        "D": 37,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -9,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "37/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              3,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          },
+          {
+            "P": [
+              3,
+              1
+            ],
+            "generator": [
+              -4,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            5,
+            2
+          ]
+        }
+      },
+      {
+        "D": 40,
+        "D40_ideal_witness": {
+          "P": [
+            3,
+            1
+          ],
+          "norm": 9,
+          "nu": [
+            7,
+            2
+          ]
+        },
+        "alpha": [
+          "24/7",
+          "10"
+        ],
+        "base_ideal": [
+          2,
+          0
+        ],
+        "basis_polynomial": [
+          -10,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "biquadratic_discriminant": 1600,
+          "genus_discriminants": [
+            5,
+            8,
+            40
+          ]
+        },
+        "class_number": 2,
+        "decision": "D=40 indecomposability argument in paper",
+        "minkowski_bound_squared": "10",
+        "narrow_class_number": 2,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              2,
+              0
+            ],
+            "generator": [
+              2,
+              0
+            ],
+            "ideal_generators": [
+              [
+                4,
+                0
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                10,
+                0
+              ]
+            ],
+            "kind": "base_squared",
+            "norm": 4
+          },
+          {
+            "P": [
+              2,
+              0
+            ],
+            "generator": [
+              2,
+              0
+            ],
+            "ideal_generators": [
+              [
+                4,
+                0
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                10,
+                0
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 4
+          },
+          {
+            "P": [
+              3,
+              1
+            ],
+            "generator": [
+              -4,
+              1
+            ],
+            "ideal_generators": [
+              [
+                6,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                10,
+                -1
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 6
+          },
+          {
+            "P": [
+              3,
+              2
+            ],
+            "generator": [
+              4,
+              1
+            ],
+            "ideal_generators": [
+              [
+                6,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                -4,
+                2
+              ],
+              [
+                10,
+                -2
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 6
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            3,
+            1
+          ]
+        }
+      },
+      {
+        "D": 44,
+        "alpha": [
+          "24/7"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -11,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "11",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            2,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              2,
+              1
+            ],
+            "generator": [
+              -3,
+              1
+            ],
+            "ideal_generators": [
+              [
+                2,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -2
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 11,
+          "squares_mod_p": [
+            0,
+            1,
+            3,
+            4,
+            5,
+            9
+          ]
+        }
+      },
+      {
+        "D": 53,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -13,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "53/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            3,
+            1
+          ]
+        }
+      },
+      {
+        "D": 56,
+        "alpha": [
+          "12/5"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -14,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "14",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            2,
+            0
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              2,
+              0
+            ],
+            "generator": [
+              4,
+              1
+            ],
+            "ideal_generators": [
+              [
+                2,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 2
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 7,
+          "squares_mod_p": [
+            0,
+            1,
+            2,
+            4
+          ]
+        }
+      },
+      {
+        "D": 60,
+        "alpha": [
+          "2",
+          "5"
+        ],
+        "base_ideal": [
+          2,
+          1
+        ],
+        "basis_polynomial": [
+          -15,
+          0,
+          1
+        ],
+        "class_lower_bound": {
+          "biquadratic_discriminant": 3600,
+          "genus_discriminants": [
+            5,
+            12,
+            60
+          ]
+        },
+        "class_number": 2,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "15",
+        "narrow_class_number": 4,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              2,
+              1
+            ],
+            "generator": [
+              2,
+              0
+            ],
+            "ideal_generators": [
+              [
+                4,
+                0
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                16,
+                -2
+              ]
+            ],
+            "kind": "base_squared",
+            "norm": 4
+          },
+          {
+            "P": [
+              2,
+              1
+            ],
+            "generator": [
+              2,
+              0
+            ],
+            "ideal_generators": [
+              [
+                4,
+                0
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                16,
+                -2
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 4
+          },
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              -3,
+              1
+            ],
+            "ideal_generators": [
+              [
+                6,
+                0
+              ],
+              [
+                -3,
+                3
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                15,
+                -1
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": -6
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 61,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -15,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "61/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              3,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -3
+          },
+          {
+            "P": [
+              3,
+              1
+            ],
+            "generator": [
+              -4,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -3
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            17,
+            5
+          ]
+        }
+      },
+      {
+        "D": 69,
+        "alpha": [
+          "2"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -17,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "retained for local computation",
+        "minkowski_bound_squared": "69/4",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            3,
+            2
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              2
+            ],
+            "generator": [
+              4,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -2,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 77,
+        "alpha": [
+          "2"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -19,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "retained for local computation",
+        "minkowski_bound_squared": "77/4",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [],
+        "relations": [],
+        "unit_certificate": {
+          "obstruction_prime": 7,
+          "squares_mod_p": [
+            0,
+            1,
+            2,
+            4
+          ]
+        }
+      },
+      {
+        "D": 85,
+        "alpha": [
+          "4/3",
+          "5/2"
+        ],
+        "base_ideal": [
+          3,
+          0
+        ],
+        "basis_polynomial": [
+          -21,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "biquadratic_discriminant": 7225,
+          "genus_discriminants": [
+            5,
+            17,
+            85
+          ]
+        },
+        "class_number": 2,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "85/4",
+        "narrow_class_number": 2,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              -6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                9,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                21,
+                1
+              ]
+            ],
+            "kind": "base_squared",
+            "norm": 9
+          },
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              -6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                9,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                21,
+                1
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 9
+          },
+          {
+            "P": [
+              3,
+              1
+            ],
+            "generator": [
+              -3,
+              0
+            ],
+            "ideal_generators": [
+              [
+                9,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                -3,
+                3
+              ],
+              [
+                21,
+                0
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 9
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            4,
+            1
+          ]
+        }
+      },
+      {
+        "D": 93,
+        "alpha": [
+          "4/3"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -23,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "93/4",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            3,
+            2
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              2
+            ],
+            "generator": [
+              4,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -2,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -3
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 101,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -25,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "101/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              5,
+              0
+            ],
+            "generator": [
+              5,
+              1
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 5
+          },
+          {
+            "P": [
+              5,
+              1
+            ],
+            "generator": [
+              -6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 5
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            9,
+            2
+          ]
+        }
+      },
+      {
+        "D": 109,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -27,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "109/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            4
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              -6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          },
+          {
+            "P": [
+              3,
+              1
+            ],
+            "generator": [
+              5,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          },
+          {
+            "P": [
+              5,
+              2
+            ],
+            "generator": [
+              14,
+              3
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                -2,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -5
+          },
+          {
+            "P": [
+              5,
+              4
+            ],
+            "generator": [
+              -17,
+              3
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                -4,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -5
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            118,
+            25
+          ]
+        }
+      },
+      {
+        "D": 133,
+        "alpha": [
+          "12/17"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -33,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "133/4",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              -6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -3
+          },
+          {
+            "P": [
+              3,
+              1
+            ],
+            "generator": [
+              5,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -3
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 7,
+          "squares_mod_p": [
+            0,
+            1,
+            2,
+            4
+          ]
+        }
+      },
+      {
+        "D": 141,
+        "alpha": [
+          "2/3"
+        ],
+        "base_ideal": null,
+        "basis_polynomial": [
+          -35,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "141/4",
+        "narrow_class_number": 2,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              2
+            ],
+            "generator": [
+              11,
+              2
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -2,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          },
+          {
+            "P": [
+              5,
+              0
+            ],
+            "generator": [
+              5,
+              1
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -5
+          },
+          {
+            "P": [
+              5,
+              1
+            ],
+            "generator": [
+              -6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": -5
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "D": 149,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -37,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "149/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            4
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              5,
+              2
+            ],
+            "generator": [
+              -7,
+              1
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                -2,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 5
+          },
+          {
+            "P": [
+              5,
+              4
+            ],
+            "generator": [
+              6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                5,
+                0
+              ],
+              [
+                -4,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 5
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            28,
+            5
+          ]
+        }
+      },
+      {
+        "D": 157,
+        "base_ideal": null,
+        "basis_polynomial": [
+          -39,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "trivial": true
+        },
+        "class_number": 1,
+        "decision": "narrow class number one",
+        "minkowski_bound_squared": "157/4",
+        "narrow_class_number": 1,
+        "negative_norm_unit": true,
+        "prime_ideals": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              0
+            ],
+            "generator": [
+              6,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          },
+          {
+            "P": [
+              3,
+              1
+            ],
+            "generator": [
+              -7,
+              1
+            ],
+            "ideal_generators": [
+              [
+                3,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "kind": "prime_principal",
+            "norm": 3
+          }
+        ],
+        "unit_certificate": {
+          "norm": -1,
+          "unit": [
+            98,
+            17
+          ]
+        }
+      },
+      {
+        "D": 165,
+        "alpha": [
+          "6/11",
+          "5/6"
+        ],
+        "base_ideal": [
+          3,
+          2
+        ],
+        "basis_polynomial": [
+          -41,
+          -1,
+          1
+        ],
+        "class_lower_bound": {
+          "biquadratic_discriminant": 27225,
+          "genus_discriminants": [
+            5,
+            33,
+            165
+          ]
+        },
+        "class_number": 2,
+        "decision": "integrality / ramified lower bound",
+        "minkowski_bound_squared": "165/4",
+        "narrow_class_number": 4,
+        "negative_norm_unit": false,
+        "prime_ideals": [
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "relations": [
+          {
+            "P": [
+              3,
+              2
+            ],
+            "generator": [
+              -3,
+              0
+            ],
+            "ideal_generators": [
+              [
+                9,
+                0
+              ],
+              [
+                -6,
+                3
+              ],
+              [
+                -6,
+                3
+              ],
+              [
+                45,
+                -3
+              ]
+            ],
+            "kind": "base_squared",
+            "norm": 9
+          },
+          {
+            "P": [
+              3,
+              2
+            ],
+            "generator": [
+              -3,
+              0
+            ],
+            "ideal_generators": [
+              [
+                9,
+                0
+              ],
+              [
+                -6,
+                3
+              ],
+              [
+                -6,
+                3
+              ],
+              [
+                45,
+                -3
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 9
+          },
+          {
+            "P": [
+              5,
+              3
+            ],
+            "generator": [
+              -8,
+              1
+            ],
+            "ideal_generators": [
+              [
+                15,
+                0
+              ],
+              [
+                -10,
+                5
+              ],
+              [
+                -9,
+                3
+              ],
+              [
+                47,
+                -4
+              ]
+            ],
+            "kind": "prime_times_base",
+            "norm": 15
+          }
+        ],
+        "unit_certificate": {
+          "obstruction_prime": 3,
+          "squares_mod_p": [
+            0,
+            1
+          ]
+        }
+      }
+    ],
+    "survivors": [
+      12,
+      21,
+      24,
+      28,
+      69,
+      77
+    ]
+  }
+}

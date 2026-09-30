@@ -1,0 +1,640 @@
+{
+  "schema": "case11-D21-D40-integer-local-verification-v1",
+  "arithmetic": "Python standard-library integers; strict inequalities are exact",
+  "D21": {
+    "field": {
+      "discriminant": 21,
+      "basis": [
+        "1",
+        "w"
+      ],
+      "defining_relation": "w^2-w-5=0"
+    },
+    "decompositions": {
+      "3": {
+        "ordered_count": 2,
+        "pairs_in_basis_1_w": [
+          [
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "complete_b_bound": 0
+      },
+      "4": {
+        "ordered_count": 3,
+        "pairs_in_basis_1_w": [
+          [
+            [
+              1,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              3,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "complete_b_bound": 0
+      },
+      "5": {
+        "ordered_count": 6,
+        "pairs_in_basis_1_w": [
+          [
+            [
+              1,
+              0
+            ],
+            [
+              4,
+              0
+            ]
+          ],
+          [
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              -1
+            ]
+          ],
+          [
+            [
+              3,
+              -1
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          [
+            [
+              3,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              4,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "complete_b_bound": 1
+      }
+    },
+    "units": {
+      "unit": [
+        2,
+        1
+      ],
+      "inverse": [
+        3,
+        -1
+      ],
+      "norms": [
+        1,
+        1
+      ],
+      "product": [
+        1,
+        0
+      ],
+      "totally_positive": true
+    },
+    "prime_witnesses": {
+      "p3_generator": [
+        1,
+        1
+      ],
+      "p3_generator_norm": -3,
+      "p3_generator_square": [
+        6,
+        3
+      ],
+      "p3_square_relation": "(1+w)^2=3(2+w)",
+      "p5_generator": [
+        0,
+        1
+      ],
+      "q5_generator": [
+        1,
+        -1
+      ],
+      "p5_q5_product": [
+        -5,
+        0
+      ],
+      "p5_q5_sum": [
+        1,
+        0
+      ],
+      "2_inert_by_no_root_mod_2": true
+    },
+    "infinite_weight_exclusion": {
+      "coefficient_formula": "a2=-5-2*(-1)^ell*3^(ell-2)",
+      "Ramanujan_bound_input": "abs(a2)<=2^ell, ell>=2",
+      "even_bases": [
+        {
+          "ell": 2,
+          "abs_a2": 7,
+          "bound": 4
+        },
+        {
+          "ell": 4,
+          "abs_a2": 23,
+          "bound": 16
+        }
+      ],
+      "even_step": "A(ell+2)-4*A(ell)=10*t-15>0 for t=3^(ell-2)>=9",
+      "even_step_minimum": 75,
+      "odd_base": {
+        "ell": 5,
+        "abs_a2": 49,
+        "bound": 32
+      },
+      "odd_step": "A(ell+2)-4*A(ell)=10*t+15>0 for t=3^(ell-2)>0",
+      "only_unexcluded_source_weight_at_least_two": 3
+    },
+    "remaining_weight": {
+      "ell": 3,
+      "cusp_coefficients_at_2_3_4": [
+        1,
+        -24,
+        -15
+      ],
+      "target_coefficients_at_2_3_4_from_supplied_Hecke_formulas": [
+        13,
+        48,
+        -87
+      ],
+      "differences_at_3_4_from_both_supplied_formulas": [
+        72,
+        -72
+      ],
+      "Eisenstein_coefficients_at_2_3_4": [
+        5,
+        13,
+        21
+      ],
+      "ordered_convolution_contributions_at_5": [
+        {
+          "Eisenstein_exponent": [
+            1,
+            0
+          ],
+          "cusp_exponent": [
+            4,
+            0
+          ],
+          "Eisenstein_coefficient": 1,
+          "cusp_coefficient": -15,
+          "contribution": -15
+        },
+        {
+          "Eisenstein_exponent": [
+            2,
+            0
+          ],
+          "cusp_exponent": [
+            3,
+            0
+          ],
+          "Eisenstein_coefficient": 5,
+          "cusp_coefficient": -24,
+          "contribution": -120
+        },
+        {
+          "Eisenstein_exponent": [
+            2,
+            1
+          ],
+          "cusp_exponent": [
+            3,
+            -1
+          ],
+          "Eisenstein_coefficient": 1,
+          "cusp_coefficient": 1,
+          "contribution": 1
+        },
+        {
+          "Eisenstein_exponent": [
+            3,
+            -1
+          ],
+          "cusp_exponent": [
+            2,
+            1
+          ],
+          "Eisenstein_coefficient": 1,
+          "cusp_coefficient": 1,
+          "contribution": 1
+        },
+        {
+          "Eisenstein_exponent": [
+            3,
+            0
+          ],
+          "cusp_exponent": [
+            2,
+            0
+          ],
+          "Eisenstein_coefficient": 13,
+          "cusp_coefficient": 1,
+          "contribution": 13
+        },
+        {
+          "Eisenstein_exponent": [
+            4,
+            0
+          ],
+          "cusp_exponent": [
+            1,
+            0
+          ],
+          "Eisenstein_coefficient": 21,
+          "cusp_coefficient": 1,
+          "contribution": 21
+        }
+      ],
+      "alpha_input": 12,
+      "Fourier_product_difference_at_5": -1188,
+      "multiplicativity_difference_at_5_conditional_on_inputs": 0,
+      "prime_indecomposability_comparison": "5<12=(sqrt(3)+sqrt(3))^2"
+    },
+    "source_snippets": [
+      "x=a+bw=(2a+b+b*sqrt(21))/2; total positivity is 2a+b>0 and (2a+b)^2>21b^2.",
+      "For 0<x_sigma<m at both embeddings, 21b^2<m^2 and 0<2a+b<2m; these bound every integer pair enumerated.",
+      "Norm(a+bw)=a^2+ab-5b^2 is the determinant of multiplication by a+bw on Z[w].",
+      "(1+w)^2=3(2+w), (2+w)(3-w)=1, w(1-w)=-5, w+(1-w)=1."
+    ]
+  },
+  "D40": {
+    "field": {
+      "discriminant": 40,
+      "basis": [
+        "1",
+        "sqrt(10)"
+      ]
+    },
+    "nu": [
+      7,
+      2
+    ],
+    "norm_nu": 9,
+    "nu_totally_positive": true,
+    "complete_a_range": [
+      1,
+      6
+    ],
+    "complete_b_range": [
+      -1,
+      1
+    ],
+    "enumerated_cases": [
+      {
+        "x": [
+          1,
+          -1
+        ],
+        "nu_minus_x": [
+          6,
+          3
+        ],
+        "x_totally_positive": false,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          1,
+          0
+        ],
+        "nu_minus_x": [
+          6,
+          2
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          1,
+          1
+        ],
+        "nu_minus_x": [
+          6,
+          1
+        ],
+        "x_totally_positive": false,
+        "nu_minus_x_totally_positive": true
+      },
+      {
+        "x": [
+          2,
+          -1
+        ],
+        "nu_minus_x": [
+          5,
+          3
+        ],
+        "x_totally_positive": false,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          2,
+          0
+        ],
+        "nu_minus_x": [
+          5,
+          2
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          2,
+          1
+        ],
+        "nu_minus_x": [
+          5,
+          1
+        ],
+        "x_totally_positive": false,
+        "nu_minus_x_totally_positive": true
+      },
+      {
+        "x": [
+          3,
+          -1
+        ],
+        "nu_minus_x": [
+          4,
+          3
+        ],
+        "x_totally_positive": false,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          3,
+          0
+        ],
+        "nu_minus_x": [
+          4,
+          2
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          3,
+          1
+        ],
+        "nu_minus_x": [
+          4,
+          1
+        ],
+        "x_totally_positive": false,
+        "nu_minus_x_totally_positive": true
+      },
+      {
+        "x": [
+          4,
+          -1
+        ],
+        "nu_minus_x": [
+          3,
+          3
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          4,
+          0
+        ],
+        "nu_minus_x": [
+          3,
+          2
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          4,
+          1
+        ],
+        "nu_minus_x": [
+          3,
+          1
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          5,
+          -1
+        ],
+        "nu_minus_x": [
+          2,
+          3
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          5,
+          0
+        ],
+        "nu_minus_x": [
+          2,
+          2
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          5,
+          1
+        ],
+        "nu_minus_x": [
+          2,
+          1
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          6,
+          -1
+        ],
+        "nu_minus_x": [
+          1,
+          3
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          6,
+          0
+        ],
+        "nu_minus_x": [
+          1,
+          2
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      },
+      {
+        "x": [
+          6,
+          1
+        ],
+        "nu_minus_x": [
+          1,
+          1
+        ],
+        "x_totally_positive": true,
+        "nu_minus_x_totally_positive": false
+      }
+    ],
+    "positive_decompositions": [],
+    "nu_indecomposable": true,
+    "prime_square_witness": {
+      "prime_generators": [
+        [
+          3,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "prime_norm": 3,
+      "square_generators": [
+        [
+          9,
+          0
+        ],
+        [
+          -3,
+          3
+        ],
+        [
+          11,
+          -2
+        ]
+      ],
+      "maximal_minors": [
+        27,
+        -18,
+        -27
+      ],
+      "square_lattice_index": 9,
+      "nu_linear_combination_coefficients": [
+        -1,
+        2,
+        2
+      ],
+      "square_generator_quotients_by_nu": [
+        [
+          7,
+          -2
+        ],
+        [
+          -9,
+          3
+        ],
+        [
+          13,
+          -4
+        ]
+      ],
+      "ideal_relation": "(3,sqrt(10)-1)^2=(7+2sqrt(10))"
+    },
+    "source_snippets": [
+      "For x=a+b*sqrt(10), total positivity is a>0 and a^2>10b^2.",
+      "If x and nu-x are totally positive, 1<=a<=6 and 10b^2<a^2<=36, so b is -1,0,1.",
+      "-9+2*3*(sqrt(10)-1)+2*(sqrt(10)-1)^2=7+2sqrt(10).",
+      "The gcd of maximal 2x2 minors of the three square-ideal generators is 9, equal to Norm(nu)."
+    ]
+  },
+  "external_dependencies_not_verified": [
+    "D21 alpha=12, ordinary class number one and narrow class number two (separate rq_certificate.py).",
+    "Full-level Hecke recurrences, multiplicativity, and Fourier product/component formulas.",
+    "Character parity identifies the primes of negative generator norm with the nontrivial narrow class.",
+    "Ramanujan bound for full-level parallel source weight ell>=2 (Blasius2006Ramanujan in manuscript).",
+    "Positive-exponent norm inequality and same-component summand ideal-class identification."
+  ],
+  "automorphic_theorem_verified": false,
+  "all_integer_arithmetic_checks_passed": true
+}

@@ -1,0 +1,17 @@
+PASS 3 81 boxes [18, 64]
+PASS 3 257 boxes [12, 48]
+PASS 3 321 boxes [18, 48]
+PASS 3 697 boxes [12, 64]
+PASS 3 1257 boxes [18, 18]
+PASS 3 1489 boxes [12, 80]
+PASS 3 3969 boxes [18, 18]
+PASS 4 2525 boxes [54, 144]
+PASS 4 4205 boxes [36, 256]
+PASS 4 4525 boxes [54, 144]
+PASS 4 8069 boxes [54, 144]
+PASS 4 16317 boxes [54, 72]
+PASS 5 14641 boxes [1024, 1024]
+PASS 5 38569 boxes [324, 576]
+PASS 6 371293 boxes [1296, 3072]
+ALL_PASS: fields=15 exponent_boxes=30 checked_points=8776 D3969_sign_records=36 D3969_maximal_order=True
+SCOPE: six separate candidates are not certified as lattice exclusions; external dependencies remain explicit.
