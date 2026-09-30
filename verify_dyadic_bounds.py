@@ -362,7 +362,7 @@ def main():
     if not __debug__:
         raise SystemExit('Assertions must be enabled: do not use -O/-OO.')
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--data-dir', type=Path, default=Path(__file__).resolve().parents[1])
+    ap.add_argument('--data-dir', type=Path, default=Path(__file__).resolve().parent/'rerun')
     ap.add_argument('--output', type=Path)
     args = ap.parse_args()
     path = args.data_dir/'rerun'/'e2_dyadic_output.json'

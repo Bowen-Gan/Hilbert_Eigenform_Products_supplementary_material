@@ -7,9 +7,9 @@ in each containing trace-dual box is checked; no floating-point sign decision
 and no Sage installation is used. A failed check exits nonzero.
 
 Examples (run from the supplement root):
-    python additional_verification/verify_lattice_witnesses.py
-    python additional_verification/verify_lattice_witnesses.py \
-        --data-dir . --output additional_verification/lattice_verification.json
+    python verify_lattice_witnesses.py
+    python verify_lattice_witnesses.py \
+        --data-dir rerun --output lattice_verification.json
 
 External inputs remain explicit. Except for discriminant 3969, identification
 of the supplied integer orders with the maximal orders relies on the reported
@@ -325,8 +325,8 @@ def run(data_dir):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--data-dir', type=Path, default=Path(__file__).resolve().parent.parent,
-                        help='supplement root containing e2_lattices.json and d3969_certificate.json (default: parent of additional_verification)')
+    parser.add_argument('--data-dir', type=Path, default=Path(__file__).resolve().parent/'rerun',
+                        help='directory containing e2_lattices.json and d3969_certificate.json (default: repository rerun directory)')
     parser.add_argument('--output', type=Path, help='optional JSON result path')
     args=parser.parse_args()
     try:

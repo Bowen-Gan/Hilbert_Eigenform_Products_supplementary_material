@@ -8,6 +8,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
 import platform
 from pathlib import Path
 import subprocess
@@ -21,14 +22,21 @@ def digest(path):
 def main():
     if not __debug__:
         raise SystemExit('Do not use optimized Python; assertions are required.')
-    root = Path(__file__).resolve().parent.parent
+    root = Path(__file__).resolve().parent
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--data-dir', type=Path, default=root/'inputs')
-    ap.add_argument('--output-dir', type=Path, default=root/'verification')
+    ap.add_argument('--data-dir', type=Path, default=root/'rerun')
+    ap.add_argument('--output-dir', type=Path, default=root/'verification_case11')
     args = ap.parse_args()
     inputs, out = args.data_dir.resolve(), args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=True)
     scripts = Path(__file__).resolve().parent
+    selected_inputs = {
+        'e2_lattices.json': inputs/'e2_lattices.json',
+        'd3969_certificate.json': inputs/'d3969_certificate.json',
+        'e2_dyadic_output.json': (inputs/'rerun'/'e2_dyadic_output.json'
+                                 if (inputs/'rerun'/'e2_dyadic_output.json').is_file()
+                                 else inputs/'e2_dyadic_output.json'),
+    }
     tasks = [
         ('verify_lattice_witnesses.py', ['--data-dir', str(inputs)], 'lattice_verification.json'),
         ('verify_dyadic_bounds.py', ['--data-dir', str(inputs)], 'dyadic_verification.json'),
@@ -44,14 +52,24 @@ def main():
         'python_version': sys.version, 'platform': platform.platform(),
         'completed': False, 'tasks': [],
         'source_hashes': {p.name: digest(p) for p in sorted(scripts.glob('*.py'))},
-        'input_hashes': {p.name: digest(p) for p in sorted(inputs.glob('*.json'))},
+        'input_paths': {name: str(p) for name, p in selected_inputs.items()},
+        'input_hashes': {},
     }
     status = out/'status.json'
+    status.write_text(json.dumps(record, indent=2)+'\n')
+    missing = [str(p) for p in selected_inputs.values() if not p.is_file()]
+    if missing:
+        record['error'] = 'Required input files are missing: '+', '.join(missing)
+        record['finished_utc'] = datetime.now(timezone.utc).isoformat()
+        status.write_text(json.dumps(record, indent=2)+'\n')
+        raise SystemExit(record['error'])
+    record['input_hashes'] = {name: digest(p) for name, p in selected_inputs.items()}
     status.write_text(json.dumps(record, indent=2)+'\n')
     for name, extra, result_name in tasks:
         print('RUN '+name, flush=True)
         command = [sys.executable, str(scripts/name), *extra, '--output', str(out/result_name)]
-        run = subprocess.run(command, capture_output=True, text=True)
+        run = subprocess.run(command, capture_output=True, text=True,
+                             cwd=root, env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
         log = out/(Path(name).stem+'.log')
         log.write_text(run.stdout+run.stderr)
         row = {'script': name, 'command': command, 'exit_code': run.returncode,
