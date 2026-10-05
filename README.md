@@ -1,6 +1,6 @@
 # Supplementary Material: Eigenform Product Identities for Full-Level Hilbert Modular Forms
 
-This repository provides SageMath programs, independent Python verifiers, complete finite input tables, arithmetic certificates, execution records, and mathematical notes for *Eigenform Product Identities for Full-Level Hilbert Modular Forms*. The sources are synchronized with the manuscript revision checked on 5 October 2026. Magma is not required.
+This repository accompanies *Eigenform Product Identities for Full-Level Hilbert Modular Forms*. It contains SageMath programs, independent Python verifiers, complete finite input tables, arithmetic certificates, execution records, and supporting mathematical notes. Magma is not required.
 
 ## Complete reproduction
 
@@ -28,9 +28,29 @@ The driver records the actual Python/Sage versions, times, commands, exit codes,
 
 The latest generated results are in `rerun/` and `verification_case11/`. Same-name outputs are replaced on rerunning. Redundant earlier `logs/` and top-level generated certificates are omitted from this distribution. Git history retains earlier revisions.
 
+## Recorded complete run
+
+The distributed complete-run records were produced locally on WSL2 using **SageMath 10.9** and **Python 3.12.14**. The run started at `2026-10-05T16:39:48.899404+00:00` and finished at `2026-10-05T16:42:27.848748+00:00`; both timestamps are in UTC. Its run ID is:
+
+```text
+f7ca4d91-2c57-4bf2-8455-ec62ac7eb2b7
+```
+
+All twelve arithmetic tasks and ten independent verification tasks met their stated acceptance conditions in this invocation. The driver exited with code 0 and printed `FULL_CERTIFICATES_PASSED`. The accepted intermediate lattice-search exit code 2 is explained below.
+
+The published records are:
+
+- [STATUS.json](STATUS.json): the complete-run summary.
+- [verification/full_run_status.json](verification/full_run_status.json): the full driver record and links to both suites.
+- [rerun/all_arithmetic_status.json](rerun/all_arithmetic_status.json): the twelve arithmetic tasks, their commands, exit codes and artifact hashes.
+- [verification_case11/status.json](verification_case11/status.json): the ten independent checks, their input/output hashes and log paths.
+- [verification/local-run.txt](verification/local-run.txt): the complete driver's console output.
+
+These records identify the executed sources and input tables by hash. Reproduction should use the complete source-and-record snapshot from the same Git commit.
+
 ## Arithmetic programs
 
-All eleven existing Sage files are retained. Their roles are listed below.
+The eleven Sage programs have the following roles.
 
 | Program | Mathematical calculation |
 | --- | --- |
@@ -48,7 +68,7 @@ All eleven existing Sage files are retained. Their roles are listed below.
 
 `rq_certificate.py` is the twelfth arithmetic task. It independently performs the quadratic reduction using exact standard-library arithmetic; it is also rerun in the independent suite.
 
-The field reduction now starts from **772 fields**, with degree counts **143, 552, 37, 40**. The formerly omitted quartic polynomial is `x^4 - 19*x^2 - 24*x + 16`, with field discriminant **65808**, polynomial discriminant **4211712**, and power-basis index **8**. Its dyadic ramification is recorded independently. The **21 surviving candidates**, **15 lattice exclusions**, and six final discriminants **49, 169, 361, 725, 1125, 5125** are unchanged.
+The field reduction uses **772 fields**: **143, 552, 37, 40** in degrees three through six, respectively. It leaves **21 candidates**; **15 lattice exclusions** reduce these to the six final discriminants **49, 169, 361, 725, 1125, 5125**. The input includes the quartic polynomial `x^4 - 19*x^2 - 24*x + 16`, whose field discriminant is **65808**, polynomial discriminant is **4211712**, and power-basis index is **8**. Its dyadic ramification is checked independently.
 
 The full compressed Bordeaux tables and their provenance/hashes are in `data/number_field_tables/`. `number_field_table_inputs.py` reads these inputs without requiring network access. Completeness of the original tables is an external mathematical input; it is not inferred from a Sage enumeration-complete flag. Documented duplicate source rows outside our bounds do not alter the required input set.
 
@@ -58,7 +78,7 @@ These programs use only the Python standard library.
 
 | Program | Independent check |
 | --- | --- |
-| `verify_field_enumeration.py` | Complete source inputs, all 772 computed field records, integral bases/discriminants, local arithmetic, screening intervals, and the missing field's dyadic ramification. |
+| `verify_field_enumeration.py` | Complete source inputs, all 772 computed field records, integral bases/discriminants, local arithmetic, screening intervals, and dyadic ramification at discriminant 65808. |
 | `verify_lattice_witnesses.py` | Rational root isolation, trace-dual boxes, exact lattice arithmetic, all thirty boxes, and adaptive sign refinement. |
 | `verify_dyadic_bounds.py` | Local factorization and exact rational bounds for the six dyadic cutoffs, including monotonicity at integer weights. |
 | `verify_special_values.py` | Generalized Bernoulli sums and exact special values in the weight-three, weight-four, and dyadic calculations. |
@@ -69,7 +89,7 @@ These programs use only the Python standard library.
 | `verify_d12_weight_one.py` | Low-weight Hilbert-series counts, both narrow components, the Dirichlet values at zero, Eisenstein support, and the normalizing scalar 12. |
 | `verify_eisenstein_bounds.py` | Certified rational intervals for the finite numerical comparisons in the Eisenstein--Eisenstein proofs. |
 
-An independent-only run checks the existing arithmetic transcripts rather than generating all Sage data again:
+The independent suite checks the existing arithmetic transcripts. To preserve the published complete-run records, run it in a separate copy of the repository: standalone verification marks the complete-run summary as incomplete.
 
 ```bash
 python run_verification.py --data-dir rerun --output-dir verification_case11
@@ -77,15 +97,15 @@ python run_verification.py --data-dir rerun --output-dir verification_case11
 
 Its success marker is `CASE11_ADDITIONAL_ARITHMETIC_PASSED`; this is a compatibility name for the expanded independent suite, not the complete-reproduction marker. Individual verifiers accept `--output PATH`; those requiring certificates also accept `--data-dir PATH`. Their JSON outputs state what they verify and their external dependencies.
 
-The lattice search returns exit code 2 when precisely 169, 361, and 725 remain unresolved by that search. The complete driver accepts this only after checking the complete search record and then runs the endpoint programs that establish the required weight-two vanishing. This accepted intermediate exit is not treated as an unconditional proof of all exclusions.
+In the recorded run, the lattice search returned exit code 2 with precisely 169, 361, and 725 unresolved by that search. The complete driver accepts this only after checking the complete search record and then runs the endpoint programs that establish the required weight-two vanishing. This accepted intermediate exit is not treated as an unconditional proof of all exclusions.
 
 ## Mathematical scope and notes
 
-The calculations verify finite arithmetic and algebra. Their application uses the manuscript's reductions and cited theorems, including the mass/genus formulas and Jacquet--Langlands correspondence. The specified-character contribution at 1125 is a sufficient lower bound, `dim S_5(epsilon) >= 5`; no obsolete exact dimension claim is retained.
+The calculations verify finite arithmetic and algebra. Their application uses the manuscript's reductions and cited theorems, including the mass/genus formulas and Jacquet--Langlands correspondence. The specified-character contribution at 1125 establishes the sufficient lower bound `dim S_5(epsilon) >= 5`.
 
-The first normalization annotation is addressed computationally by the existing local Rankin verifier and its character algebra. Identifying the global Mok family, its nonzero normalization, ordinary class-group projection, the actual Petersson endpoint, and boundary nonvanishing remain the analytic arguments in the manuscript. Finite calculations do not replace those arguments.
+The Rankin verifier checks local polynomial and character identities. The identification and nonzero normalization of the global Mok family, ordinary class-group projection, Petersson endpoint pairing, and boundary nonvanishing are established analytically in the manuscript.
 
-The manuscript now treats the Eisenstein weight-two case with cuspidal weight one as well. Its final twisting argument is theoretical. Products of a weight-one Eisenstein eigenform with a cuspidal eigenform remain unclassified; the discriminant-12 identity is an example, not a classification of that open case.
+The classification of Eisenstein weight-two products with cuspidal weight one includes a twisting argument proved in the manuscript. Products of a weight-one Eisenstein eigenform with a cuspidal eigenform remain unclassified; the discriminant-12 identity is an example, not a classification of that open case.
 
 `notes/` provides the accompanying mathematical explanations. `MANUAL_CHECK_REPORT.md` records the per-file source review and the distinction between source review, independently replayed certificates, and a fresh complete run. `manuscript_changes.md` lists the few text changes required by the computational synchronization.
 
@@ -93,4 +113,4 @@ The manuscript now treats the Eisenstein weight-two case with cuspidal weight on
 
 `SHA256SUMS.txt` lists every distributed file except itself and generated Python caches. The complete driver refreshes it after success. Documentation or other changes require a new manifest; a checksum identifies bytes and does not certify a computation.
 
-Cite a fixed Git commit of the exact source-and-record version used. The repository is [Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material](https://github.com/Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material). The manuscript's previous fixed citation to `8eaf1af` must be replaced after this update with the new commit, rather than continuing to cite the older 771-field input.
+Cite the title of this supplementary material, the repository URL, and a fixed Git commit identifying the exact source-and-record version used. Use a commit-specific URL of the form `https://github.com/Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material/tree/<full-commit-sha>`. The repository is [Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material](https://github.com/Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material).
