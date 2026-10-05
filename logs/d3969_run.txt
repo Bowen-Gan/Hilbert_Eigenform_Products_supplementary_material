@@ -1,1 +1,0 @@
-D=3969: both exponents indecomposable; output: certificates/d3969_certificate.json
