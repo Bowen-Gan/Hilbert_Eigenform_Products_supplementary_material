@@ -1,0 +1,26 @@
+{
+  "schema": "case11-independent-field-screening-v1",
+  "result": "PASS",
+  "status": "PASS",
+  "candidate_manifest_sha256": "efe9b19f2bae6c7c0c272963083433b0a6502a49c6723b7c35fd795cf7d78332",
+  "field_count": 772,
+  "counts_by_degree": {
+    "3": 143,
+    "4": 552,
+    "5": 37,
+    "6": 40
+  },
+  "counts_by_status": {
+    "requires_lattice_or_exception_certificate": 21,
+    "noninert_two_argument": 135,
+    "reciprocal_constant_not_integral": 37,
+    "trivial_character_discriminant_bound": 521,
+    "even_class_number_argument": 15,
+    "small_prime_argument": 43
+  },
+  "remaining_field_count": 21,
+  "D65808_power_basis_index": 8,
+  "D65808_frobenius_rank_mod_two": 2,
+  "D65808_ramification_independently_checked": true,
+  "external_inputs": "completeness and field discriminants of\nBordeaux's published tables; ordinary/narrow class numbers and primality of\nnon-dyadic local factors, recomputed by the separate proof-enabled Sage run;\nthe manuscript's modular-form exclusions. This program verifies their recorded\narithmetic use; it does not claim to reprove field enumeration or class groups."
+}

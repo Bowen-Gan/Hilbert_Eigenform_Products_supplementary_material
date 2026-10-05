@@ -8,8 +8,12 @@ No Hilbert-modular-form implementation, database, or Magma is used.
 
 Run: sage -python cubic_weight_two_genus.sage --output cubic_weight_two_genus.json
 """
+if not __debug__:
+    raise RuntimeError('Assertions must remain enabled; do not use -O/-OO.')
+
 from sage.all import *
 from sage.version import version as sage_version
+from pathlib import Path
 import argparse
 import json
 
@@ -53,10 +57,21 @@ def run():
         (361, x**3-x**2-6*x+7, 19),
     ]:
         F = NumberField(f, 'a')
-        assert F.discriminant() == D
+        assert F.discriminant() == D and F.signature() == (3, 0)
         h = F.class_number(proof=True)
         hp = F.narrow_class_group().order()
         assert h == hp == 1
+        embeddings = sorted(F.embeddings(AA), key=lambda v: v(F.gen()))
+        units = F.units(proof=True)
+        unit_signatures = [tuple(int(sign(v(u))) for v in embeddings) for u in units]
+        signature_image = {(1, 1, 1)}
+        for signs in unit_signatures + [(-1, -1, -1)]:
+            signature_image.update({tuple(s*t for s, t in zip(row, signs))
+                                    for row in list(signature_image)})
+        assert len(signature_image) == 8
+        # Signature rank 3 says every totally positive unit is a square.
+        # This justifies both the norm-one group reduction and norm unit
+        # index 1 in the elliptic-cycle formula; no numerical sign test.
         zeta, zeta_certificate = exact_cubic_zeta(F, conductor)
         assert zeta == {169: QQ(-1)/3, 361: QQ(-1)}[D]
         # If F(zeta_(2q))/F is quadratic then phi(2q) divides 6.
@@ -101,23 +116,33 @@ def run():
         rows.append({
             'discriminant': D, 'polynomial': str(f),
             'class_number': int(h), 'narrow_class_number': int(hp),
+            'fundamental_units': [[str(c) for c in u.list()] for u in units],
+            'unit_signatures': [list(s) for s in unit_signatures],
+            'unit_signature_image': [list(s) for s in sorted(signature_image)],
+            'unit_signature_image_order': len(signature_image),
             'zeta_minus_one': str(zeta), 'zeta_certificate': zeta_certificate,
             'possible_elliptic_orders': possible_q,
             'excluded_cubic_real_subfields': excluded_real_subfields,
             'CM_certificates': cm_rows, 'normalized_area': str(area),
             'genus': int(genus), 'full_level_parallel_weight_two_cusp_dimension': 0,
         })
-    return {'sage_version': sage_version, 'proof_all': True,
+    return {'schema': 'cubic-weight-two-genus-v2',
+            'sage_version': sage_version, 'proof_all': True,
             'method': 'Shimizu area, exact CM class numbers, Riemann-Hurwitz, Jacquet-Langlands',
+            'theorem_dependencies': [
+                'Voight: Shimura curves of genus at most two (1),(2), Lemma 2.1, Proposition 2.3(a)',
+                'Dembele--Voight: Explicit methods for Hilbert modular forms, Theorem 3.9'],
+            'scope': 'Arithmetic inputs and genus formulas are checked; area, embedding and transfer theorems are cited dependencies.',
             'rows': rows}
 
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
-    p.add_argument('--output')
+    p.add_argument('--output', default=str(Path(__file__).resolve().parent/'rerun'/'cubic_weight_two_genus.json'))
     args = p.parse_args()
     output = json.dumps(run(), indent=2)
     if args.output:
+        Path(args.output).parent.mkdir(parents=True, exist_ok=True)
         with open(args.output, 'w') as handle:
             handle.write(output+'\n')
     else:

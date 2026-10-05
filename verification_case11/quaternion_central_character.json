@@ -1,0 +1,155 @@
+{
+  "schema": "D1125-independent-quaternion-central-character-v1",
+  "result": "PASS",
+  "certificate": "/mnt/d/certificates/repository/rerun/quartic_1125_sufficient.json",
+  "field_arithmetic": "exact rational polynomial quotient",
+  "norm_one_group_order": 120,
+  "reduced_group_order": 60,
+  "trace_gram_determinant": "-1",
+  "weight_five_character_sum": 600,
+  "character_distribution": [
+    {
+      "value": 0,
+      "multiplicity": 30
+    },
+    {
+      "value": 1,
+      "multiplicity": 88
+    },
+    {
+      "value": 256,
+      "multiplicity": 2
+    }
+  ],
+  "trace_distribution": [
+    {
+      "trace": [
+        "-1",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 20
+    },
+    {
+      "trace": [
+        "-1",
+        "3",
+        "0",
+        "-1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "-2",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 1
+    },
+    {
+      "trace": [
+        "0",
+        "-3",
+        "0",
+        "1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 30
+    },
+    {
+      "trace": [
+        "0",
+        "3",
+        "0",
+        "-1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "1",
+        "-3",
+        "0",
+        "1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 20
+    },
+    {
+      "trace": [
+        "2",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 1
+    }
+  ],
+  "central_action_rule": "Norm(b)^3/abs(Norm(b))^3 = epsilon((b))",
+  "central_scalar_checks": [
+    {
+      "name": "1",
+      "field_norm": "1",
+      "normalized_scalar": "1"
+    },
+    {
+      "name": "-1",
+      "field_norm": "1",
+      "normalized_scalar": "1"
+    },
+    {
+      "name": "2",
+      "field_norm": "16",
+      "normalized_scalar": "1"
+    },
+    {
+      "name": "a+1",
+      "field_norm": "-5",
+      "normalized_scalar": "-1"
+    },
+    {
+      "name": "unit_1",
+      "field_norm": "1",
+      "normalized_scalar": "1"
+    },
+    {
+      "name": "unit_2",
+      "field_norm": "1",
+      "normalized_scalar": "1"
+    },
+    {
+      "name": "unit_3",
+      "field_norm": "1",
+      "normalized_scalar": "1"
+    }
+  ],
+  "fixed_central_character": "epsilon",
+  "dim_S5_epsilon_lower_bound": 5,
+  "theorem_dependencies": [
+    "finite subgroups of SO(3)",
+    "Eichler mass formula",
+    "surjectivity of the reduced-norm map to the narrow class group",
+    "definite quaternionic modular-form decomposition",
+    "Jacquet-Langlands correspondence"
+  ],
+  "scope": "Independent finite verification; class-number and unit-signature completeness are proof-mode Sage inputs; representation, mass and Jacquet--Langlands statements are cited theorems."
+}

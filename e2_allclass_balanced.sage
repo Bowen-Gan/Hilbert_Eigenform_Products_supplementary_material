@@ -1,6 +1,8 @@
 """Exact positive decomposition certificates, in every narrow class.
 
-Run: sage -python e2_allclass_balanced.sage --output d3969_certificate.json
+Run: sage -python e2_allclass_balanced.sage
+The default output is rerun/d3969_certificate.json next to this script.
+Use --output to choose a standalone certificate path.
 
 For any integral ideal A, choose the positive integer m generating A cap Z
 and set t=(m) A^-1.  Then A=(m)t^-1 and t is integral.  Testing whether
@@ -14,11 +16,16 @@ Every integer point in an exact trace-dual box is tested with algebraic
 real embeddings.  Exhaustion of that box certifies indecomposability.
 """
 
+if not __debug__:
+    raise RuntimeError('Assertions must remain enabled; do not use -O/-OO.')
+
 from sage.all import *
 from sage.version import version as SAGE_VERSION
 from itertools import product
 import argparse
+import hashlib
 import json
+from pathlib import Path
 
 proof.all(True)
 
@@ -51,6 +58,8 @@ def trace_basis(ideal, reduce_basis=True):
 
 def coordinate_box(mu, basis, gram):
     F = mu.parent()
+    assert len(basis) == F.degree()
+    assert gram.nrows() == gram.ncols() == F.degree()
     # Outward intervals suffice for a containing box.  Computing sums of
     # unrelated exact conjugates in AA can unnecessarily construct a large
     # normal closure; rational interval endpoints avoid that expense.
@@ -178,10 +187,13 @@ def d3969_certificate():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", default="d3969_certificate.json")
+    parser.add_argument("--output", type=Path,
+                        default=Path(__file__).resolve().parent/"rerun"/"d3969_certificate.json")
     args = parser.parse_args()
     result = d3969_certificate()
     result["sage_version"] = SAGE_VERSION
+    result["source_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    args.output.parent.mkdir(parents=True, exist_ok=True)
     with open(args.output,"w") as handle:
         json.dump(result, handle, indent=2)
     print("D=3969: both exponents indecomposable; output:", args.output)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Case 11: exact dyadic certificates for the surviving small inert fields.
+"""Exact dyadic certificates for source weights at least two.
 
 Run: sage -python e2_dyadic_bound.sage --output e2_dyadic_output.json
 or use a Python installation providing sage.all.
@@ -9,12 +9,16 @@ abelian special values are generalized Bernoulli sums after an exact Gaussian
 period field identification.  For D=725,5125 a finite Euler product supplies a
 rigorous upper bound for |2^4/zeta_F(-1)| via the functional equation.
 """
+if not __debug__:
+    raise SystemExit("Assertions must be enabled: do not use -O/-OO.")
+
 from sage.all import *
-from sage.modules.free_quadratic_module_integer_symmetric import IntegralLattice
 from sage.version import version as sage_version
 import argparse
 import json
 import sys
+from math import isqrt
+from itertools import product
 
 proof.all(True)
 x = polygen(QQ)
@@ -93,15 +97,20 @@ def euler_alpha_upper(K, cutoff=199):
             norms.append({'norm': int(N), 'ramification_index': int(e)})
         product *= local
         factors.append({'p': int(p), 'primes': norms, 'factor': str(local)})
-    # MPFI gives an outward-rounded upper endpoint for pi. All following
-    # operations and the final rational ceiling are exact real algebraic ones.
-    pi_upper = QQ(RIF256.pi().upper())
-    exact_upper = AA((4*pi_upper**2)**n)/(AA(D)*AA(D).sqrt()*product)
+    # Use precisely the rational bounds stated in the current manuscript.
+    # floor(sqrt(D)*10^8)/10^8 is checked by integer squaring below.
+    pi_upper = QQ(22) / 7
+    sqrt_scale = ZZ(10)**8
+    sqrt_floor = ZZ(isqrt(int(D * sqrt_scale**2)))
+    sqrt_lower = QQ(sqrt_floor) / sqrt_scale
+    assert sqrt_lower**2 < D < (sqrt_lower + QQ(1)/sqrt_scale)**2
+    exact_upper = (4*pi_upper**2)**n/(D*sqrt_lower*product)
     rational_upper = QQ(ceil(exact_upper*10**9))/10**9
-    assert AA(rational_upper) >= exact_upper
+    assert rational_upper >= exact_upper
     return rational_upper, {
         'cutoff': cutoff, 'Euler_factors': factors,
         'Euler_product': str(product), 'pi_upper': str(pi_upper),
+        'sqrt_discriminant_lower': str(sqrt_lower),
         'alpha_absolute_upper': str(rational_upper),
         'method': 'finite Euler lower product and functional equation',
     }
@@ -115,38 +124,50 @@ def divisor_data(I):
 
 
 def positive_decompositions(K):
-    basis = K.integral_basis()
     n = int(K.degree())
+    # All listed defining polynomials have maximal power basis. Choosing it
+    # explicitly makes recorded coordinates independent of backend choices.
+    assert K.defining_polynomial().discriminant() == K.discriminant()
+    basis = [K.gen()**j for j in range(n)]
     gram = matrix(ZZ, [[(u*v).trace() for v in basis] for u in basis])
-    lattice = IntegralLattice(gram)
-    # If 0 << u << 4 then Tr(u^2)<16n. short_vectors is exhaustive
-    # below this strict bound and includes both signs.
+    # If 0 << u << 4 then Tr(u^2)<16n. Cauchy--Schwarz for the
+    # positive Gram matrix gives c_j^2 < 16n*(G^-1)_{jj}, so this
+    # finite integer box contains every short vector, including both signs.
+    # This exact enumeration also works on Sage versions without
+    # IntegralLattice.short_vectors.
     bound = 16*n
+    inverse_gram = gram.change_ring(QQ).inverse()
+    coordinate_bounds = [isqrt(int(bound*inverse_gram[j, j])) for j in range(n)]
     terms = []
     examined = 0
-    for layer in lattice.short_vectors(bound, up_to_sign_flag=False):
-        for coordinates in layer:
-            examined += 1
-            u = sum((ZZ(c)*b for c, b in zip(coordinates, basis)), K(0))
-            v = K(4)-u
-            if not u.is_totally_positive() or not v.is_totally_positive():
-                continue
-            tx, sx, fx = divisor_data(K.ideal(u))
-            ty, sy, fy = divisor_data(K.ideal(v))
-            Nv = ZZ(v.norm())
-            assert 0 < Nv < 4**n
-            terms.append({
-                'coordinates': [int(c) for c in coordinates],
-                'x': str(u), 'y': str(v),
-                'norm_x': int(u.norm()), 'norm_y': int(Nv),
-                'sigma_one_x': int(sx), 'divisor_count_y': int(ty),
-                'ideal_x_factor_norms': fx, 'ideal_y_factor_norms': fy,
-            })
+    for coordinates in product(*(range(-b, b+1) for b in coordinate_bounds)):
+        length = sum(coordinates[i]*gram[i, j]*coordinates[j]
+                     for i in range(n) for j in range(n))
+        if length >= bound:
+            continue
+        examined += 1
+        u = sum((ZZ(c)*b for c, b in zip(coordinates, basis)), K(0))
+        v = K(4)-u
+        if not u.is_totally_positive() or not v.is_totally_positive():
+            continue
+        tx, sx, fx = divisor_data(K.ideal(u))
+        ty, sy, fy = divisor_data(K.ideal(v))
+        Nv = ZZ(v.norm())
+        assert 0 < Nv < 4**n
+        terms.append({
+            'coordinates': [int(c) for c in coordinates],
+            'x': str(u), 'y': str(v),
+            'norm_x': int(u.norm()), 'norm_y': int(Nv),
+            'sigma_one_x': int(sx), 'divisor_count_y': int(ty),
+            'ideal_x_factor_norms': fx, 'ideal_y_factor_norms': fy,
+        })
     terms.sort(key=lambda t: t['coordinates'])
     return terms, {
         'integral_basis': [str(b) for b in basis],
         'trace_gram_matrix': [[int(c) for c in row] for row in gram.rows()],
         'strict_squared_length_bound': bound,
+        'complete_coordinate_bounds': coordinate_bounds,
+        'enumeration_method': 'exact inverse-Gram coordinate box with strict length filter',
         'number_of_short_vectors_including_zero': examined,
         'number_of_positive_decompositions': len(terms),
     }
@@ -188,8 +209,10 @@ def run():
                 output['fields'].append(row)
                 continue
         else:
-            alpha_bound, value_certificate = euler_alpha_upper(K)
+            exact_upper, value_certificate = euler_alpha_upper(K)
             row['alpha_upper_certificate'] = value_certificate
+            alpha_bound = {725: QQ(121), 5125: QQ(61)/10}[D]
+            assert exact_upper < alpha_bound
         terms, lattice_certificate = positive_decompositions(K)
         row['lattice_certificate'] = lattice_certificate
         row['decompositions'] = terms
@@ -212,8 +235,10 @@ def run():
         row['alpha_absolute_bound_used'] = str(alpha_bound)
         row['comparisons'] = comparisons
         row['all_source_weights_at_least_excluded'] = threshold
-        # Every norm_y<q^2 and q>1: every term in the normalized RHS
-        # strictly decreases with t. This proves all subsequent weights.
+        # Every norm_y<q^2 and q>1: increasing the integer source weight
+        # multiplies each positive term by a base strictly below one.
+        # This proves every subsequent integer weight, rather than only
+        # the finitely many weights inspected in the search above.
         row['monotonicity_bases_less_than_one_checked'] = True
         output['fields'].append(row)
     return output

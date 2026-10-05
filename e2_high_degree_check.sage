@@ -1,15 +1,19 @@
 """Finite checks for the repaired degree-seven and degree-eight E2 boundary.
 
-The septic list is independently enumerated here; completeness of the octic
-list remains an external input from Voight's tables. This script verifies
+The complete corrected Bordeaux septic table is filtered here; completeness
+of that table and the octic list remains an explicit published external input.
+This script verifies
 the defining-polynomial discriminants, dyadic and septic local factorizations,
 finite Euler products through 199, and the inequalities used for the one
 analytic survivor in each degree.
 """
 
 from sage.all import *
+from number_field_table_inputs import table_rows, SEPTIC_BOUND
 
 proof.all(True)
+if not __debug__:
+    raise RuntimeError("verification assertions require Python without -O/-OO")
 x = polygen(QQ)
 
 
@@ -40,6 +44,8 @@ F8c = NumberField(f8c, "c8")
 assert [F8a.discriminant(), F8b.discriminant(), F8c.discriminant()] == [
     282300416, 309593125, 324000000
 ]
+assert all(field.degree()==8 and field.signature()==(8,0)
+           for field in [F8a,F8b,F8c])
 assert [f8a.discriminant(), f8b.discriminant(), f8c.discriminant()] == [
     282300416, 309593125, 324000000
 ]
@@ -64,14 +70,16 @@ f7 = x**7 - x**6 - 6*x**5 + 4*x**4 + 9*x**3 - 4*x**2 - 3*x + 1
 F7 = NumberField(f7, "a7")
 assert F7.discriminant() == 25367689
 assert f7.discriminant() == 25367689
-# Independently enumerate all septic fields below the cutoff. Prime degree
-# means the primitive enumeration is the complete field enumeration.
-from sage.rings.number_field.totallyreal import enumerate_totallyreal_fields_prim
-septic_rows = enumerate_totallyreal_fields_prim(7,28162991,return_pari_objects=False)
-assert [ZZ(row[0]) for row in septic_rows] == [20134393,25164057,25367689,28118369]
+# Retain every source row under the analytic cutoff rounded upwards. The
+# bundled source has complete range D<150000000 and preserves provenance.
+septic_rows = table_rows(7, SEPTIC_BOUND)
+assert [row["discriminant"] for row in septic_rows] == [20134393,25164057,25367689,28118369]
 local_tests = {20134393:(7,[1,6]),25164057:(3,[1,1,5]),28118369:(7,[1,6])}
-for D,poly in septic_rows:
+for source_row in septic_rows:
+    D=ZZ(source_row["discriminant"])
+    poly=PolynomialRing(QQ,"x")(source_row["polynomial"])
     F=NumberField(poly,"s")
+    assert F.signature()==(7,0)
     assert F.discriminant()==D
     print("SEPTIC_FIELD",D,poly)
     if ZZ(D) in local_tests:

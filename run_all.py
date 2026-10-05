@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run twelve original Sage tasks followed by six additional exact checks.
+"""Run the complete manuscript arithmetic and independent certificate checks.
 
 The default invocation records both suites and reports complete success only
 when both pass in this invocation. Endpoint-only mode retains its three tasks.
@@ -28,7 +28,9 @@ def read(path):
 
 def write(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2)+'\n')
+    temporary = path.with_name(path.name+'.tmp')
+    temporary.write_text(json.dumps(data, indent=2)+'\n')
+    temporary.replace(path)
 
 
 def digest(path):
@@ -36,8 +38,12 @@ def digest(path):
 
 
 def source_hashes():
-    return {p.name: digest(p) for p in sorted(ROOT.iterdir())
-            if p.is_file() and p.suffix in {'.py', '.sage'}}
+    files = [p for p in ROOT.iterdir()
+             if p.is_file() and p.suffix in {'.py', '.sage'}]
+    data = ROOT/'data'
+    if data.is_dir():
+        files.extend(p for p in data.rglob('*') if p.is_file())
+    return {p.relative_to(ROOT).as_posix(): digest(p) for p in sorted(files)}
 
 
 def refresh_checksums():
@@ -54,16 +60,17 @@ def refresh_checksums():
     (ROOT/'SHA256SUMS.txt').write_text('\n'.join(lines)+'\n')
 
 
-def additional_checks():
+def additional_checks(parent_run_id=None):
+    parent_options = [] if parent_run_id is None else ['--parent-run-id', parent_run_id]
     result = subprocess.run(
         [sys.executable, str(ROOT/'run_verification.py'),
          '--data-dir', str(ROOT/'rerun'),
-         '--output-dir', str(ROOT/'verification_case11')],
+         '--output-dir', str(ROOT/'verification_case11'), *parent_options],
         cwd=ROOT, env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
     if result.returncode:
         return result.returncode
     data = read(ROOT/'verification_case11'/'status.json')
-    assert data['completed'] and len(data['tasks']) == 6
+    assert data['completed'] and len(data['tasks']) == 10
     assert all(row['exit_code'] == 0 and row['accepted'] for row in data['tasks'])
     assert all(data['cross_checks'].values())
     assert all(digest(ROOT/name) == checksum
@@ -89,18 +96,31 @@ def main():
     run_id = str(uuid.uuid4())
     full_path = ROOT/'verification'/'full_run_status.json'
     full = {
-        'schema': 'complete-arithmetic-run-v1', 'run_id': run_id,
-        'scope': 'twelve original Sage tasks plus six additional exact checks',
+        'schema': 'complete-arithmetic-run-v2', 'run_id': run_id,
+        'scope': 'twelve arithmetic tasks plus ten independent exact checks',
         'started_utc': now(), 'completed': False, 'stage': 'sage_environment',
         'python_version': sys.version, 'platform': platform.platform(),
         'source_hashes': source_hashes(), 'suites': [],
         'theoretical_inputs': 'The manuscript and cited mathematical theorems remain external.',
     }
-    if not args.endpoints_only:
-        write(full_path, full)
+    if args.endpoints_only:
+        full['scope'] = 'three endpoint programs only; not a complete reproduction'
+    write(full_path, full)
+    write(ROOT/'STATUS.json', {
+        'schema': 'complete-arithmetic-record-summary-v2',
+        'run_id': run_id, 'completed': False,
+        'started_utc': full['started_utc'], 'stage': 'sage_environment',
+        'complete_record': 'verification/full_run_status.json',
+    })
     try:
-        import sage.all
         from sage.version import version as sage_version
+        # Keep Sage's native signal/interface setup out of the process that
+        # owns and waits for the arithmetic subprocesses.
+        probe = subprocess.run([sys.executable, '-c', 'import sage.all'],
+                               cwd=ROOT, capture_output=True, text=True,
+                               env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
+        if probe.returncode:
+            raise ImportError('Sage startup failed: '+probe.stderr)
     except ImportError:
         if not args.endpoints_only:
             full.update(stage='failed', error='SageMath is unavailable in this Python environment.',
@@ -116,7 +136,7 @@ def main():
         return ['--output', str(out/name)]
     tasks = [] if args.endpoints_only else [
         ('e3_cusp_check.sage', []),
-        ('e2_square_branch_check.sage', []),
+        ('e2_square_branch_check.sage', output('e2_square_branch.json')),
         ('e2_high_degree_check.sage', []),
         ('e2_candidate_enumeration.sage', output('e2_candidates.json')),
         ('e2_allclass_balanced.sage', output('d3969_certificate.json')),
@@ -149,11 +169,20 @@ def main():
             print('RUN '+name, flush=True)
             log = out/(Path(name).stem+'.txt')
             command = [sys.executable, str(ROOT/name), *options]
+            if '--output' in options:
+                Path(options[options.index('--output')+1]).unlink(missing_ok=True)
             with log.open('w') as handle:
                 result = subprocess.run(command, cwd=ROOT, stdout=handle,
                                         stderr=subprocess.STDOUT,
                                         env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
             accepted = result.returncode == 0
+            if name == 'e2_candidate_enumeration.sage' and accepted:
+                data = read(out/'e2_candidates.json')
+                accepted = (data['enumeration_complete'] and
+                            data['covers_all_required_degrees'] and
+                            len(data['fields']) == 772 and
+                            data['counts_by_degree'] == {'3': 143, '4': 552,
+                                                        '5': 37, '6': 40})
             if name == 'e2_indecomposable_search.sage' and result.returncode == 2:
                 data = read(out/'e2_lattices.json')
                 accepted = (data['search_complete'] and data['all_required_degrees']
@@ -176,7 +205,11 @@ def main():
         assert large['conclusions']['dim_S5_totally_odd_character_at_least'] >= 5
         if not args.endpoints_only:
             enumeration = read(out/'e2_candidates.json')
-            assert enumeration['covers_all_required_degrees'] and len(enumeration['fields']) == 771
+            assert enumeration['covers_all_required_degrees'] and len(enumeration['fields']) == 772
+            assert {n: sum(r['degree'] == n for r in enumeration['fields'])
+                    for n in (3, 4, 5, 6)} == {3: 143, 4: 552, 5: 37, 6: 40}
+            assert sum(r['status'] == 'requires_lattice_or_exception_certificate'
+                       for r in enumeration['fields']) == 21
             lattices = read(out/'e2_lattices.json')
             assert sum(r['status'] == 'excluded_by_lattice_certificate' for r in lattices['fields']) == 15
         assert source_hashes() == status['source_hashes']
@@ -196,21 +229,39 @@ def main():
         full['stage'] = 'additional_case11'
         write(full_path, full)
         additional_started = now()
-        result = additional_checks()
+        result = additional_checks(run_id)
         if result:
             raise RuntimeError('Additional Case 11 checks failed; inspect verification_case11/.')
         extra_path = ROOT/'verification_case11'/'status.json'
         extra = read(extra_path)
         assert extra['started_utc'] >= additional_started
+        assert extra['parent_run_id'] == run_id
         assert extra['input_hashes'] == {name: digest(out/name) for name in
-                                       ['e2_lattices.json', 'd3969_certificate.json', 'e2_dyadic_output.json']}
+                                       ['e2_lattices.json', 'd3969_certificate.json',
+                                        'e2_dyadic_output.json', 'e2_candidates.json',
+                                        'quartic_1125_sufficient.json']}
         assert source_hashes() == full['source_hashes']
-        full['suites'].append({'name': 'additional_case11', 'task_count': 6,
+        full['suites'].append({'name': 'independent_arithmetic_checks', 'task_count': 10,
                                'completed': True, 'status': 'verification_case11/status.json',
                                'status_sha256': digest(extra_path)})
         full.update(completed=True, stage='completed', finished_utc=now(),
                     success_marker='FULL_CERTIFICATES_PASSED')
         write(full_path, full)
+        write(ROOT/'STATUS.json', {
+            'schema': 'complete-arithmetic-record-summary-v2',
+            'execution_relationship': 'single_invocation',
+            'run_id': run_id, 'completed': True,
+            'started_utc': full['started_utc'], 'finished_utc': full['finished_utc'],
+            'total_recorded_task_count': sum(s['task_count'] for s in full['suites']),
+            'all_recorded_tasks_accepted': True,
+            'success_marker': full['success_marker'],
+            'sage_version': sage_version, 'python_version': sys.version,
+            'platform': platform.platform(), 'magma_required': False,
+            'complete_record': {'path': 'verification/full_run_status.json',
+                                'sha256': digest(full_path)},
+            'suites': full['suites'],
+            'theoretical_inputs': full['theoretical_inputs'],
+        })
         refresh_checksums()
         print('FREE_ARITHMETIC_SUITE_PASSED')
         print('FULL_CERTIFICATES_PASSED')
@@ -220,6 +271,12 @@ def main():
             full.pop('success_marker', None)
             full.update(completed=False, stage='failed', error=str(exc), finished_utc=now())
             write(full_path, full)
+            write(ROOT/'STATUS.json', {
+                'schema': 'complete-arithmetic-record-summary-v2',
+                'run_id': run_id, 'completed': False, 'stage': 'failed',
+                'error': str(exc), 'finished_utc': full['finished_utc'],
+                'complete_record': 'verification/full_run_status.json',
+            })
         print('FAILED: '+str(exc), file=sys.stderr)
         return 1
 

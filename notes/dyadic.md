@@ -1,127 +1,85 @@
-# Case 11 dyadic calculation: completed and executed
+# Dyadic coefficient certificates for source weights at least two
 
-The replacement `free_certificates/e2_dyadic_bound.sage` was executed with
-SageMath 10.8.12 (passagemath) and all assertions passed. Its actual output is
-`free_certificates/e2_dyadic_output.json`. It covers the exceptional discriminants
-49, 1125, 5125, and 6125, and the additional lattice-search survivors 169,
-361, and 725. The original uploads are unchanged.
+`e2_dyadic_bound.sage` enumerates every ordered totally positive decomposition
+of 4 and checks the normalized coefficient inequality used in the manuscript.
+`verify_dyadic_bounds.py` independently reconstructs the same arithmetic using
+Python integers and rational intervals. The current outputs belong in `rerun/`
+and `verification_case11/`; run status and logs describe the actual execution.
 
-| Discriminant | Certified input | Positive decompositions of 4 | Dyadic conclusion |
-|---|---|---:|---|
-| 49 | Exact alpha = -168 | 9 | Every source weight at least 7 is excluded |
-| 169 | Exact alpha = -24 | 3 | Every source weight at least 4 is excluded |
-| 361 | Exact alpha = -8 | 3 | Every source weight at least 3 is excluded |
-| 725 | Absolute alpha < 120.08107414 | 7 | Every source weight at least 4 is excluded |
-| 1125 | Exact alpha = 60 | 15 | Every source weight at least 4 is excluded |
-| 5125 | Absolute alpha < 6.004472943 | 7 | Every source weight at least 2 is excluded |
-| 6125 | Exact alpha = 60/13 | Not required | Alpha is not an algebraic integer |
+| Discriminant | Bound A for the absolute reciprocal constant | Ordered decompositions of 4 | Excluded integer source weights |
+|---|---:|---:|---|
+| 49 | 168 (exact alpha = -168) | 9 | At least 7 |
+| 169 | 24 (exact alpha = -24) | 3 | At least 4 |
+| 361 | 8 (exact alpha = -8) | 3 | At least 3 |
+| 725 | 121 | 7 | At least 4 |
+| 1125 | 60 (exact alpha = 60) | 15 | At least 4 |
+| 5125 | 61/10 | 7 | At least 2 |
+| 6125 | Exact alpha = 60/13 | Not required | Excluded by nonintegrality |
 
-For discriminant 49, the even-weight condition then leaves source weights
-2, 4, and 6. The dyadic calculation by itself does not exclude weight 2.
-The manuscript's phrase "the two remaining source weights" also uses
-the absence of a weight-two cusp source. This separate modular-form input
-is supplied by the Borisov--Gunnells citation, as explained in the main
-manuscript additions: the three level-p weight-two cusp generators have
-nontrivial g_7 eigenvalues zeta_7^3, zeta_7^6, zeta_7^5, hence the full-level
-invariant space vanishes. It is not a separate output of this file.
-
-For the additional discriminants 169, 361, and 725 the script also certifies
-narrow class number one. Odd source weights are consequently unavailable.
-Their dyadic inequalities leave only source weight 2. The separate free certificates cubic_weight_two_genus.sage and
-quartic_725_weight_two.sage now prove S_2=0 for all three fields.
-Thus these endpoints are closed without Magma.
+At discriminants 49, 169, 361, and 725 the narrow class number is one,
+so compatible source weights are even. These comparisons leave 2, 4, 6
+at discriminant 49, only 2 at discriminants 169, 361, and 725, and 2, 3
+at discriminant 1125. The remaining cusp-space arguments are separate
+mathematical inputs: `cubic_weight_two_genus.sage`,
+`quartic_725_weight_two.sage`, and `quartic_1125_sufficient.sage` check
+arithmetic for the small-space arguments. The discriminant-49 modular-form
+inputs come from Borisov--Gunnells, as stated in the manuscript.
+The manuscript treats source weight one by its endpoint pairing and twisting
+argument; none of the finite searches here is presented as an unresolved case.
 
 ## Exact special values
 
-The script identifies the field as a Gaussian-period subfield of a
-cyclotomic field, using an exact number-field isomorphism test. If chi
-generates the quotient character group, it evaluates every primitive
-character underlying chi^j by the finite formula
+For each abelian field, an exact Gaussian-period isomorphism identifies the
+cyclic quotient character group. The product of primitive Dirichlet special
+values gives
 
-    L(-1, chi) = -1/2 sum(a=1..f) chi(a) (a^2/f - a + f/6).
-
-The product over the quotient character group gives the Dedekind special
-value. The computations give
-
-    zeta_49(-1)   = -1/21,
-    zeta_169(-1)  = -1/3,
-    zeta_361(-1)  = -1,
+    zeta_49(-1) = -1/21,
+    zeta_169(-1) = -1/3,
+    zeta_361(-1) = -1,
     zeta_1125(-1) = 4/15,
     zeta_6125(-1) = 52/15.
 
-In particular, the quartic factors of conductors 15 and 35 are respectively
-the conjugate pairs -2 +/- 2i and 2 +/- 10i; their quadratic factor is -2/5
-and the rational factor is -1/12. All field-identification data, kernel
-residues, primitive conductors and character values are in the JSON output.
-No numerical value is rounded to recover a rational special value.
+Each factor is a finite generalized Bernoulli sum; no numerical reconstruction
+of a rational special value is used. `verify_special_values.py` independently
+checks the first four values using rational coordinate arithmetic in
+Q(zeta_3) and Q(i). It also checks the weight-three and weight-four
+Dirichlet tables used elsewhere in the manuscript.
 
-Discriminants 169 and 361 are identified as the cubic Gaussian-period
-fields of conductors 13 and 19 by the same exact method.
+## Rational Euler-product bounds
 
-## Discriminant 5125: no exact special value needed
+For discriminants 725 and 5125, let P be the product over all prime ideals
+above rational primes at most 199. Exact ideal factorization computes P over
+QQ, and P is strictly smaller than zeta_F(2). The functional equation, pi < 22/7,
+and rational lower bounds for sqrt(D) give
 
-The functional equation gives
+    |alpha| < (4*(22/7)^2)^4 / (D*sqrt_lower(D)*P).
 
-    |alpha| = (4*pi^2)^4 / (5125^(3/2) * zeta_F(2)).
+The square-root lower bounds are 2692582403/10^8 and 7158910531/10^8,
+respectively; integer squaring certifies their directions. The products satisfy
+P > 1.036232 and P > 1.102613, respectively. The resulting reciprocal bounds
+are |alpha| < 120.468280 and |alpha| < 6.023835, so the manuscript's choices
+A=121 and A=61/10 are valid. Exact algebraic comparisons at the selected source
+weights give right sides below 138 and 149, respectively, while the left side
+is 255. The recorded certificate uses these same A values.
 
-The finite product over every prime ideal above rational primes at most
-199 is a strict lower bound for zeta_F(2). This product is computed over QQ.
-An outward-rounded 256-bit MPFI upper bound for pi and exact algebraic
-arithmetic give the rational bound
+## Exhaustive enumeration and integer weight monotonicity
 
-    |alpha| < 6004472943/1000000000.
+Every listed polynomial has polynomial discriminant equal to the field
+discriminant, so its power basis is integral and maximal. Every x with
+0 << x << 4 satisfies Tr(x^2) < 16*[F:Q]. Exact short-vector enumeration
+uses a finite integer box derived from the inverse trace Gram matrix:
+c_j^2 < 16*[F:Q]*(G^-1)_{jj}. Filtering the box by the strict trace bound
+includes every short vector with both signs; exact total-positivity tests
+retain precisely all such x. The independent Python implementation
+reconstructs its own Gram matrix and exhaustively checks the same proof bound.
 
-Using this upper bound in the normalized dyadic inequality at source
-weight 2 gives
+After division by q^(ell-1), where q=2^[F:Q], each convolution term has
+base sqrt(N(4-x))/q strictly between zero and one; the other two bases are
+q^(-1/2) and q^(-1). Increasing the integer source weight therefore decreases
+every positive term. A successful cutoff comparison excludes every subsequent
+integer weight. Decimal intervals are display data only.
 
-    RHS < 144.859588354 < 255 = 16^2 - 1.
+Run from the repository root:
 
-Consequently the exact value alpha = 6 is unnecessary for this exclusion.
-The old `e2_exact_zeta_values.m` is not a dependency of the replacement
-certificate and can be omitted from the final supplement.
-
-The same finite-Euler-product method for discriminant 725 gives
-|alpha| < 6004053707/50000000 = 120.08107414. At source weight 4 its
-normalized right side is below 136.148985297 < 255. At weight 3 the
-bound is above 255, so the certified cutoff is 4.
-
-## Exhaustive enumeration and the infinite weight range
-
-For each relevant field the script computes an integral basis and its
-positive trace Gram matrix. Every algebraic integer x with 0 << x << 4
-satisfies Tr(x^2) < 16*[F:Q]. Exact short-vector enumeration below that
-bound (including both signs), followed by exact total-positivity tests,
-therefore finds all such x. The output records every coordinate vector,
-the two algebraic integers, their norms, ideal-factor norms, divisor
-counts and sigma_1 values.
-
-After division by q^(ell-1), with q=2^[F:Q], each convolution summand has
-base sqrt(N(4-x))/q < 1. The other terms also have bases below one.
-Thus once the normalized right side is strictly smaller than q^2-1,
-it remains so for all larger weights. All comparisons use Sage's exact
-algebraic real field AA; decimal intervals are display data only.
-
-## Minimal manuscript adjustment
-
-The present conclusion at discriminant 5125 remains unchanged. Add a
-short explanation such as:
-
-> At discriminant 5125, a finite Euler product through 199 and the
-> functional equation give |alpha| < 6.004472943. Substitution into the
-> normalized dyadic inequality at source weight two gives a right side
-> smaller than 144.86, whereas the left side is 255. Monotonicity excludes
-> every larger source weight.
-
-For the other two dyadic thresholds the actual comparisons are:
-
-* D=49: at ell=6 the right side is 64.3753898187... > 63;
-  at ell=7 it is exactly 33.9071044921875 < 63.
-* D=1125: at ell=3 the right side is 286.40625 > 255;
-  at ell=4 it is exactly 81.884765625 < 255.
-
-Run the certificate with:
-
-    sage -python e2_dyadic_bound.sage --output e2_dyadic_output.json
-
-The equivalent `python` command works when `sage.all` is available in that
-Python environment, as in the execution performed here.
+    sage -python e2_dyadic_bound.sage --output rerun/e2_dyadic_output.json
+    python3 verify_dyadic_bounds.py --data-dir rerun --output verification_case11/dyadic_verification.json

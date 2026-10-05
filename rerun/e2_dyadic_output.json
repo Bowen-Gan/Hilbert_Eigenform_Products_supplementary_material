@@ -83,6 +83,12 @@
           ]
         ],
         "strict_squared_length_bound": 48,
+        "complete_coordinate_bounds": [
+          6,
+          3,
+          3
+        ],
+        "enumeration_method": "exact inverse-Gram coordinate box with strict length filter",
         "number_of_short_vectors_including_zero": 199,
         "number_of_positive_decompositions": 9
       },
@@ -416,6 +422,12 @@
           ]
         ],
         "strict_squared_length_bound": 48,
+        "complete_coordinate_bounds": [
+          7,
+          4,
+          2
+        ],
+        "enumeration_method": "exact inverse-Gram coordinate box with strict length filter",
         "number_of_short_vectors_including_zero": 103,
         "number_of_positive_decompositions": 3
       },
@@ -622,6 +634,12 @@
           ]
         ],
         "strict_squared_length_bound": 48,
+        "complete_coordinate_bounds": [
+          10,
+          2,
+          2
+        ],
+        "enumeration_method": "exact inverse-Gram coordinate box with strict length filter",
         "number_of_short_vectors_including_zero": 67,
         "number_of_positive_decompositions": 3
       },
@@ -1380,8 +1398,9 @@
           }
         ],
         "Euler_product": "12767502221004529136990788088274430925994045616232255906510710756279426661495990721866936182910170560802688099727448563146380880233220247630189537788433802907268237656799553061480574563075436382183108642625497426579047419244552353018119020677713495445779888868156006867967805667078229181164306290990057124783073777747661809888589685205557472942911355100888791667131162625457842651765817672414992637932801546259540872142393317278498925954973250511731003473564594307801741239955733254235933835593438711/12321074090626091956703221282670967612667104378681816696024073485430437583826904559318991696886031423783173048084660866208877590971905852673197070530922253885651458729285764562255764156655920853386089807840940397136831467808253384507135174135924422795298159861513296318001410299179593515261766076615543480885063327498316993944971872979702396911896200306467453237765391059794148631428160552960000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "pi_upper": "256839923861488782607902790348837497679/81754686931803956266412424933874257924",
-        "alpha_absolute_upper": "6004053707/50000000",
+        "pi_upper": "22/7",
+        "sqrt_discriminant_lower": "2692582403/100000000",
+        "alpha_absolute_upper": "120468279827/1000000000",
         "method": "finite Euler lower product and functional equation"
       },
       "lattice_certificate": {
@@ -1418,6 +1437,13 @@
           ]
         ],
         "strict_squared_length_bound": 64,
+        "complete_coordinate_bounds": [
+          6,
+          9,
+          5,
+          3
+        ],
+        "enumeration_method": "exact inverse-Gram coordinate box with strict length filter",
         "number_of_short_vectors_including_zero": 733,
         "number_of_positive_decompositions": 7
       },
@@ -1575,27 +1601,27 @@
           "ideal_y_factor_norms": []
         }
       ],
-      "alpha_absolute_bound_used": "6004053707/50000000",
+      "alpha_absolute_bound_used": "121",
       "comparisons": [
         {
           "t": 1,
           "source_weight": 2,
           "left": "255",
-          "right_interval": "3332.8582742485110462250000000000000000000000000000000000000000000000000000000?",
+          "right_interval": "3365.312500000000000000000000000000000000000000000000000000000000000000000000000?",
           "right_strictly_less": false
         },
         {
           "t": 2,
           "source_weight": 3,
           "left": "255",
-          "right_interval": "527.26899532490694038906250000000000000000000000000000000000000000000000000000?",
+          "right_interval": "531.7382812500000000000000000000000000000000000000000000000000000000000000000000?",
           "right_strictly_less": false
         },
         {
           "t": 3,
           "source_weight": 4,
           "left": "255",
-          "right_interval": "136.14898529686918377431640625000000000000000000000000000000000000000000000000?",
+          "right_interval": "137.2180175781250000000000000000000000000000000000000000000000000000000000000000?",
           "right_strictly_less": true
         }
       ],
@@ -1721,6 +1747,13 @@
           ]
         ],
         "strict_squared_length_bound": 64,
+        "complete_coordinate_bounds": [
+          7,
+          13,
+          2,
+          4
+        ],
+        "enumeration_method": "exact inverse-Gram coordinate box with strict length filter",
         "number_of_short_vectors_including_zero": 573,
         "number_of_positive_decompositions": 15
       },
@@ -2697,8 +2730,9 @@
           }
         ],
         "Euler_product": "2623675036227997629658773678290610547930805444813040647062386594207090490648787964821327353600112638515727585955016215738269623673736307194906400188648945252217932299787135206404556004066630095863737347710820369784111033512010569757191099215779374906956498549528887637607956745970003932841944281207952901252804779900398857688207622045270361841362963763856322553953021454795718201529780819881729693169859824146388517394056546943532994062589064966315660164901787316182524752122410426507484329700064608137222871/2379505938397315480556688416510949756815604669819616862834151949663274909957852072743780375895885838391002491314174564579325710825655407378237164905565262125911531922653624038057705942894257764764351691662084301667602559427650995859116045621191502280044615585934084810157020346292799877476959308490477079748669479501298248969299689212206929309051722455712300666043337229903071125586837993894707200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "pi_upper": "256839923861488782607902790348837497679/81754686931803956266412424933874257924",
-        "alpha_absolute_upper": "6004472943/1000000000",
+        "pi_upper": "22/7",
+        "sqrt_discriminant_lower": "7158910531/100000000",
+        "alpha_absolute_upper": "6023834579/1000000000",
         "method": "finite Euler lower product and functional equation"
       },
       "lattice_certificate": {
@@ -2735,6 +2769,13 @@
           ]
         ],
         "strict_squared_length_bound": 64,
+        "complete_coordinate_bounds": [
+          13,
+          7,
+          4,
+          1
+        ],
+        "enumeration_method": "exact inverse-Gram coordinate box with strict length filter",
         "number_of_short_vectors_including_zero": 271,
         "number_of_positive_decompositions": 7
       },
@@ -2900,13 +2941,13 @@
           "ideal_y_factor_norms": []
         }
       ],
-      "alpha_absolute_bound_used": "6004472943/1000000000",
+      "alpha_absolute_bound_used": "61/10",
       "comparisons": [
         {
           "t": 1,
           "source_weight": 2,
           "left": "255",
-          "right_interval": "144.85958835395119257806250000000000000000000000000000000000000000000000000000?",
+          "right_interval": "147.20062500000000000000000000000000000000000000000000000000000000000000000000?",
           "right_strictly_less": true
         }
       ],

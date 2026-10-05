@@ -1,5 +1,40 @@
 {
   "binet_formula": "h_j(A,B)=(A^(j+1)-B^(j+1))/(A-B)",
+  "character_directions": {
+    "character_coordinates": [
+      "eta",
+      "psi",
+      "omega_h"
+    ],
+    "chi": [
+      -1,
+      1,
+      0
+    ],
+    "divisor_term_identity": "eta(m) chi(r) = eta(m/r) psi(r)",
+    "kernel_character": "chi^(-1)",
+    "method": "Exact identities in a free character-exponent lattice; analytic and automorphic identifications are external inputs.",
+    "normalization": "Q_chi(w)/u_chi, where u_chi is its actual nonzero unit-ideal coefficient at w=0; no explicit value is asserted.",
+    "omega_f": [
+      1,
+      1,
+      1
+    ],
+    "omega_f_eta": [
+      -1,
+      1,
+      1
+    ],
+    "ordered_endpoint_input": "E_2(1,chi)",
+    "projected_endpoint_central_character": "chi",
+    "rankin_determinant_character": [
+      1,
+      -1,
+      0
+    ],
+    "reversed_ordered_endpoint": "E_2(chi,1) would twist to E_2(psi,eta), generally a different form.",
+    "twisted_ordered_endpoint": "E_2(eta,psi)"
+  },
   "claimed_cross_numerator": [
     {
       "coefficient": 1,
@@ -170,7 +205,9 @@
   "method": "Exact polynomial cross multiplication of all four geometric-series denominators and (A-B)(C-D).",
   "not_verified": [
     "The identification of Satake products with central characters and weights.",
-    "The global Eisenstein normalization and ordinary class-group projection.",
+    "The identification of Mok's projected kernel with the ordered Eisenstein family E_2(1,chi).",
+    "The ordinary class-group projection, regularity, and nonzero actual endpoint coefficient u_chi.",
+    "Any explicit global scalar, Gauss sum, or different-ideal normalization factor.",
     "Analytic continuation and specialization of the Rankin integral.",
     "Boundary nonvanishing of the Rankin-Selberg L-function."
   ],
@@ -198,5 +235,5 @@
     "D",
     "X"
   ],
-  "verification_scope": "Exact local polynomial algebra only; no analytic theorem is certified."
+  "verification_scope": "Exact local polynomial algebra and formal character-direction identities; no analytic theorem is certified."
 }

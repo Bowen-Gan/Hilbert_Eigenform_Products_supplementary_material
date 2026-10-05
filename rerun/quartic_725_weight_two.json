@@ -1,10 +1,150 @@
 {
+  "schema": "quartic-725-weight-two-v2",
   "sage_version": "10.9",
   "proof_all": true,
   "field_polynomial": "x^4 - x^3 - 3*x^2 + x + 1",
   "field_discriminant": 725,
   "ordinary_class_number": 1,
   "narrow_class_number": 1,
+  "fundamental_units": [
+    [
+      "0",
+      "-2",
+      "-1",
+      "1"
+    ],
+    [
+      "0",
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "-1",
+      "1",
+      "0",
+      "0"
+    ]
+  ],
+  "unit_signatures": [
+    [
+      -1,
+      1,
+      -1,
+      1
+    ],
+    [
+      -1,
+      -1,
+      1,
+      1
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      1
+    ]
+  ],
+  "unit_signature_image": [
+    [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      1
+    ],
+    [
+      -1,
+      -1,
+      1,
+      -1
+    ],
+    [
+      -1,
+      -1,
+      1,
+      1
+    ],
+    [
+      -1,
+      1,
+      -1,
+      -1
+    ],
+    [
+      -1,
+      1,
+      -1,
+      1
+    ],
+    [
+      -1,
+      1,
+      1,
+      -1
+    ],
+    [
+      -1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      -1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      -1,
+      1
+    ],
+    [
+      1,
+      -1,
+      1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      1,
+      -1,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      -1
+    ],
+    [
+      1,
+      1,
+      1,
+      1
+    ]
+  ],
+  "unit_signature_image_order": 16,
   "elliptic_order_candidates": [
     2,
     3,
@@ -106,5 +246,10 @@
   "unique_integer_class_number": 1,
   "mass_deduced_from_class_number_formula": "1/60",
   "zeta_minus_one_deduced_from_mass": "2/15",
-  "full_level_parallel_weight_two_cusp_dimension": 0
+  "full_level_parallel_weight_two_cusp_dimension": 0,
+  "theorem_dependencies": [
+    "Kirschmer--Voight: Algorithmic enumeration of ideal classes for quaternion orders (5.1), Proposition 5.1, Lemma 5.3, (5.3)",
+    "Dembele--Voight: Explicit methods for Hilbert modular forms, Theorem 3.9"
+  ],
+  "scope": "Arithmetic inputs and class-number interval are checked; mass, embedding and transfer theorems are cited dependencies."
 }

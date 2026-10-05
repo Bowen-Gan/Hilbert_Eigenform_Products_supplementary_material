@@ -2,6 +2,11 @@ R3 = (4*pi^3*zeta(3))^(2/5) = [7.40242224921355456008828976742292154623987063698
 R3^2 = [54.79585515565186005499153270759544265781180516065652239917 +/- 1.65e-57]
 R3^4 = [3002.585742239178532334717643524983252476742809697214375440 +/- 3.50e-55]
 
+Weight-four exceptional special values
+D = 49 L(-3) factors = [-22/7*zeta6 + 54/7, 22/7*zeta6 + 32/7] product = 316/7 zeta_F(-3) = 79/210 alpha = 1680/79
+D = 81 L(-3) factors = [34/3*zeta6 + 22/3, -34/3*zeta6 + 56/3] product = 796/3 zeta_F(-3) = 199/90 alpha = 720/199
+D = 21: B_4 = -1232, L(-3) = 308, alpha = 120/77
+
 Totally real quartic fields through discriminant 3003
 725 x^4 - x^3 - 3*x^2 + x + 1 unit norms = [1, 1, -1] negative norm = True
 1125 x^4 - x^3 - 4*x^2 + 4*x + 1 unit norms = [1, 1, 1] negative norm = False
@@ -48,4 +53,4 @@ D = 28 (d1,d2) = (-4, -7) factors = (-1/2, -16/7) L_F(-2,epsilon) = 8/7 alpha = 
 D = 33 (d1,d2) = (-3, -11) factors = (-2/9, -6) L_F(-2,epsilon) = 4/3 alpha = 3
 D = 44 (d1,d2) = (-4, -11) factors = (-1/2, -6) L_F(-2,epsilon) = 3 alpha = 4/3
 
-All exact E3 Eisenstein--cuspidal finite checks passed.
+All exact Eisenstein-weight-three-and-four finite checks passed.

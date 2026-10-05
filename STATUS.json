@@ -1,11 +1,11 @@
 {
-  "schema": "complete-arithmetic-record-summary-v1",
-  "completed": true,
+  "schema": "complete-arithmetic-record-summary-v2",
   "execution_relationship": "single_invocation",
-  "run_id": "51796563-e0e0-4e32-96ea-43e6ae028406",
-  "started_utc": "2026-09-30T11:59:20.063468+00:00",
-  "finished_utc": "2026-09-30T12:01:03.538296+00:00",
-  "total_recorded_task_count": 18,
+  "run_id": "f7ca4d91-2c57-4bf2-8455-ec62ac7eb2b7",
+  "completed": true,
+  "started_utc": "2026-10-05T16:39:48.899404+00:00",
+  "finished_utc": "2026-10-05T16:42:27.848748+00:00",
+  "total_recorded_task_count": 22,
   "all_recorded_tasks_accepted": true,
   "success_marker": "FULL_CERTIFICATES_PASSED",
   "sage_version": "10.9",
@@ -14,7 +14,7 @@
   "magma_required": false,
   "complete_record": {
     "path": "verification/full_run_status.json",
-    "sha256": "0b661ac1d712591213f808bb1267adc8b69733baa3e8f9232981c53d8a914f9f"
+    "sha256": "ece183d28fa9ba7a5ee3e08dada1a5282235452de31f1ab25d9ffd6b5428f4bf"
   },
   "suites": [
     {
@@ -22,14 +22,14 @@
       "task_count": 12,
       "completed": true,
       "status": "rerun/all_arithmetic_status.json",
-      "status_sha256": "5549ede9d36ba595af9f1b6ca59be97acbd116dfac945d711c96b7bdc1b2f97b"
+      "status_sha256": "882133d4560623ca47ff1241cb062ef9233d9079219affd3dcb0513c7549b164"
     },
     {
-      "name": "additional_case11",
-      "task_count": 6,
+      "name": "independent_arithmetic_checks",
+      "task_count": 10,
       "completed": true,
       "status": "verification_case11/status.json",
-      "status_sha256": "1384934a4038577806fb70187876ee3193f0cf677b8e0276247df795dd49c069"
+      "status_sha256": "ba3a6e3ce635480cc8551f07fbd49eac9fdc0af88a9cf222d69a0d42c5e8fb24"
     }
   ],
   "theoretical_inputs": "The manuscript and cited mathematical theorems remain external."

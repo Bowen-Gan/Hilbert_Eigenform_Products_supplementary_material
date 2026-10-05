@@ -1,8 +1,8 @@
 # Free certificate: the discriminant-725 weight-two endpoint
 
-The script `quartic_725_weight_two.sage` was executed successfully with
-SageMath 10.8.12. Its complete output is
-`quartic_725_weight_two.json`. It proves the required vanishing without
+The script `quartic_725_weight_two.sage` writes its complete arithmetic
+certificate to `quartic_725_weight_two.json` (or the requested output
+path). It proves the required vanishing without
 Magma and without using a database dimension or a numerically guessed
 special value.
 
@@ -21,6 +21,9 @@ a unit u by a base-field unit of norm-square root makes all its complex
 absolute values equal to one. Kronecker's theorem then makes it a root
 of unity. Thus there are no extra half-elliptic unit contributions, and
 [R^*:O_F^*] equals half the number of roots of unity in R.
+The full 16-element unit-signature image is also checked and recorded
+using exact real-algebraic embeddings; no approximate sign determination
+is used. Class-number and fundamental-unit calculations run in proof mode.
 
 All possible CM roots are found completely: if F(zeta_(2q))/F is
 quadratic, phi(2q) divides 8. The bound phi(m)^2 >= m/2 makes q<=64
@@ -61,6 +64,11 @@ The final comparison uses exact real-algebraic arithmetic. Hence
 S_2(F)=0 and finishes the remaining source weight for discriminant 725.
 As a consequence, the same formula gives M=1/60 and zeta_F(-1)=2/15;
 these exact values are deductions, not numerical reconstructions.
+
+The finite computation supplies arithmetic inputs for the cited mass and
+embedding formulas. It does not implement or independently prove those
+theorems or the Jacquet--Langlands correspondence. Actual execution
+versions and results are recorded by the repository runner.
 
 ## Sources and independent agreement
 

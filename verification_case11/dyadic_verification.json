@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "arithmetic": "integer/rational, Python standard library",
-  "input_sha256": "3195bd12b3edd523a0b9971a506908873f78f6e09a81f3aec4855caaafcc3421",
+  "input_sha256": "ad46446106603a0ea5cd29e567f09a12fffa895b3ff0ac101ef26f248f5fad0a",
   "external_dependencies": [
     "stated field discriminants",
     "four exact alpha values",

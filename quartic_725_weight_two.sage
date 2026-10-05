@@ -6,8 +6,12 @@ of ideal classes for quaternion orders, Proposition5.1 and Lemma5.3.
 The mass is rigorously bounded, not numerically rationally reconstructed.
 The unique integer in the resulting class-number interval is1.
 """
+if not __debug__:
+    raise RuntimeError('Assertions must remain enabled; do not use -O/-OO.')
+
 from sage.all import *
 from sage.version import version as sage_version
+from pathlib import Path
 import argparse
 import json
 
@@ -18,8 +22,18 @@ def run():
     x = polygen(QQ)
     f = x**4-x**3-3*x*x+x+1
     F = NumberField(f, 'a')
-    assert F.discriminant() == 725
+    assert F.discriminant() == 725 and F.signature() == (4, 0)
     assert F.class_number(proof=True) == F.narrow_class_group().order() == 1
+    embeddings = sorted(F.embeddings(AA), key=lambda v: v(F.gen()))
+    units = F.units(proof=True)
+    unit_signatures = [tuple(int(sign(v(u))) for v in embeddings) for u in units]
+    signature_image = {(1, 1, 1, 1)}
+    for signs in unit_signatures + [(-1, -1, -1, -1)]:
+        signature_image.update({tuple(s*t for s, t in zip(row, signs))
+                                for row in list(signature_image)})
+    assert len(signature_image) == 16
+    # Exact full unit-signature image proves that every totally positive
+    # unit is a square. This excludes half-elliptic CM unit contributions.
     t = F['t'].gen()
     # For K/F quadratic, phi(2q)|8; phi(m)^2>=m/2 implies2q<=128.
     candidates = [q for q in range(2,65) if 8 % euler_phi(2*q) == 0]
@@ -73,9 +87,14 @@ def run():
     assert 0 < class_number_lower < 1 < class_number_upper < 2
     # Strict interval (59/60,59/60+mass_upper) has the unique integer1.
     return {
+        'schema': 'quartic-725-weight-two-v2',
         'sage_version': sage_version, 'proof_all': True,
         'field_polynomial': str(f), 'field_discriminant': 725,
         'ordinary_class_number': 1, 'narrow_class_number': 1,
+        'fundamental_units': [[str(c) for c in u.list()] for u in units],
+        'unit_signatures': [list(s) for s in unit_signatures],
+        'unit_signature_image': [list(s) for s in sorted(signature_image)],
+        'unit_signature_image_order': len(signature_image),
         'elliptic_order_candidates': candidates, 'excluded_orders': excluded,
         'CM_certificates': cm_rows, 'elliptic_correction': str(correction),
         'mass_lower_strict': '0',
@@ -87,15 +106,20 @@ def run():
         'mass_deduced_from_class_number_formula': '1/60',
         'zeta_minus_one_deduced_from_mass': '2/15',
         'full_level_parallel_weight_two_cusp_dimension': 0,
+        'theorem_dependencies': [
+            'Kirschmer--Voight: Algorithmic enumeration of ideal classes for quaternion orders (5.1), Proposition 5.1, Lemma 5.3, (5.3)',
+            'Dembele--Voight: Explicit methods for Hilbert modular forms, Theorem 3.9'],
+        'scope': 'Arithmetic inputs and class-number interval are checked; mass, embedding and transfer theorems are cited dependencies.',
     }
 
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
-    p.add_argument('--output')
+    p.add_argument('--output', default=str(Path(__file__).resolve().parent/'rerun'/'quartic_725_weight_two.json'))
     args = p.parse_args()
     result = json.dumps(run(), indent=2)
     if args.output:
+        Path(args.output).parent.mkdir(parents=True, exist_ok=True)
         with open(args.output, 'w') as handle:
             handle.write(result+'\n')
     else:

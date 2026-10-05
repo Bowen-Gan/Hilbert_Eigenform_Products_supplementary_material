@@ -1,25 +1,23 @@
-# 采用免费证书时的正文修改
+# Synchronization with the checked manuscript
 
-1. 保留前版完整枚举修正：771 个域，经理论、局部分解及严格整性筛选后剩 21 个，其中 15 个有格证书，其他六个判别式为 49、169、361、725、1125、5125。6125 已由整性排除。不能恢复“仅四个格例外”的原句。
+The mathematical classification is unchanged. The following text details require synchronization with the revised computation package.
 
-2. 对 169、361、725：二进界和奇偶性只留下源权重二；现在用三个 S2=0 结果收尾。前两域见 notes/cubic_weight_two_proof.md；725 见 notes/quartic_725_weight_two_proof.md。
+1. The complete finite degree-three through degree-six input contains 772 fields (143 cubic, 552 quartic, 37 quintic, 40 sextic), not 771. The extra quartic is defined by `x^4 - 19*x^2 - 24*x + 16`, with field discriminant 65808 and power-basis index 8. Its dyadic factorization excludes it independently. The latest manuscript already includes this correction. Twenty-one candidates and the fifteen lattice exclusions remain unchanged.
 
-3. 对 1125：二进界排除源权重至少四。将原来的 Magma 精确维数表替换为：
+2. In the lattice-box table, the row for discriminant 8069 must read
 
-   \[
-   S_2(1)=0,\qquad \dim S_5(\varepsilon)\ge5.
-   \]
+   ```latex
+   8069 & $x^4-x^3-5x^2+5x+1$ & 5 & 54 & 144\\
+   ```
 
-   前者排除权重二来源；后者结合正文的目标空间维数准则排除权重三来源。证明和所有有限算术在 notes/quartic_1125_sufficient_proof.md 及对应 Sage 文件中。无需再保留或复核“dim S3=2、dim S5=6”的原数值。
+   The previous final entry 108 disagrees with both stored certificates and independent exact re-enumeration. The displayed total 8776 already agrees with the correct entry 144. This correction changes no exclusion.
 
-4. 对 21：使用 notes/d21_local_free.tex 的完整系数证明，替换“先计算 S2，再计算权重 3、4、5 的 Hecke 阻碍行列式”的整段论证。三个行列式和相关 Magma 文件不再是证明输入。
+3. The 1125 certificate now records the central action explicitly, rather than inferring the required central character from the dimension of one stabilizer-invariant space. Its conclusion is the sufficient bound `dim S_5(epsilon) >= 5`. The latest manuscript already supplies this argument.
 
-5. 对 12：用 notes/d12_ring_dimensions.md 的两分量环结构证明替代空间构造断言。完整单项式计数已经在正文型证明中给出，不需要单独计算附件。
+4. The local Rankin verification now includes the formal character/twist direction and the ordered inducing pair. It does not compute or assert an explicit global normalization for the Mok family. The first annotation is resolved in the manuscript by its own nonzero unit-ideal coefficient normalization and cited analytic arguments.
 
-6. 对 49：二进界及奇偶性留下源权重 2、4、6。需补上权重二消失的理由：Borisov–Gunnells 的 Propositions 6.6、8.1 给出的三个低水平权重二尖点生成元，在 g7 下的特征值为 zeta7^3、zeta7^6、zeta7^5，均非 1，所以满水平不变部分为零。然后用原稿已引用的 S6、S8 维数结论处理源权重 4、6。
+5. Replace the fixed bibliography commit `8eaf1af` and its full commit URL by the commit of the updated package. A commit should never be guessed or replaced by a moving branch URL in the manuscript citation.
 
-7. 对 5125：只需已经验证的严格上界 |alpha| < 6.004472943，以及源权重二处的归一化不等式 144.859588355 < 255 和单调性。不要要求不必要的精确 zeta 文件。
+6. Additional independent checks cover the discriminant-12 weight-one example and the finite numerical comparisons in the Eisenstein--Eisenstein sections. They do not change the dimension formulas or the identity `h_5 = 12 E_1(1,epsilon) h_4` already proved in the manuscript.
 
-8. 七次域验证说明可加强为“程序独立完整枚举并检查局部分解”；八次域名单完备性继续引用原文表格来源。
-
-9. 删除旧的“必须运行四份 Magma 程序才能收尾”及“相关输出尚未验证”的计算说明，改为列举本版实际使用的免费算术证书与文献证明。这个修改只针对本次明确列出的任务，不声称将全文形式化验证。
+The former incomplete/obsolete computation notes and redundant earlier execution transcripts have been superseded. Only the latest complete run should accompany this revision.

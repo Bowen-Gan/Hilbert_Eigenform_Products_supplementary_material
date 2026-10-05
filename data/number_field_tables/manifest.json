@@ -1,0 +1,107 @@
+{
+  "schema": "bordeaux-field-table-input-v1",
+  "source_directory": "https://pari.math.u-bordeaux.fr/pub/pari/packages/nftables/",
+  "source_readme": "https://pari.math.u-bordeaux.fr/pub/pari/packages/nftables/README.txt",
+  "retrieved_utc_date": "2026-10-05",
+  "format": "GP vectors [field discriminant, polynomial coefficients highest degree first, ordinary class number, class-group elementary divisors], one field per line",
+  "distribution": "Corrected PARI/GP version by Karim Belabas (2007); files distributed September 2008. These gzip files deterministically repack the unmodified downloaded GP text with mtime=0; byte identity is asserted for the decompressed source, not the upstream gzip wrapper.",
+  "completeness_external_input": "The complete field enumeration within each published discriminant range is an external input from the corrected Bordeaux tables; this package validates and filters every source row but does not reprove the original field enumeration.",
+  "tables": {
+    "3": {
+      "file": "T33.gp.gz",
+      "source_url": "https://pari.math.u-bordeaux.fr/pub/pari/packages/nftables/T33.gp.gz",
+      "published_discriminant_bound_exclusive": 2000000,
+      "row_count": 112444,
+      "first_discriminant": 49,
+      "last_discriminant": 1999988,
+      "decompressed_bytes": 3445990,
+      "source_text_sha256": "940d141c91294bbd221bdc6bce1ab63d2d5e6b4a27365159999f24e447df2bf3",
+      "repacked_gzip_sha256": "7c1815f663b1a2c7f85646146066096cfe936d805caec489bc90f0fdd841dbf1",
+      "manuscript_inclusive_cutoff": 4218,
+      "fields_within_cutoff": 143,
+      "exact_duplicate_source_rows": []
+    },
+    "4": {
+      "file": "T44.gp.gz",
+      "source_url": "https://pari.math.u-bordeaux.fr/pub/pari/packages/nftables/T44.gp.gz",
+      "published_discriminant_bound_exclusive": 1000000,
+      "row_count": 13073,
+      "first_discriminant": 725,
+      "last_discriminant": 999892,
+      "decompressed_bytes": 402489,
+      "source_text_sha256": "3bccbff159603e755e9a959946591b18568eb68be4b239c13e14059cb3f0bff8",
+      "repacked_gzip_sha256": "71be7b95a6d569e01622691029a24f64c56d38361cdab6c0bfd90102a3b327f9",
+      "manuscript_inclusive_cutoff": 68133,
+      "fields_within_cutoff": 552,
+      "exact_duplicate_source_rows": []
+    },
+    "5": {
+      "file": "T55.gp.gz",
+      "source_url": "https://pari.math.u-bordeaux.fr/pub/pari/packages/nftables/T55.gp.gz",
+      "published_discriminant_bound_exclusive": 20000000,
+      "row_count": 22740,
+      "first_discriminant": 14641,
+      "last_discriminant": 19997537,
+      "decompressed_bytes": 790688,
+      "source_text_sha256": "3918a87866e70a766b2139429f3572b5e2dc0bb003a07739d9853dddcbad5964",
+      "repacked_gzip_sha256": "db3c7ad0b755c92d8f0544402ce47cd3334bf73a384b6315785a93af045b96f2",
+      "manuscript_inclusive_cutoff": 209508,
+      "fields_within_cutoff": 37,
+      "exact_duplicate_source_rows": [
+        {
+          "first_line": 8591,
+          "repeated_line": 8592,
+          "discriminant": 9262117
+        },
+        {
+          "first_line": 13373,
+          "repeated_line": 13374,
+          "discriminant": 13072837
+        },
+        {
+          "first_line": 15571,
+          "repeated_line": 15572,
+          "discriminant": 14731145
+        },
+        {
+          "first_line": 19854,
+          "repeated_line": 19855,
+          "discriminant": 17946025
+        },
+        {
+          "first_line": 20454,
+          "repeated_line": 20455,
+          "discriminant": 18371721
+        }
+      ]
+    },
+    "6": {
+      "file": "T66.gp.gz",
+      "source_url": "https://pari.math.u-bordeaux.fr/pub/pari/packages/nftables/T66.gp.gz",
+      "published_discriminant_bound_exclusive": 10000000,
+      "row_count": 398,
+      "first_discriminant": 300125,
+      "last_discriminant": 9979841,
+      "decompressed_bytes": 14191,
+      "source_text_sha256": "da458367b5589157b5afd83524f4dc31be5581e24b1373996034c3c6d3666740",
+      "repacked_gzip_sha256": "c83a8ef6c96315c8ab1ae0bf81faafe9c00ef785f312f9adbe716c47e0e7468b",
+      "manuscript_inclusive_cutoff": 2429064,
+      "fields_within_cutoff": 40,
+      "exact_duplicate_source_rows": []
+    },
+    "7": {
+      "file": "T77.gp.gz",
+      "source_url": "https://pari.math.u-bordeaux.fr/pub/pari/packages/nftables/T77.gp.gz",
+      "published_discriminant_bound_exclusive": 150000000,
+      "row_count": 154,
+      "first_discriminant": 20134393,
+      "last_discriminant": 149324209,
+      "decompressed_bytes": 6146,
+      "source_text_sha256": "bdc6220d3e5d8b886ca9003e8598d8c929efd0209f759c62d91e9e73ccba2cd9",
+      "repacked_gzip_sha256": "e01209b15116e136ee4d06def618c566f12a0074a97b55ea95286b6007b542cc",
+      "manuscript_inclusive_cutoff": 28162991,
+      "fields_within_cutoff": 4,
+      "exact_duplicate_source_rows": []
+    }
+  }
+}

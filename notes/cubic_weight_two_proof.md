@@ -1,7 +1,7 @@
 # Free certificate: weight two vanishes at discriminants 169 and 361
 
-`cubic_weight_two_genus.sage` was executed successfully with SageMath
-10.8.12. Its actual output is `cubic_weight_two_genus.json`. It uses exact
+`cubic_weight_two_genus.sage` writes its arithmetic certificate to
+`cubic_weight_two_genus.json` (or the requested output path). It uses exact
 number-field and finite-character arithmetic, with proof mode enabled.
 It does not use Magma, precomputed Hilbert-form dimensions, or absence of
 database records.
@@ -51,10 +51,19 @@ Gaussian-period identification with the cubic subfields of conductors
 13 and 19. The four sextic CM class numbers are computed with
 `class_number(proof=True)`. Their defining polynomials and discriminants
 are recorded in the JSON transcript.
+For each cubic field, the complete 8-element unit-signature image is
+checked and recorded using exact real-algebraic embeddings. This supports
+the assertion that totally positive units are squares and the norm unit
+index in the elliptic-cycle formula.
 
 It follows that S_2(F)=0 for both fields. Combined with the already
 executed dyadic cutoffs and the absence of odd weights, this finishes
 both additional lattice survivors.
+
+The area, elliptic-cycle, Riemann--Hurwitz and Jacquet--Langlands formulas
+are cited mathematical inputs. The executable checks their finite
+arithmetic inputs and substitutions; it does not prove those theorems.
+Actual execution versions and results are recorded by the repository runner.
 
 ## References
 

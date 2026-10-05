@@ -1,1 +1,1 @@
-PASS: exact quadratic certificate written to /mnt/d/certificates/rerun/rq_certificate.json
+PASS: exact quadratic certificate written to /mnt/d/certificates/repository/rerun/rq_certificate.json

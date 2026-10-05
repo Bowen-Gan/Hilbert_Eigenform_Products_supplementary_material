@@ -55,16 +55,11 @@
           1
         ],
         "resolution": "Pure coefficient proof in notes/d21_local_free.tex",
-        "terminal_t": 5,
-        "weights_left_by_old_dyadic_bound": [
-          2,
-          3,
-          4,
-          5
-        ]
+        "terminal_t": 5
       },
       {
         "D": 69,
+        "all_source_weights_at_least_two_excluded": true,
         "alpha": "2",
         "coefficient_relation": "3*h2+h3 = -11 - (15/2)*4^(ell-1)",
         "decompositions_at_4": [
@@ -109,6 +104,16 @@
             "sigma1": 13
           }
         },
+        "infinite_weight_comparison": {
+          "Ramanujan_upper_bound": "12*2^t+9*3^t<=21*3^t",
+          "base_and_ratio_checks": [
+            "30>21",
+            "4>3",
+            "3>=2"
+          ],
+          "integer_parameter": "t=ell-2>=0",
+          "required_magnitude_strictly_greater_than": "30*4^t"
+        },
         "lower_bound": 15,
         "normalized_upper_bound": "49/4",
         "ramanujan_bound": 21,
@@ -117,6 +122,7 @@
       },
       {
         "D": 77,
+        "all_source_weights_at_least_two_excluded": true,
         "alpha": "2",
         "coefficient_relation": "3*h2+h3 = -8 - (15/2)*4^(ell-1)",
         "decompositions_at_4": [
@@ -160,6 +166,16 @@
             ],
             "sigma1": 10
           }
+        },
+        "infinite_weight_comparison": {
+          "Ramanujan_upper_bound": "12*2^t+9*3^t<=21*3^t",
+          "base_and_ratio_checks": [
+            "30>21",
+            "4>3",
+            "3>=2"
+          ],
+          "integer_parameter": "t=ell-2>=0",
+          "required_magnitude_strictly_greater_than": "30*4^t"
         },
         "lower_bound": 15,
         "normalized_upper_bound": "43/4",

@@ -1,4 +1,4 @@
 D=1125: maximal quaternion order verified, binary icosahedral subgroup order 120.
 Quaternion ideal classes =2; weight-two cusp space =0.
 One ideal class contributes5 weight-five invariants; dim S5(epsilon)>=5.
-Output: /mnt/d/certificates/rerun/quartic_1125_sufficient.json
+Output: /mnt/d/certificates/repository/rerun/quartic_1125_sufficient.json

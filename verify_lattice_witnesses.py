@@ -88,6 +88,18 @@ def isign(a):
     if a[1]<0:return -1
     raise AssertionError(('undecided interval',a))
 
+def refine_root(f, interval):
+    """Bisect an isolating interval for a simple real root, exactly.
+
+    The defining polynomials are irreducible of degree at least two, so
+    their rational midpoint cannot be a root.  A one-root interval has
+    opposite endpoint signs; the retained half still has exactly one root.
+    """
+    a,b=interval;sa,sb=sign(val(f,a)),sign(val(f,b))
+    assert sa and sb and sa!=sb
+    m=(a+b)/2;sm=sign(val(f,m));assert sm
+    return (a,m) if sa!=sm else (m,b)
+
 def inverse(a):
     n=len(a);m=[list(row)+[Q(i==j) for j in range(n)] for i,row in enumerate(a)]
     for k in range(n):
@@ -178,6 +190,24 @@ class Field:
         r=divrem(c,self.f)[1];return r+[Q(0)]*(n-len(r))
     def trace(self,a):return sum(x*y for x,y in zip(a,self.traces))
     def gram(self,b):return [[self.trace(self.mul(x,y)) for y in b] for x in b]
+    def signs(self,element):
+        """Certified embedding signs, with terminating rational refinement.
+
+        Every nonzero reduced element has degree below the irreducible
+        defining polynomial, so it is nonzero at each conjugate.  Shrinking
+        the isolating intervals therefore eventually decides every sign.
+        """
+        assert len(element)==self.n
+        if not any(element):return [0]*self.n
+        answer=[]
+        for j,root in enumerate(self.roots):
+            while True:
+                value=ival(element,root)
+                if value[0]>0:answer.append(1);break
+                if value[1]<0:answer.append(-1);break
+                root=refine_root(self.f,root)
+            self.roots[j]=root
+        return answer
     def check_ideal(self,I):
         inv=inverse(I)
         for b in I:assert all(x.denominator==1 for x in rowmul(b,self.Oinv))
@@ -215,7 +245,11 @@ def verify(data,sign_data=None):
         exact_bounds=[]
         for d in dual:
             vals=[iscale(mu[0],ival(d,r)) for r in F.roots]
-            signs=[isign(v) for v in vals]
+            try:
+                signs=[isign(v) for v in vals]
+            except AssertionError:
+                signs=F.signs(d)
+                vals=[iscale(mu[0],ival(d,r)) for r in F.roots]
             if all(s==1 for s in signs):lo=Q(0);hi=mu[0]*F.trace(d)
             elif all(s==-1 for s in signs):lo=mu[0]*F.trace(d);hi=Q(0)
             else:
@@ -232,8 +266,17 @@ def verify(data,sign_data=None):
             vals=[(Q(0),Q(0)) for _ in range(n)]
             for c,e in zip(coords,embeds):
                 vals=[iadd(v,iscale(c,w)) for v,w in zip(vals,e)]
-            sx=[0]*n if not any(element) else [isign(v) for v in vals]
-            sy=[0]*n if not any(rest) else [isign((mu[0]-v[1],mu[0]-v[0])) for v in vals]
+            # The precomputed enclosures are fast when decisive.  Close
+            # to zero, refine the root intervals rather than guessing or
+            # relying on an arbitrary fixed numerical precision.
+            try:
+                sx=[0]*n if not any(element) else [isign(v) for v in vals]
+            except AssertionError:
+                sx=F.signs(element)
+            try:
+                sy=[0]*n if not any(rest) else [isign((mu[0]-v[1],mu[0]-v[0])) for v in vals]
+            except AssertionError:
+                sy=F.signs(rest)
             assert not (all(s==1 for s in sx) and all(s==1 for s in sy))
             points.append({'coordinates':list(coords),'signs_x':sx,'signs_mu_minus_x':sy})
         if row['points']:assert points==row['points']
@@ -301,6 +344,9 @@ def run(data_dir):
         'python_version': sys.version.split()[0],
         'arithmetic': 'integer/rational arithmetic; Sturm-isolated roots; outward rational intervals',
         'source_hashes': {p.name: sha256(p) for p in [lattice_path,special_path]},
+        'source_candidate_field_count': payload.get('input_field_count'),
+        'source_lattice_sage_version': payload.get('sage_version'),
+        'verification_mode': 'fresh exact-rational verification of supplied certificates; Sage generation is separate',
         'verifier_sha256': sha256(Path(__file__).resolve()),
         'field_count': len(field_results), 'exponent_box_count': boxes,
         'checked_point_count': total,
@@ -314,7 +360,7 @@ def run(data_dir):
              'source_status': r['status'], 'lattice_exclusion_verified_here': False}
             for r in separate],
         'external_dependencies': [
-            'Complete enumeration of the original 771 fields is not reproduced here.',
+            'Complete enumeration of the 772 fields in the current manuscript is not reproduced here.',
             'Reported field discriminants establish maximal-order identification outside D=3969; class groups are not recomputed.',
             'The small-norm/indecomposable Fourier coefficient comparison and Hecke recurrences are mathematical inputs.',
             'The analytic all-component pairing and dimension criterion are not verified by this computation.',

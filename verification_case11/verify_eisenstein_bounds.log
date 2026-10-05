@@ -1,0 +1,2 @@
+EISENSTEIN_FINITE_BOUNDS_PASS: comparisons=36
+SCOPE: finite rational endpoints verified; analytic theorems and symbolic inductions remain explicit inputs.

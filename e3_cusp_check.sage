@@ -1,12 +1,15 @@
-"""Case 10: exact number-field and primitive Dirichlet L-value certificates.
+"""Exact arithmetic for Eisenstein weights three and at least four.
 Run: sage -python e3_cusp_check.sage
 This supplements only the finite arithmetic used in the manuscript.
+It does not compute cusp spaces or replace the analytic and automorphic proofs.
 """
 
+if not __debug__:
+    raise SystemExit("Assertions must be enabled: do not use -O/-OO.")
+
 from sage.all import *
-from sage.rings.number_field.totallyreal_rel import (
-    enumerate_totallyreal_fields_all,
-)
+from rq_certificate import fundamental
+from number_field_table_inputs import table_rows
 
 proof.all(True)
 x = polygen(QQ)
@@ -31,14 +34,64 @@ assert R3 < RBF(15) / 2
 assert R3 ** 2 < 55
 assert R3 ** 4 < 3003
 
+# These rational inequalities reproduce the manuscript's outward bounds,
+# independently of the displayed real-ball approximations.
+pi_upper = QQ(355) / 113
+zeta3_upper = sum(QQ(1) / j**3 for j in range(1, 26)) + QQ(1) / 1250
+assert zeta3_upper < QQ(12021) / 10000
+cutoff_base = 4 * pi_upper**3 * zeta3_upper
+assert cutoff_base**4 < 55**5
+assert cutoff_base**8 < 3003**5
+assert cutoff_base**2 < (QQ(7403) / 1000)**5
+
+
+# --------------------------------------------------------------------------
+# Weight at least four: the exact exceptional special values
+# --------------------------------------------------------------------------
+
+print("\nWeight-four exceptional special values")
+for discriminant, conductor, polynomial, expected_product, expected_zeta in [
+    (49, 7, x**3 - x**2 - 2*x + 1, QQ(316)/7, QQ(79)/210),
+    (81, 9, x**3 - 3*x - 1, QQ(796)/3, QQ(199)/90),
+]:
+    F = NumberField(polynomial, "c")
+    assert polynomial.is_irreducible()
+    assert polynomial.discriminant() == discriminant
+    assert F.discriminant() == discriminant
+    assert F.class_number(proof=True) == 1
+    cubic_characters = [chi for chi in DirichletGroup(conductor)
+                        if chi.order() == 3]
+    assert len(cubic_characters) == 2
+    assert all(chi.conductor() == conductor and chi(-1) == 1
+               for chi in cubic_characters)
+    factors = [exact_L_one_minus_k(chi, 4) for chi in cubic_characters]
+    character_product = prod(factors)
+    zeta_value = character_product / 120
+    alpha = QQ(8) / zeta_value
+    assert character_product == expected_product
+    assert zeta_value == expected_zeta
+    assert alpha not in ZZ
+    print("D =", discriminant, "L(-3) factors =", factors,
+          "product =", character_product, "zeta_F(-3) =", zeta_value,
+          "alpha =", alpha)
+
+chi21 = kronecker_character(21)
+assert chi21.bernoulli(4) == -1232
+assert exact_L_one_minus_k(chi21, 4) == 308
+assert QQ(308) / 120 == QQ(77) / 30
+assert QQ(4) / (QQ(77) / 30) == QQ(120) / 77
+assert QQ(120) / 77 not in ZZ
+print("D = 21: B_4 = -1232, L(-3) = 308, alpha = 120/77")
+
 
 # --------------------------------------------------------------------------
 # Totally real quartic fields below the forced discriminant cutoff
 # --------------------------------------------------------------------------
 
-quartic_fields = enumerate_totallyreal_fields_all(
-    4, 3003, return_pari_objects=False
-)
+# Read the complete corrected source table rather than rely on a version-
+# dependent built-in enumeration. The loader checks source bytes and rows.
+quartic_fields = [[row["discriminant"], x.parent()(row["polynomial"])]
+                  for row in table_rows(4, 3003)]
 expected_quartic_fields = [
     [725, x**4 - x**3 - 3*x**2 + x + 1],
     [1125, x**4 - x**3 - 4*x**2 + 4*x + 1],
@@ -59,6 +112,8 @@ quartic_without_negative_norm_unit = []
 quartic_by_discriminant = {}
 for discriminant, polynomial in quartic_fields:
     K = NumberField(polynomial, "a")
+    assert K.discriminant() == discriminant
+    assert K.signature() == (4, 0)
     quartic_by_discriminant[ZZ(discriminant)] = K
     unit_norms = [ZZ(u.norm()) for u in K.units()]
     has_negative_norm_unit = -1 in unit_norms
@@ -72,6 +127,10 @@ for discriminant, polynomial in quartic_fields:
     )
     if not has_negative_norm_unit:
         quartic_without_negative_norm_unit.append(ZZ(discriminant))
+    else:
+        # This is the explicit unit witness used in the current manuscript.
+        assert polynomial(-1) == -1
+        assert (1 + K.gen()).norm() == -1
 
 assert quartic_without_negative_norm_unit == [1125, 2000, 2304]
 
@@ -129,7 +188,7 @@ for discriminant, (conductor, expected_L, expected_alpha) in (
 # --------------------------------------------------------------------------
 
 fundamental_discriminants_below_55 = [
-    D for D in range(2, 55) if ZZ(D).is_fundamental_discriminant()
+    D for D in range(2, 55) if fundamental(D)
 ]
 expected_fundamental_discriminants = [
     5,
@@ -272,4 +331,4 @@ assert len(factor_two_33) == 2
 assert all(exponent == 1 for _, exponent in factor_two_33)
 assert all(prime.norm() == 2 for prime, _ in factor_two_33)
 
-print("\nAll exact E3 Eisenstein--cuspidal finite checks passed.")
+print("\nAll exact Eisenstein-weight-three-and-four finite checks passed.")

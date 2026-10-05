@@ -838,5 +838,6 @@
       }
     ]
   },
-  "sage_version": "10.9"
+  "sage_version": "10.9",
+  "source_sha256": "6748378476c9cedf85f0fa619e0473b23e68e0193376cbad2d74a77899d135a6"
 }

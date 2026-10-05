@@ -7,10 +7,13 @@
   "python_version": "3.12.14",
   "arithmetic": "integer/rational arithmetic; Sturm-isolated roots; outward rational intervals",
   "source_hashes": {
-    "e2_lattices.json": "b5a542e8307a192047fbc9339a0b5cdfa17d70640e9bfe7b9b96a256323a0179",
-    "d3969_certificate.json": "d87441f659cd7e218df7855f8c0e8fd979654f94c8686ce6011abb20cc575db5"
+    "e2_lattices.json": "14a093dae0f673cdfa78ad2ad23509874fcea3f0ac091d0ee5089cf66f06c257",
+    "d3969_certificate.json": "91fe822d328c74cf247db1fd3c6785742fead6169241b7df1bfbe8cca30a8744"
   },
-  "verifier_sha256": "e778c000baac1acec9ba97f1364da073273366b481a463a694cfe968049d907e",
+  "source_candidate_field_count": 772,
+  "source_lattice_sage_version": "10.9",
+  "verification_mode": "fresh exact-rational verification of supplied certificates; Sage generation is separate",
+  "verifier_sha256": "9e4dcc76827ef38c0298adb64be233ff98c0351069a4b4156094fca3ca9d81dd",
   "field_count": 15,
   "exponent_box_count": 30,
   "checked_point_count": 8776,
@@ -415,7 +418,7 @@
     }
   ],
   "external_dependencies": [
-    "Complete enumeration of the original 771 fields is not reproduced here.",
+    "Complete enumeration of the 772 fields in the current manuscript is not reproduced here.",
     "Reported field discriminants establish maximal-order identification outside D=3969; class groups are not recomputed.",
     "The small-norm/indecomposable Fourier coefficient comparison and Hecke recurrences are mathematical inputs.",
     "The analytic all-component pairing and dimension criterion are not verified by this computation.",

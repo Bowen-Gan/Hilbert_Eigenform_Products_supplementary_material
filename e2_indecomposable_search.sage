@@ -1,7 +1,11 @@
 """Apply exact all-component lattice certificates to an enumerated field list.
 
 Run the candidate enumerator first, then:
-  sage -python e2_indecomposable_search.sage --input e2_candidates.json --output e2_lattices.json
+  sage -python e2_indecomposable_search.sage
+
+The default input and output are rerun/e2_candidates.json and
+rerun/e2_lattices.json next to this script. Explicit --input and --output
+paths support a separate standalone run.
 
 A missing prime below --prime-bound produces an explicit unresolved record
 and a nonzero exit status.  It is never silently treated as a proof.
@@ -9,10 +13,14 @@ The four named arithmetic exceptions are checked up to field isomorphism
 and referred to the separate dyadic/space computations, not excluded here.
 """
 
+if not __debug__:
+    raise RuntimeError('Assertions must remain enabled; do not use -O/-OO.')
+
 from sage.all import *
 from sage.version import version as SAGE_VERSION
 from pathlib import Path
 import argparse
+import hashlib
 import json
 import sys
 
@@ -46,6 +54,8 @@ def is_arithmetic_exception(F):
 def run_manifest(payload, prime_bound):
     if not payload.get("enumeration_complete",False):
         raise ValueError("incomplete enumeration: resume/re-run it before lattice certification")
+    if prime_bound < 3:
+        raise ValueError("the rational-prime search bound must be at least 3")
     Qx=PolynomialRing(QQ,"x")
     results=[]
     for source in payload["fields"]:
@@ -69,13 +79,19 @@ def run_manifest(payload, prime_bound):
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input",default="e2_candidates.json")
-    parser.add_argument("--output",default="e2_lattices.json")
+    root=Path(__file__).resolve().parent
+    parser.add_argument("--input",default=str(root/"rerun"/"e2_candidates.json"))
+    parser.add_argument("--output",default=str(root/"rerun"/"e2_lattices.json"))
     parser.add_argument("--prime-bound",type=int,default=43)
     args=parser.parse_args()
     source=json.loads(Path(args.input).read_text())
+    Path(args.output).parent.mkdir(parents=True,exist_ok=True)
     output={"schema":"case11-lattice-search-v1","sage_version":SAGE_VERSION,
             "input_manifest":args.input,"prime_bound":args.prime_bound,
+            "input_manifest_sha256":hashlib.sha256(Path(args.input).read_bytes()).hexdigest(),
+            "input_field_count":len(source["fields"]),
+            "source_sha256":{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in
+                [Path(__file__).resolve(),Path(__file__).resolve().parent/"e2_allclass_balanced.sage"]},
             "all_required_degrees":source.get("covers_all_required_degrees",False),
             "search_complete":False,"fields":[]}
     for rows in run_manifest(source,args.prime_bound):

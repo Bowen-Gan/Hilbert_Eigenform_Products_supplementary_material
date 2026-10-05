@@ -1,1 +1,1 @@
-PASS: exact Rankin local-factor identity; JSON written to /mnt/d/certificates/verification_case11/rankin_local_factor.json
+PASS: exact Rankin local factor and character directions; JSON written to /mnt/d/certificates/repository/verification_case11/rankin_local_factor.json

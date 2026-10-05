@@ -1,7 +1,7 @@
 """Free exact certificates sufficient for the D=1125 endpoint.
 
-Run with Sage, or Python with passagemath-standard:
-  python free_replacements/quartic_1125_sufficient.sage
+Run with Sage:
+  sage -python quartic_1125_sufficient.sage
 
 Outputs S_2(1)=0 and dim S_5(epsilon)>=5, using the mathematical argument
 in quartic_1125_sufficient_proof.md.  This does NOT assert the manuscript's
@@ -10,9 +10,14 @@ the remaining source weights, with no Magma call and no numerical zeta
 reconstruction.
 """
 
+if not __debug__:
+    raise RuntimeError('Assertions must remain enabled; do not use -O/-OO.')
+
 from sage.all import *
 from sage.version import version as SAGE_VERSION
 from pathlib import Path
+from collections import Counter
+from itertools import product as cartesian_product
 import argparse
 import json
 
@@ -36,6 +41,20 @@ def main(output_path=None):
     assert F.narrow_class_group().order()==2
     units=F.units(proof=True)
     assert all(u.norm()==1 for u in units)
+    embeddings=sorted(F.embeddings(AA),key=lambda v:v(a))
+    unit_signatures=[tuple(int(sign(v(u))) for v in embeddings) for u in units]
+    signature_image={(1,1,1,1)}
+    for signs in unit_signatures+[(-1,-1,-1,-1)]:
+        signature_image.update({tuple(s*t for s,t in zip(row,signs))
+                                for row in list(signature_image)})
+    assert len(signature_image)==8
+    assert signature_image=={tuple(s) for s in cartesian_product(*[[-1,1]]*4)
+                             if prod(s)==1}
+    # Since h(F)=1, a fractional ideal is (b). Norm-positive units make
+    # epsilon((b))=sgn(Norm(b)) independent of the choice of generator.
+    # The signature image proves that this is the unique totally odd
+    # narrow character. It is a theoretical identification, not a class
+    # character fitted to the later invariant count.
 
     # Universal reduced-unit-group bound in degree four: a projective
     # element of order m gives Q(zeta_m+zeta_m^-1) subset F, hence phi(m)<=8.
@@ -100,6 +119,8 @@ def main(output_path=None):
     assert len(group)==120
     assert all(g.reduced_norm()==1 for g in group)
     assert all(g in group for g in (-Q(1),-i,-z))
+    assert i**2==-1 and z**2==tau*z-1
+    assert z*i==(1-tau)+tau*i-i*z
     # The universal projective-order bound above proves the full reduced
     # unit group is this 120-element group's quotient by {+1,-1}.
 
@@ -114,11 +135,42 @@ def main(output_path=None):
                                "weight_five_character":int(character)})
     invariant_dimension=QQ(character_sum)/120
     assert invariant_dimension==5
+    character_distribution=Counter(row["weight_five_character"]
+                                   for row in character_rows)
+    trace_distribution=Counter(tuple(row["trace"]) for row in character_rows)
+    assert character_distribution=={256:2,1:88,0:30}
 
-    result={"schema":"D1125-free-sufficient-endpoint-v1","sage_version":SAGE_VERSION,
+    # Dembélé--Voight (7.3),(7.10): on the algebraic weight-five
+    # representation a scalar b acts by Norm(b)^3. Global covariance
+    # gives Phi(bx)=Norm(b)^(-3)Phi(x). Inverse translation (7.14),
+    # normalized by N((b))^(-3), therefore acts as
+    # Norm(b)^3/abs(Norm(b))^3 = epsilon((b)). These exact rows check
+    # both sign cosets, positive rational scalars, and all base units.
+    scalar_rows=[]
+    for name,b in [("1",F(1)),("-1",F(-1)),("2",F(2)),
+                   ("a+1",a+1)]+[("unit_%s"%(j+1),u) for j,u in enumerate(units)]:
+        norm=QQ(b.norm())
+        assert norm!=0
+        scalar_action=norm**3
+        ideal_norm=abs(norm)
+        normalized_action=scalar_action/ideal_norm**3
+        epsilon_value=ZZ(sign(norm))
+        assert normalized_action==epsilon_value
+        scalar_rows.append({"name":name,"element":elt(b),"field_norm":str(norm),
+                            "algebraic_weight_five_scalar_action":str(scalar_action),
+                            "principal_ideal_norm":str(ideal_norm),
+                            "normalized_inverse_translation_scalar":str(normalized_action),
+                            "epsilon_principal_ideal_value":int(epsilon_value)})
+    assert {row["epsilon_principal_ideal_value"] for row in scalar_rows}=={-1,1}
+    assert QQ((a+1).norm())==-5
+
+    result={"schema":"D1125-fixed-central-character-endpoint-v2","sage_version":SAGE_VERSION,"proof_all":True,
         "polynomial":[1,4,-4,-1,1],"discriminant":1125,
         "ordinary_class_number":1,"narrow_class_number":2,
         "fundamental_units":[elt(u) for u in units],"fundamental_unit_norms":[1]*len(units),
+        "unit_signatures":[list(s) for s in unit_signatures],
+        "unit_signature_image":[list(s) for s in sorted(signature_image)],
+        "signature_image_order":8,
         "possible_projective_element_orders":possible_orders,
         "universal_reduced_unit_group_bound":60,
         "local_euler_factors":local,"mass_upper_coefficient":str(mass_coefficient),
@@ -132,14 +184,29 @@ def main(output_path=None):
         "full_reduced_unit_group_order":60,
         "weight_five_character_sum":int(character_sum),
         "principal_ideal_class_weight_five_invariants":5,
+        "weight_five_character_distribution":[{"value":value,"multiplicity":count}
+            for value,count in sorted(character_distribution.items())],
+        "reduced_trace_distribution":[{"trace":list(trace),"multiplicity":count}
+            for trace,count in sorted(trace_distribution.items())],
         "weight_five_character_rows":character_rows,
+        "fixed_central_character":{
+            "name":"epsilon", "infinity_type":[1,1,1,1],
+            "principal_ideal_value_rule":"epsilon((b)) = sign(Norm_F/Q(b))",
+            "algebraic_scalar_action_rule":"rho_5(b) = Norm_F/Q(b)^3",
+            "global_covariance_rule":"Phi(b*x) = Norm_F/Q(b)^(-3)*Phi(x)",
+            "normalized_central_action_rule":"Z_(b) = Norm(b)^3/abs(Norm(b))^3",
+            "base_unit_action":1,"scalar_rows":scalar_rows,
+            "references":["Dembele--Voight (7.3)","Dembele--Voight (7.10)",
+                          "Dembele--Voight (7.14)","Dembele--Voight (7.27)"]},
         "conclusions":{"dim_S2_trivial_character":0,"dim_S5_totally_odd_character_at_least":5},
         "exact_S3_or_S5_dimension_claimed":False,
         "theorem_dependencies":["finite subgroups of SO(3)","Eichler mass formula",
             "surjectivity of the reduced-norm map to the narrow class group",
             "definite quaternionic modular-form decomposition",
-            "Jacquet-Langlands correspondence"]}
-    out=Path(output_path) if output_path else Path(__file__).with_suffix(".json")
+            "Jacquet-Langlands correspondence"],
+        "scope":"Finite arithmetic is checked; representation and transfer theorems are cited dependencies."}
+    out=Path(output_path) if output_path else Path(__file__).resolve().parent/"rerun"/"quartic_1125_sufficient.json"
+    out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(json.dumps(result,indent=2))
     print("D=1125: maximal quaternion order verified, binary icosahedral subgroup order 120.")
     print("Quaternion ideal classes =2; weight-two cusp space =0.")

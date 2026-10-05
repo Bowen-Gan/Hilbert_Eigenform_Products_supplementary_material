@@ -117,5 +117,210 @@
       "zeta_minus_one": "4/15",
       "alpha": "60"
     }
-  ]
+  ],
+  "higher_eisenstein_weight_checks": {
+    "weight_four_cubic_fields": [
+      {
+        "discriminant": 49,
+        "conductor": 7,
+        "L_minus_three_coordinates": [
+          "32/7",
+          "-22/7"
+        ],
+        "conjugate_product": "316/7",
+        "zeta_minus_three": "79/210",
+        "alpha": "1680/79"
+      },
+      {
+        "discriminant": 81,
+        "conductor": 9,
+        "L_minus_three_coordinates": [
+          "56/3",
+          "34/3"
+        ],
+        "conjugate_product": "796/3",
+        "zeta_minus_three": "199/90",
+        "alpha": "720/199"
+      }
+    ],
+    "weight_four_D21": {
+      "B_4": "-1232",
+      "L_minus_three": "308",
+      "zeta_minus_three": "77/30",
+      "alpha": "120/77"
+    },
+    "weight_three_quadratic_fields": [
+      {
+        "discriminant": 12,
+        "genus_discriminants": [
+          -3,
+          -4
+        ],
+        "primitive_factors": [
+          "-2/9",
+          "-1/2"
+        ],
+        "L_minus_two": "1/9",
+        "alpha": "36"
+      },
+      {
+        "discriminant": 21,
+        "genus_discriminants": [
+          -3,
+          -7
+        ],
+        "primitive_factors": [
+          "-2/9",
+          "-16/7"
+        ],
+        "L_minus_two": "32/63",
+        "alpha": "63/8"
+      },
+      {
+        "discriminant": 24,
+        "genus_discriminants": [
+          -3,
+          -8
+        ],
+        "primitive_factors": [
+          "-2/9",
+          "-3"
+        ],
+        "L_minus_two": "2/3",
+        "alpha": "6"
+      },
+      {
+        "discriminant": 28,
+        "genus_discriminants": [
+          -4,
+          -7
+        ],
+        "primitive_factors": [
+          "-1/2",
+          "-16/7"
+        ],
+        "L_minus_two": "8/7",
+        "alpha": "7/2"
+      },
+      {
+        "discriminant": 33,
+        "genus_discriminants": [
+          -3,
+          -11
+        ],
+        "primitive_factors": [
+          "-2/9",
+          "-6"
+        ],
+        "L_minus_two": "4/3",
+        "alpha": "3"
+      },
+      {
+        "discriminant": 44,
+        "genus_discriminants": [
+          -4,
+          -11
+        ],
+        "primitive_factors": [
+          "-1/2",
+          "-6"
+        ],
+        "L_minus_two": "3",
+        "alpha": "4/3"
+      }
+    ],
+    "weight_three_quartic_fields": [
+      {
+        "discriminant": 1125,
+        "cyclotomic_conductor": 15,
+        "quadratic_primitive_discriminants": [
+          -3,
+          -15
+        ],
+        "quadratic_primitive_factors": [
+          "-2/9",
+          "-16"
+        ],
+        "conjugate_conductor_five_product": "4/5",
+        "L_minus_two": "128/45",
+        "alpha": "45/8"
+      },
+      {
+        "discriminant": 2000,
+        "cyclotomic_conductor": 20,
+        "quadratic_primitive_discriminants": [
+          -4,
+          -20
+        ],
+        "quadratic_primitive_factors": [
+          "-1/2",
+          "-30"
+        ],
+        "conjugate_conductor_five_product": "4/5",
+        "L_minus_two": "12",
+        "alpha": "4/3"
+      },
+      {
+        "discriminant": 2304,
+        "cyclotomic_conductor": 24,
+        "quadratic_primitive_discriminants": [
+          -4,
+          -8,
+          -3,
+          -24
+        ],
+        "quadratic_primitive_factors": [
+          "-1/2",
+          "-3",
+          "-2/9",
+          "-46"
+        ],
+        "conjugate_conductor_five_product": "1",
+        "L_minus_two": "46/3",
+        "alpha": "24/23"
+      }
+    ],
+    "rational_numerical_cutoffs": {
+      "external_pi_bounds": [
+        "pi<22/7",
+        "pi<355/113"
+      ],
+      "zeta_three_upper_by_integral_test": "2562681639157300592362477010989/2131858131361319942957376000000",
+      "delta_three_checks": [
+        "delta_3^2<55",
+        "delta_3^4<3003",
+        "delta_3<7.403"
+      ],
+      "exact_squared_comparisons": [
+        {
+          "comparison": "V(28,4)<1",
+          "squared_upper": "141692157213022710162961859891099015839744/302105501819933459086644109984316278164375"
+        },
+        {
+          "comparison": "V(21,5)<1",
+          "squared_upper": "33988851691616100343741228493464874039864392155136/699581259644061598127289041963008806413516991763125"
+        },
+        {
+          "comparison": "V(12,4)<14",
+          "squared_upper": "141692157213022710162961859891099015839744/802271080538835828878990737017617416875"
+        },
+        {
+          "comparison": "b_4(51/10)<19/20",
+          "squared_upper": "19272713576570016917094400000/21741394740342381796618831779"
+        },
+        {
+          "comparison": "b_6(18/5)<1/2",
+          "squared_upper": "403445050401079750439397007360000000/1932798954234553977725968901943372201"
+        },
+        {
+          "comparison": "25*pi^6/28^(5/2)<6",
+          "squared_upper": "7846070941802500/232630513987207"
+        },
+        {
+          "comparison": "25*pi^6/24^(5/2)<9",
+          "squared_upper": "1961517735450625/26907462318744"
+        }
+      ]
+    }
+  }
 }

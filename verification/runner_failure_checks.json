@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scope": "Runner failure behavior; not arithmetic recomputation",
+  "checks": [
+    {
+      "script": "run_all.py",
+      "source_sha256": "115a7a75179874f08538dfb12e7114f4206ed659815fd265217e4009193e13b2",
+      "scenario": "Missing Sage invalidates earlier complete success",
+      "actual_exit_code": 1,
+      "stale_complete_status_rejected": true
+    },
+    {
+      "script": "run_verification.py",
+      "source_sha256": "c7af35b920c474609b0b7f32ca57843c35ee092992fe56954ee4433f7a046a0e",
+      "scenario": "Missing verifier/input invalidates earlier complete success",
+      "actual_exit_code": 1,
+      "stale_complete_status_rejected": true
+    }
+  ]
+}

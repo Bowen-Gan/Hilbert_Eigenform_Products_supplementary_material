@@ -1,1 +1,1 @@
-D=3969: both exponents indecomposable; output: /mnt/d/certificates/rerun/d3969_certificate.json
+D=3969: both exponents indecomposable; output: /mnt/d/certificates/repository/rerun/d3969_certificate.json

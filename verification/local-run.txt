@@ -1,0 +1,25 @@
+RUN e3_cusp_check.sage
+RUN e2_square_branch_check.sage
+RUN e2_high_degree_check.sage
+RUN e2_candidate_enumeration.sage
+RUN e2_allclass_balanced.sage
+RUN e2_indecomposable_search.sage
+RUN e2_dyadic_bound.sage
+RUN rq_certificate.py
+RUN rq_e2_exact.sage
+RUN cubic_weight_two_genus.sage
+RUN quartic_725_weight_two.sage
+RUN quartic_1125_sufficient.sage
+RUN verify_lattice_witnesses.py
+RUN verify_dyadic_bounds.py
+RUN verify_special_values.py
+RUN verify_d21_local.py
+RUN rq_certificate.py
+RUN verify_rankin_local_factor.py
+RUN verify_field_enumeration.py
+RUN verify_quaternion_central_character.py
+RUN verify_d12_weight_one.py
+RUN verify_eisenstein_bounds.py
+CASE11_ADDITIONAL_ARITHMETIC_PASSED
+FREE_ARITHMETIC_SUITE_PASSED
+FULL_CERTIFICATES_PASSED

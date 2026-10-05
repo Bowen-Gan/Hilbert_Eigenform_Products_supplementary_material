@@ -25,13 +25,12 @@ the even-sign subspace: its rank is 3, and all its vectors have even
 parity.  The nontrivial narrow character `epsilon` is therefore totally
 odd.  It is the only character compatible with odd parallel weight.
 
-There is no unperformed central-character projection in the calculation
-below.  A finite central idele has ordinary ideal `(b)` because `h_F=1`.
-On the odd-weight coefficient representation its action, after removing
-the scalar global element `b`, is `sgn Norm(b)`, which is exactly
-`epsilon((b))`.  Every vector in the full odd-weight quaternionic module
-therefore has this same finite central character.  In weight 2 the
-corresponding central character is trivial.
+A finite central idele has associated ordinary ideal `(b)` because
+`h_F=1`. Since every base-field unit has norm one,
+`epsilon((b)) = sign(Norm(b))` is independent of the generator. The
+normalized central action is derived explicitly below; this is what
+locates the five-dimensional contribution in the required character
+sector. The invariant average alone would not identify that sector.
 
 ## A uniform stabilizer bound
 
@@ -138,6 +137,43 @@ symmetric powers.  The exact 120-element average is
  =\frac{600}{120}=5.
 \]
 All 120 elements and their character values are saved in the JSON output.
+The output also records the distribution `256:2`, `1:88`, `0:30`, the
+exact multiplication table, and the full trace Gram matrix.
+
+## The central character of this contribution
+
+Use the algebraic weight action in Dembélé--Voight (7.3) and (7.10).
+A scalar `b` acts on the fourfold weight-five coefficient representation
+by `Norm(b)^3`. Thus global covariance says
+
+\[
+\Phi(bx)=N_{F/\mathbb Q}(b)^{-3}\Phi(x).
+\]
+
+Let a finite central idele `c` have associated fractional ideal
+`mathfrak b=(b)`. In the inverse-translation convention of (7.14), the
+normalized central operator is
+
+\[
+(Z_{\mathfrak b}\Phi)(x)
+  =(N\mathfrak b)^{-3}\Phi(xc^{-1}).
+\]
+
+Full level gives invariance under `c/b` in the finite unit group, so
+
+\[
+Z_{\mathfrak b}\Phi
+ =\frac{N_{F/\mathbb Q}(b)^3}{|N_{F/\mathbb Q}(b)|^3}\Phi
+ =\varepsilon(\mathfrak b)\Phi.
+\]
+
+This formula applies to the whole weight-five quaternionic module and
+therefore to the principal-class summand. The executable checks both
+central sign cosets, using `b=a+1` of norm `-5`, together with rational
+scalars and all fundamental units. For example, `b=a+1` has algebraic
+scalar action `(-5)^3=-125`, ideal norm `5`, and normalized central action
+`-125/5^3=-1`. In weight two the exponent is zero, giving trivial central
+character.
 
 In the definite quaternionic description, the principal right ideal
 class contributes this invariant space as a direct summand.  The other
@@ -145,6 +181,26 @@ class can only add to the dimension.  In weight five no one-dimensional
 norm-character representations occur, so this is a cuspidal contribution.
 Jacquet--Langlands therefore gives
 `dim S_5(epsilon)>=5>1`.
+
+The companion `verify_quaternion_central_character.py` reconstructs the
+field and quaternion arithmetic using only rational numbers in Python's
+standard library. It independently checks all 120 group elements, all
+16 basis products, the trace Gram determinant, the exact character
+distribution, and the scalar normalization rows. It reads the newly
+generated v2 Sage certificate; the original v1 certificate is rejected
+because it lacks the central-action evidence.
+
+This finite verification does not implement the mass formula, the
+surjectivity of reduced norm on ideal classes, or Jacquet--Langlands.
+Those are the cited mathematical inputs. The ordinary/narrow class
+numbers and completeness of fundamental units are obtained by Sage with
+proof mode enabled, and their signature vectors are recorded using exact
+real-algebraic embeddings.
+
+Run the arithmetic certificate and independent verifier in that order:
+
+    sage -python quartic_1125_sufficient.sage --output rerun/quartic_1125_sufficient.json
+    python verify_quaternion_central_character.py --data-dir rerun --output verification_case11/quaternion_central_character.json
 
 For the quaternionic direct-sum description and its relation with
 Hilbert forms, use Dembélé--Voight, *Explicit methods for Hilbert modular

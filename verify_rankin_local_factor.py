@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Exact algebra for the spherical Rankin factor; no analytic claims.
+"""Exact Rankin local-factor and character-direction algebra.
 
 Standard library only. Polynomials have integer coefficients in A,B,C,D,X.
 The rational generating-function identity is proved by cross multiplication
 of the Binet denominators (A-B)(C-D), rather than finite coefficient tests.
+Character identities are checked in the free character-exponent lattice.
+The ordered Mok kernel and its analytic endpoint normalization remain
+mathematical inputs: this verifier does not prove either identification.
 """
 
 import argparse
@@ -52,6 +55,71 @@ def serialize(poly):
     ]
 
 
+def verify_character_directions():
+    # Coordinates are eta, psi, omega_h. Addition means multiplication
+    # of characters, and inversion negates all coordinates. Checking in
+    # the free lattice implies the identities for every compatible
+    # specialization to finite-order characters.
+    def product(*characters):
+        return tuple(sum(entries) for entries in zip(*characters))
+
+    def power(character, exponent):
+        return tuple(exponent * entry for entry in character)
+
+    eta = (1, 0, 0)
+    psi = (0, 1, 0)
+    omega_h = (0, 0, 1)
+    chi = product(power(eta, -1), psi)
+    omega_f = product(eta, psi, omega_h)
+    omega_f_eta = product(omega_f, power(eta, -2))
+    require(omega_f_eta == product(chi, omega_h),
+            "The eta^-1 target-twist central character is incorrect.")
+    # Conjugating a finite-order central character inverts it. Thus the
+    # Rankin pair f_eta^rho,h has determinant character chi^-1.
+    rankin_character = product(power(omega_f_eta, -1), omega_h)
+    require(rankin_character == power(chi, -1),
+            "The Rankin determinant character must be chi^-1.")
+
+    # Independent coordinates eta(m), eta(r), psi(r). In the divisor
+    # term of E_2(1,chi), twisting by eta gives
+    # eta(m) chi(r) = eta(m/r) psi(r).
+    eta_m = (1, 0, 0)
+    eta_r = (0, 1, 0)
+    psi_r = (0, 0, 1)
+    twisted_divisor_term = product(eta_m, power(eta_r, -1), psi_r)
+    inducing_pair_divisor_term = product(
+        product(eta_m, power(eta_r, -1)), psi_r)
+    require(twisted_divisor_term == inducing_pair_divisor_term,
+            "The twist does not give the ordered pair (eta,psi).")
+    trivial_character = (0, 0, 0)
+    twisted_pair = tuple(product(character, eta)
+                         for character in (trivial_character, chi))
+    reversed_twisted_pair = tuple(product(character, eta)
+                                  for character in (chi, trivial_character))
+    require(twisted_pair == (eta, psi),
+            "The ordered endpoint must twist to (eta,psi).")
+    require(reversed_twisted_pair == (psi, eta),
+            "A reversed input pair should twist to (psi,eta).")
+    require(twisted_pair != reversed_twisted_pair,
+            "Generic inducing pairs must retain their ordering.")
+
+    return {
+        "character_coordinates": ["eta", "psi", "omega_h"],
+        "chi": list(chi),
+        "omega_f": list(omega_f),
+        "omega_f_eta": list(omega_f_eta),
+        "rankin_determinant_character": list(rankin_character),
+        "kernel_character": "chi^(-1)",
+        "projected_endpoint_central_character": "chi",
+        "ordered_endpoint_input": "E_2(1,chi)",
+        "twisted_ordered_endpoint": "E_2(eta,psi)",
+        "reversed_ordered_endpoint": "E_2(chi,1) would twist to E_2(psi,eta), generally a different form.",
+        "divisor_term_identity": "eta(m) chi(r) = eta(m/r) psi(r)",
+        "normalization": "Q_chi(w)/u_chi, where u_chi is its actual nonzero unit-ideal coefficient at w=0; no explicit value is asserted.",
+        "method": "Exact identities in a free character-exponent lattice; analytic and automorphic identifications are external inputs.",
+    }
+
+
 def verify():
     one = {ZERO: 1}
     A, B, C, D, X = [variable(i) for i in range(5)]
@@ -87,10 +155,11 @@ def verify():
     }
     require(substituted_exponent == {"ell": 0, "w": -2, "constant": -2},
             "The weight/exponent substitution failed.")
+    character_directions = verify_character_directions()
 
     return {
         "status": "PASS",
-        "verification_scope": "Exact local polynomial algebra only; no analytic theorem is certified.",
+        "verification_scope": "Exact local polynomial algebra and formal character-direction identities; no analytic theorem is certified.",
         "python_version": sys.version.split()[0],
         "python_optimization": sys.flags.optimize,
         "coefficient_ring": "Z[A,B,C,D,X]",
@@ -111,9 +180,12 @@ def verify():
             "global_correction_character": "chi^(-1)",
             "global_correction_argument": "2+2w",
         },
+        "character_directions": character_directions,
         "not_verified": [
             "The identification of Satake products with central characters and weights.",
-            "The global Eisenstein normalization and ordinary class-group projection.",
+            "The identification of Mok's projected kernel with the ordered Eisenstein family E_2(1,chi).",
+            "The ordinary class-group projection, regularity, and nonzero actual endpoint coefficient u_chi.",
+            "Any explicit global scalar, Gauss sum, or different-ideal normalization factor.",
             "Analytic continuation and specialization of the Rankin integral.",
             "Boundary nonvanishing of the Rankin-Selberg L-function.",
         ],
@@ -136,7 +208,7 @@ def main():
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(payload, encoding="utf-8")
-        print("PASS: exact Rankin local-factor identity; JSON written to " + str(args.output))
+        print("PASS: exact Rankin local factor and character directions; JSON written to " + str(args.output))
     else:
         print(payload, end="")
     return 0

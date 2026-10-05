@@ -10,6 +10,9 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rq_certificate as certificate
+if not __debug__:
+    raise RuntimeError('Assertions must remain enabled; do not use -O/-OO.')
+
 from sage.all import *
 from sage.version import version as sage_version
 
@@ -70,8 +73,8 @@ for D in reduction["survivors"]:
         assert e == 1 and P.norm() == 4
     print("DYADIC", D, factor2)
 
-R = PolynomialRing(QQ, names=("h2", "h3"))
-h2, h3 = R.gens()
+R = PolynomialRing(QQ, names=("h2", "h3", "weight_power"))
+h2, h3, weight_power = R.gens()
 for row in local["inert"]:
     D = row["D"]
     F = field_from_discriminant(D)
@@ -80,11 +83,12 @@ for row in local["inert"]:
         assert factors == sorted(row["ideal_data"][m]["factor_norms_exponents"])
     alpha = QQ(row["alpha"])
     f3 = row["f3"]
-    for ell in range(2,7):
-        constant = alpha-f3-(15/alpha)*4**(ell-1)
-        from_hecke = (h2+alpha)**2-4**(ell+1)
-        from_convolution = h2**2-4**(ell-1)+alpha*(h3+5*h2+f3)
-        assert from_hecke-from_convolution == -alpha*(3*h2+h3-constant)
+    # Treat 4^(ell-1) as a polynomial indeterminate: this verifies the
+    # coefficient identity for every weight, rather than a finite sample.
+    constant = alpha-f3-(15/alpha)*weight_power
+    from_hecke = (h2+alpha)**2-16*weight_power
+    from_convolution = h2**2-weight_power+alpha*(h3+5*h2+f3)
+    assert from_hecke-from_convolution == -alpha*(3*h2+h3-constant)
     print("INERT", D, "F3", f3, "RELATION", row["coefficient_relation"],
           "BOUND_AT_T", row["terminal_t"], row["normalized_upper_bound"], "< 15")
     if D in [69,77]:

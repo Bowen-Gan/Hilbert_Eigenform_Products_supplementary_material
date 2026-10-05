@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Exact finite certificate for Case 11 (Python 3, standard library only).
 
-Run: python3 rq_certificate.py --output logs/rq_certificate.json
+Run: python3 rq_certificate.py --output rerun/rq_certificate.json
 
 Computational inputs are the discriminant inequalities proved in the paper.
 The mathematical inputs used to interpret the certificates are Minkowski's
@@ -338,11 +338,22 @@ def local_certificate():
             assert abs(constant) > ramanujan
             row["weight_two_constant"] = str(constant)
             row["ramanujan_bound"] = ramanujan
+            # The current manuscript excludes all ell>=2 directly: put
+            # t=ell-2>=0. The required magnitude is >30*4^t, while
+            # Ramanujan gives at most 12*2^t+9*3^t <=21*3^t.
+            assert 30 > 21 and 4 > 3 and 3 >= 2
+            assert alpha-f3 < 0
+            row["all_source_weights_at_least_two_excluded"] = True
+            row["infinite_weight_comparison"] = {
+                "integer_parameter": "t=ell-2>=0",
+                "required_magnitude_strictly_greater_than": "30*4^t",
+                "Ramanujan_upper_bound": "12*2^t+9*3^t<=21*3^t",
+                "base_and_ratio_checks": ["30>21", "4>3", "3>=2"],
+            }
         else:
             assert R.norm((1,1)) == -3
             row["prime_above_3_generator"] = [1,1]
             row["generator_norm"] = -3
-            row["weights_left_by_old_dyadic_bound"] = [2,3,4,5]
             row["resolution"] = "Pure coefficient proof in notes/d21_local_free.tex"
         result["inert"].append(row)
     return result

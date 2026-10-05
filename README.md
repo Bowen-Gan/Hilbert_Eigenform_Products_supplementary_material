@@ -1,73 +1,96 @@
 # Supplementary Material: Eigenform Product Identities for Full-Level Hilbert Modular Forms
 
-This repository contains SageMath and Python programs, arithmetic certificates, recorded outputs, and mathematical notes supporting the finite computations in *Eigenform Product Identities for Full-Level Hilbert Modular Forms*. Magma is not required.
+This repository provides SageMath programs, independent Python verifiers, complete finite input tables, arithmetic certificates, execution records, and mathematical notes for *Eigenform Product Identities for Full-Level Hilbert Modular Forms*. The sources are synchronized with the manuscript revision checked on 5 October 2026. Magma is not required.
 
-## Running the complete verification
+## Complete reproduction
 
-Use a Python environment in which SageMath is installed and available to Python. Run the following command from the repository root:
+From the repository root, use the Python interpreter belonging to a SageMath installation:
 
 ```bash
-python run_all.py
+sage -python run_all.py
 ```
 
-The driver runs the original twelve arithmetic tasks, followed by six additional exact verification tasks. A successful complete run exits with code zero and prints:
+In a conda environment where `import sage.all` succeeds, the equivalent command is:
+
+```bash
+python -u run_all.py
+```
+
+The driver executes twelve arithmetic tasks and ten independent verification tasks. Successful completion of all twenty-two tasks in this invocation prints:
 
 ```text
 FULL_CERTIFICATES_PASSED
 ```
 
-Use this marker and the corresponding `completed: true` record in `verification/full_run_status.json` as the criterion for a successful complete reproduction. That record is created by the complete driver and links both suites from the same invocation. For subsequent runs, use the latest successful complete run and retain its generated records together.
+The result is recorded in `verification/full_run_status.json` and summarized in `STATUS.json`. Inspect the actual process exit code, the success marker, and `completed: true` together. A failed new run invalidates the current complete-run status; older results alone do not establish that the changed sources passed.
 
-Outputs and logs are written to [`rerun/`](rerun/) and [`verification_case11/`](verification_case11/). The driver records task outcomes, UTC times, environment information, source-file hashes, and relevant artifact hashes. Existing files with the same names are overwritten, so preserve any outputs that you wish to keep before rerunning. A failed run does not certify completion; older output files alone are insufficient.
+The driver records the actual Python/Sage versions, times, commands, exit codes, source and input hashes, and generated artifact hashes. Complete field-table inputs are included in the source snapshot. Assertions must remain enabled: do not use `-O`, `-OO`, or `PYTHONOPTIMIZE`.
 
-Python assertions must remain enabled. Do not use optimized Python execution (`-O`, `-OO`, or `PYTHONOPTIMIZE`).
+The latest generated results are in `rerun/` and `verification_case11/`. Same-name outputs are replaced on rerunning. Redundant earlier `logs/` and top-level generated certificates are omitted from this distribution. Git history retains earlier revisions.
 
-## Supplied execution records
+## Arithmetic programs
 
-The repository includes a successful complete run of all eighteen tasks in one invocation of `python run_all.py`, performed on 30 September 2026 using SageMath 10.9 and Python 3.12.14 under WSL2. The run began at 11:59:20 UTC and finished at 12:01:03 UTC. All eighteen tasks were accepted, and the driver reported `FULL_CERTIFICATES_PASSED`.
+All eleven existing Sage files are retained. Their roles are listed below.
 
-The complete record is [`verification/full_run_status.json`](verification/full_run_status.json). It links the original twelve-task record, [`rerun/all_arithmetic_status.json`](rerun/all_arithmetic_status.json), and the additional six-task record, [`verification_case11/status.json`](verification_case11/status.json), from that invocation. [`STATUS.json`](STATUS.json) summarizes this latest successful complete run. The corresponding logs and results are included in the two output directories.
-
-The lattice search has one accepted exit code of `2`: its prescribed search leaves precisely the discriminants `169, 361, 725` unresolved. The driver checks this condition, and the subsequent endpoint programs establish the required weight-two cusp-space vanishing. Thus the lattice search's incomplete-exclusion flag must be read together with the endpoint results. All other tasks have exit code zero in the supplied records.
-
-## Computational scope
-
-The original twelve-task suite checks the finite number-field reduction, local arithmetic, lattice exclusions, and remaining cusp-space endpoints:
-
-| Component | Computation |
+| Program | Mathematical calculation |
 | --- | --- |
-| Eisenstein weight three | Field, unit-signature, character, and special-value checks. |
-| Square and higher-degree branches | Quartic and septic enumeration, dyadic ideal factorizations, local inequalities, and finite Euler-product bounds. |
-| Candidate enumeration | 771 fields within the degree-dependent bounds, yielding 21 candidates requiring further arguments. |
-| Narrow-class lattices | Fifteen candidate-field exclusions, including a separate certificate for discriminant `3969`. |
-| Dyadic and quadratic branches | Dyadic weight restrictions, real-quadratic reduction, and local coefficient exclusions. |
-| Cusp-space endpoints | Weight-two vanishing for discriminants `169, 361, 725, 1125`, and the sufficient bound `dim S_5(epsilon) >= 5` for `1125`. |
+| `e3_cusp_check.sage` | Weight-three and weight-four exceptional-field arithmetic, explicit unit norms, character parity, and exact Dirichlet special values. |
+| `e2_square_branch_check.sage` | Complete quartic input in the square branch and its exclusions. |
+| `e2_high_degree_check.sage` | Septic input and higher-degree local exclusions and Euler bounds. |
+| `e2_candidate_enumeration.sage` | Complete degree-three through degree-six field inputs; maximal orders, class numbers, local decompositions, and reciprocal-constant screening. |
+| `e2_allclass_balanced.sage` | The all-narrow-component certificate at discriminant 3969. |
+| `e2_indecomposable_search.sage` | Trace-dual coordinate boxes and certified indecomposability for the fifteen lattice exclusions. |
+| `e2_dyadic_bound.sage` | Exact dyadic decompositions, Euler-product bounds, and integer-weight cutoffs for the six final fields. |
+| `rq_e2_exact.sage` | Sage cross-check of the quadratic reduction and coefficient algebra for every relevant integer weight. |
+| `cubic_weight_two_genus.sage` | CM and genus arithmetic for discriminants 169 and 361. |
+| `quartic_725_weight_two.sage` | CM, mass, and weight-two arithmetic at discriminant 725. |
+| `quartic_1125_sufficient.sage` | Weight-two vanishing and the five-dimensional contribution with the specified totally odd central character at discriminant 1125. |
 
-The six additional tasks independently recheck selected arithmetic certificates:
+`rq_certificate.py` is the twelfth arithmetic task. It independently performs the quadratic reduction using exact standard-library arithmetic; it is also rerun in the independent suite.
 
-| Program | Exact verification |
+The field reduction now starts from **772 fields**, with degree counts **143, 552, 37, 40**. The formerly omitted quartic polynomial is `x^4 - 19*x^2 - 24*x + 16`, with field discriminant **65808**, polynomial discriminant **4211712**, and power-basis index **8**. Its dyadic ramification is recorded independently. The **21 surviving candidates**, **15 lattice exclusions**, and six final discriminants **49, 169, 361, 725, 1125, 5125** are unchanged.
+
+The full compressed Bordeaux tables and their provenance/hashes are in `data/number_field_tables/`. `number_field_table_inputs.py` reads these inputs without requiring network access. Completeness of the original tables is an external mathematical input; it is not inferred from a Sage enumeration-complete flag. Documented duplicate source rows outside our bounds do not alter the required input set.
+
+## Independent verifiers
+
+These programs use only the Python standard library.
+
+| Program | Independent check |
 | --- | --- |
-| [`verify_lattice_witnesses.py`](verify_lattice_witnesses.py) | Fifteen lattice exclusions, thirty exponent boxes, and 8,776 lattice points. |
-| [`verify_dyadic_bounds.py`](verify_dyadic_bounds.py) | Six dyadic cutoffs and integer-weight monotonicity. |
-| [`verify_special_values.py`](verify_special_values.py) | Four special-value constants; the suite also compares them with the dyadic inputs. |
-| [`verify_d21_local.py`](verify_d21_local.py) | The discriminant `21` coefficient contradiction for `ell >= 2`, and discriminant `40` indecomposable-element and prime-square arithmetic. |
-| [`rq_certificate.py`](rq_certificate.py) | The quadratic reduction and local exclusions. |
-| [`verify_rankin_local_factor.py`](verify_rankin_local_factor.py) | A spherical local polynomial identity and its correction parameter `2 + 2w`. |
+| `verify_field_enumeration.py` | Complete source inputs, all 772 computed field records, integral bases/discriminants, local arithmetic, screening intervals, and the missing field's dyadic ramification. |
+| `verify_lattice_witnesses.py` | Rational root isolation, trace-dual boxes, exact lattice arithmetic, all thirty boxes, and adaptive sign refinement. |
+| `verify_dyadic_bounds.py` | Local factorization and exact rational bounds for the six dyadic cutoffs, including monotonicity at integer weights. |
+| `verify_special_values.py` | Generalized Bernoulli sums and exact special values in the weight-three, weight-four, and dyadic calculations. |
+| `verify_d21_local.py` | The coefficient contradiction at discriminant 21 and the local indecomposability/prime-square calculations at discriminant 40. |
+| `rq_certificate.py` | The exact quadratic reduction and local exclusions. |
+| `verify_rankin_local_factor.py` | The generic polynomial identity, character/twist directions, and the correction factor with character `chi^(-1)` at argument `2+2w`. |
+| `verify_quaternion_central_character.py` | Exact quaternion arithmetic, the 120-element group and character average, and the scalar action locating the five-dimensional contribution in the epsilon sector. |
+| `verify_d12_weight_one.py` | Low-weight Hilbert-series counts, both narrow components, the Dirichlet values at zero, Eisenstein support, and the normalizing scalar 12. |
+| `verify_eisenstein_bounds.py` | Certified rational intervals for the finite numerical comparisons in the Eisenstein--Eisenstein proofs. |
 
-The programs use exact integer, rational, and number-field arithmetic, with interval or ball arithmetic for the specified analytic comparisons. Printed decimal approximations do not replace these comparisons.
+An independent-only run checks the existing arithmetic transcripts rather than generating all Sage data again:
 
-## Mathematical interpretation
+```bash
+python run_verification.py --data-dir rerun --output-dir verification_case11
+```
 
-These computations verify the implemented arithmetic. Their application to the classification uses the manuscript's reductions, coefficient identities, and cited theorems. The weight-two Eisenstein–cuspidal checks concern parallel cuspidal weight `ell >= 2`; they do not establish the case `ell = 1`.
+Its success marker is `CASE11_ADDITIONAL_ARITHMETIC_PASSED`; this is a compatibility name for the expanded independent suite, not the complete-reproduction marker. Individual verifiers accept `--output PATH`; those requiring certificates also accept `--data-dir PATH`. Their JSON outputs state what they verify and their external dependencies.
 
-The octic list's completeness remains an external table input. The additional lattice verifier does not repeat the full field enumeration or independently identify every maximal order; its output states these dependencies. The local Rankin check does not establish global projection, analytic continuation, or boundary nonvanishing.
+The lattice search returns exit code 2 when precisely 169, 361, and 725 remain unresolved by that search. The complete driver accepts this only after checking the complete search record and then runs the endpoint programs that establish the required weight-two vanishing. This accepted intermediate exit is not treated as an unconditional proof of all exclusions.
 
-For discriminant `1125`, the certified dimension conclusion is the sufficient lower bound above, rather than the earlier exact dimension claims. The six quadratic survivors `12, 21, 24, 28, 69, 77` are intermediate candidates. Earlier discriminant `21` Hecke determinants are not certified by this repository.
+## Mathematical scope and notes
 
-The [`notes/`](notes/) directory explains supporting arguments and external dependencies. Some notes and [`manuscript_changes.md`](manuscript_changes.md) retain earlier proof routes and have not yet been synchronized with the current Case 11 proof.
+The calculations verify finite arithmetic and algebra. Their application uses the manuscript's reductions and cited theorems, including the mass/genus formulas and Jacquet--Langlands correspondence. The specified-character contribution at 1125 is a sufficient lower bound, `dim S_5(epsilon) >= 5`; no obsolete exact dimension claim is retained.
+
+The first normalization annotation is addressed computationally by the existing local Rankin verifier and its character algebra. Identifying the global Mok family, its nonzero normalization, ordinary class-group projection, the actual Petersson endpoint, and boundary nonvanishing remain the analytic arguments in the manuscript. Finite calculations do not replace those arguments.
+
+The manuscript now treats the Eisenstein weight-two case with cuspidal weight one as well. Its final twisting argument is theoretical. Products of a weight-one Eisenstein eigenform with a cuspidal eigenform remain unclassified; the discriminant-12 identity is an example, not a classification of that open case.
+
+`notes/` provides the accompanying mathematical explanations. `MANUAL_CHECK_REPORT.md` records the per-file source review and the distinction between source review, independently replayed certificates, and a fresh complete run. `manuscript_changes.md` lists the few text changes required by the computational synchronization.
 
 ## Integrity and citation
 
-[`SHA256SUMS.txt`](SHA256SUMS.txt) lists hashes of the distributed files, excluding itself and generated Python caches. The complete driver refreshes this manifest after success. Documentation or artifact changes also require a manifest update. Checksums identify file contents; they are not execution certificates.
+`SHA256SUMS.txt` lists every distributed file except itself and generated Python caches. The complete driver refreshes it after success. Documentation or other changes require a new manifest; a checksum identifies bytes and does not certify a computation.
 
-Cite the supplement using the full Git commit of the version used, or the specific-version DOI of an archived release. The repository is available at [Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material](https://github.com/Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material). A fixed revision identifies the corresponding source and records.
+Cite a fixed Git commit of the exact source-and-record version used. The repository is [Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material](https://github.com/Bowen-Gan/Hilbert_Eigenform_Products_supplementary_material). The manuscript's previous fixed citation to `8eaf1af` must be replaced after this update with the new commit, rather than continuing to cite the older 771-field input.

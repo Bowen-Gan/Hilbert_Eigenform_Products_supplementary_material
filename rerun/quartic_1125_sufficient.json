@@ -1,6 +1,7 @@
 {
-  "schema": "D1125-free-sufficient-endpoint-v1",
+  "schema": "D1125-fixed-central-character-endpoint-v2",
   "sage_version": "10.9",
+  "proof_all": true,
   "polynomial": [
     1,
     4,
@@ -36,6 +37,77 @@
     1,
     1
   ],
+  "unit_signatures": [
+    [
+      1,
+      -1,
+      1,
+      -1
+    ],
+    [
+      -1,
+      -1,
+      1,
+      1
+    ],
+    [
+      1,
+      -1,
+      -1,
+      1
+    ]
+  ],
+  "unit_signature_image": [
+    [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    [
+      -1,
+      -1,
+      1,
+      1
+    ],
+    [
+      -1,
+      1,
+      -1,
+      1
+    ],
+    [
+      -1,
+      1,
+      1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      -1,
+      1
+    ],
+    [
+      1,
+      -1,
+      1,
+      -1
+    ],
+    [
+      1,
+      1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      1,
+      1,
+      1
+    ]
+  ],
+  "signature_image_order": 8,
   "possible_projective_element_orders": [
     1,
     2,
@@ -730,6 +802,103 @@
   "full_reduced_unit_group_order": 60,
   "weight_five_character_sum": 600,
   "principal_ideal_class_weight_five_invariants": 5,
+  "weight_five_character_distribution": [
+    {
+      "value": 0,
+      "multiplicity": 30
+    },
+    {
+      "value": 1,
+      "multiplicity": 88
+    },
+    {
+      "value": 256,
+      "multiplicity": 2
+    }
+  ],
+  "reduced_trace_distribution": [
+    {
+      "trace": [
+        "-1",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 20
+    },
+    {
+      "trace": [
+        "-1",
+        "3",
+        "0",
+        "-1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "-2",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 1
+    },
+    {
+      "trace": [
+        "0",
+        "-3",
+        "0",
+        "1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 30
+    },
+    {
+      "trace": [
+        "0",
+        "3",
+        "0",
+        "-1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "1",
+        "-3",
+        "0",
+        "1"
+      ],
+      "multiplicity": 12
+    },
+    {
+      "trace": [
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 20
+    },
+    {
+      "trace": [
+        "2",
+        "0",
+        "0",
+        "0"
+      ],
+      "multiplicity": 1
+    }
+  ],
   "weight_five_character_rows": [
     {
       "element": [
@@ -4932,6 +5101,126 @@
       "weight_five_character": 0
     }
   ],
+  "fixed_central_character": {
+    "name": "epsilon",
+    "infinity_type": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "principal_ideal_value_rule": "epsilon((b)) = sign(Norm_F/Q(b))",
+    "algebraic_scalar_action_rule": "rho_5(b) = Norm_F/Q(b)^3",
+    "global_covariance_rule": "Phi(b*x) = Norm_F/Q(b)^(-3)*Phi(x)",
+    "normalized_central_action_rule": "Z_(b) = Norm(b)^3/abs(Norm(b))^3",
+    "base_unit_action": 1,
+    "scalar_rows": [
+      {
+        "name": "1",
+        "element": [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "field_norm": "1",
+        "algebraic_weight_five_scalar_action": "1",
+        "principal_ideal_norm": "1",
+        "normalized_inverse_translation_scalar": "1",
+        "epsilon_principal_ideal_value": 1
+      },
+      {
+        "name": "-1",
+        "element": [
+          "-1",
+          "0",
+          "0",
+          "0"
+        ],
+        "field_norm": "1",
+        "algebraic_weight_five_scalar_action": "1",
+        "principal_ideal_norm": "1",
+        "normalized_inverse_translation_scalar": "1",
+        "epsilon_principal_ideal_value": 1
+      },
+      {
+        "name": "2",
+        "element": [
+          "2",
+          "0",
+          "0",
+          "0"
+        ],
+        "field_norm": "16",
+        "algebraic_weight_five_scalar_action": "4096",
+        "principal_ideal_norm": "16",
+        "normalized_inverse_translation_scalar": "1",
+        "epsilon_principal_ideal_value": 1
+      },
+      {
+        "name": "a+1",
+        "element": [
+          "1",
+          "1",
+          "0",
+          "0"
+        ],
+        "field_norm": "-5",
+        "algebraic_weight_five_scalar_action": "-125",
+        "principal_ideal_norm": "5",
+        "normalized_inverse_translation_scalar": "-1",
+        "epsilon_principal_ideal_value": -1
+      },
+      {
+        "name": "unit_1",
+        "element": [
+          "-1",
+          "3",
+          "0",
+          "-1"
+        ],
+        "field_norm": "1",
+        "algebraic_weight_five_scalar_action": "1",
+        "principal_ideal_norm": "1",
+        "normalized_inverse_translation_scalar": "1",
+        "epsilon_principal_ideal_value": 1
+      },
+      {
+        "name": "unit_2",
+        "element": [
+          "-1",
+          "1",
+          "0",
+          "0"
+        ],
+        "field_norm": "1",
+        "algebraic_weight_five_scalar_action": "1",
+        "principal_ideal_norm": "1",
+        "normalized_inverse_translation_scalar": "1",
+        "epsilon_principal_ideal_value": 1
+      },
+      {
+        "name": "unit_3",
+        "element": [
+          "-1",
+          "-3",
+          "1",
+          "1"
+        ],
+        "field_norm": "1",
+        "algebraic_weight_five_scalar_action": "1",
+        "principal_ideal_norm": "1",
+        "normalized_inverse_translation_scalar": "1",
+        "epsilon_principal_ideal_value": 1
+      }
+    ],
+    "references": [
+      "Dembele--Voight (7.3)",
+      "Dembele--Voight (7.10)",
+      "Dembele--Voight (7.14)",
+      "Dembele--Voight (7.27)"
+    ]
+  },
   "conclusions": {
     "dim_S2_trivial_character": 0,
     "dim_S5_totally_odd_character_at_least": 5
@@ -4943,5 +5232,6 @@
     "surjectivity of the reduced-norm map to the narrow class group",
     "definite quaternionic modular-form decomposition",
     "Jacquet-Langlands correspondence"
-  ]
+  ],
+  "scope": "Finite arithmetic is checked; representation and transfer theorems are cited dependencies."
 }
